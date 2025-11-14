@@ -283,7 +283,7 @@ async function carregarNoticias() {
                   <span class="tagEvent">${noticia.categoria}</span>
                   <h3>${noticia.titulo}</h3>
                   <p>${noticia.texto}</p>
-                  <span class="dateEvent"><time datetime="${noticia.data_criacao}">${formatarData(noticia.data)}</time></span>
+                  <span class="dateEvent"><time datetime="${noticia.data_criacao}">${formatarData(noticia.data_criacao)}</time></span>
                   <p class="continuar-lendo">Ler mais</p>
               </div>
           </div>
