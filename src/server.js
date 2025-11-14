@@ -4,8 +4,6 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
-// const categoriasRoutes = require('./routes/categoriasRoutes'); // Deixaremos simples por enquanto
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 

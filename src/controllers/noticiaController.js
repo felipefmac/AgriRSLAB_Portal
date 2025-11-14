@@ -1,4 +1,4 @@
-const pool = require('../database/dbConfig');
+const { pool } = require('../database/dbConfig');
 
 // GET ALL notícias
 async function getAllNoticias(_req, res) {
