@@ -6,6 +6,15 @@
   gap: 40px;
 }
 
+#container-noticias-dinamicas {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;   /* OBRIGATÓRIO: Permite que os itens pulem de linha */
+    gap: 20px;         /* Espaço entre cards */
+    width: 100%;
+    align-items: flex-start; /* Evita que cards estiquem verticalmente */
+}
+
 .btn-ver-mais {
   background-color: var(--azul-claro);
   color: #fff;
@@ -345,6 +354,20 @@
   background-color: var(--verde-claro);
   margin-bottom: 20px;
 }
+/* ALTERAÇÂO TEEESTE */
+.card-noticia img {
+    width: 100%;
+    height: 200px;          /* Altura fixa para manter padrão */
+    object-fit: cover;      /* Corta a imagem sem esticar */
+    border-radius: 8px;
+}
+
+.link-card {
+    width: 100%;            /* Garante que o link ocupe 100% da largura */
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
 
 .link-fale-conosco {
   display: block;
@@ -552,7 +575,7 @@
 /* ============================================================
    SEÇÃO — TÍTULOS E MENSAGENS
    ============================================================ */
-.titulo-mes {
+/* .titulo-mes {
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--marrom);
@@ -560,7 +583,20 @@
   position: relative;
   display: inline-block;
   padding-bottom: 4px;
+} */
+.titulo-mes {
+    font-size: 1.2rem;
+    font-weight: 600;
+    position: relative;
+    width: 100%;       /* Ocupa toda a largura */
+    flex-basis: 100%;  /* Garante a quebra no Flexbox */
+    margin-top: 40px;
+    margin-bottom: 10px;
+    color: var(--marrom); 
+    font-size: 1.5rem;
+    padding-bottom: 5px;
 }
+
 .titulo-mes::after {
   content: "";
   position: absolute;

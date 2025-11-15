@@ -1,219 +1,279 @@
+// =========================================
+// CONFIGURAÇÕES GLOBAIS
+// =========================================
+const ITENS_POR_PAGINA = 10;
+let todasAsNoticias = [];       
+let noticiasFiltradas = [];     
+let itensVisiveis = 0;          
+let ultimoMesRenderizado = '';  
+
+// =========================================
+// FUNÇÕES AUXILIARES
+// =========================================
+function formatarData(dataISO) {
+    if (!dataISO) return '';
+    const data = new Date(dataISO);
+    const dia = String(data.getUTCDate()).padStart(2, '0');
+    const mes = String(data.getUTCMonth() + 1).padStart(2, '0');
+    const ano = data.getUTCFullYear();
+    return `${dia}/${mes}/${ano}`;
+}
+
+function getNomeMes(dataISO) {
+    if (!dataISO) return '';
+    const data = new Date(dataISO);
+    return data.toLocaleString('pt-BR', { month: 'long', timeZone: 'UTC' });
+}
+
+// =========================================
+// INICIALIZAÇÃO
+// =========================================
 document.addEventListener("DOMContentLoaded", () => {
-  // === COMPARTILHAMENTO DE NOTÍCIAS ===
-  const url = encodeURIComponent(window.location.href);
-  const title = encodeURIComponent(document.title);
+    const containerCompleto = document.getElementById('container-noticias-dinamicas'); 
+    const containerDestaques = document.getElementById('cards-noticias'); 
 
-  const shareWhatsApp = document.getElementById("shareWhatsApp");
-  const shareEmail = document.getElementById("shareEmail");
-  const shareLinkedIn = document.getElementById("shareLinkedIn");
+    // PÁGINA "TODAS AS NOTÍCIAS"
+    if (containerCompleto) {
+        const filtroAno = document.getElementById("YearSelection");
+        const filtroCategoria = document.getElementById("CategorySelection");
+        const btnVerMais = document.querySelector(".btn-ver-mais");
 
-  if (shareWhatsApp) shareWhatsApp.href = `https://api.whatsapp.com/send?text=${title}%20${url}`;
-  if (shareEmail) shareEmail.href = `mailto:?subject=${title}&body=Veja%20essa%20matéria:%20${url}`;
-  if (shareLinkedIn) shareLinkedIn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+        // Listeners
+        if (filtroAno) filtroAno.addEventListener("change", () => aplicarFiltros(true));
+        if (filtroCategoria) filtroCategoria.addEventListener("change", () => aplicarFiltros(true));
+        if (btnVerMais) btnVerMais.addEventListener("click", carregarMaisNoticias);
 
-  // === ELEMENTOS ===
-  const btnVerMais = document.querySelector(".btn-ver-mais");
-  const cards = document.querySelectorAll(".cards-noticias a");
-  const containerNoticias = document.querySelector(".cards-noticias");
-  const filtroAno = document.getElementById("YearSelection");
-  const filtroCategoria = document.getElementById("CategorySelection");
-  const meses = document.querySelectorAll(".titulo-mes");
-
-  // === ORGANIZAÇÃO DOS FILTROS ===
-  const filtrosLinha = document.createElement("div");
-  filtrosLinha.classList.add("filtros-linha");
-
-  const filtrosContainer = filtroAno.closest(".filtros-superiores");
-  filtrosContainer.prepend(filtrosLinha);
-
-  // Move os filtros (Categoria e Ano) para a nova linha
-  document.querySelectorAll(".filterCategorySelection, .filterYearSelection")
-    .forEach(f => filtrosLinha.appendChild(f));
-
-// === BOTÃO LIMPAR FILTRO ===
-const btnLimpar = document.createElement("button");
-btnLimpar.textContent = "Limpar filtro";
-btnLimpar.classList.add("btn-limpar-filtro");
-btnLimpar.style.display = "none";
-
-const containerBtnLimpar = document.createElement("div");
-containerBtnLimpar.classList.add("container-btn-limpar");
-
-// Aqui muda: adiciona o botão DEPOIS da linha dos filtros
-filtrosLinha.after(containerBtnLimpar);
-containerBtnLimpar.appendChild(btnLimpar);
-
-
-  // === CONFIGURAÇÕES ===
-  const qtdInicio = 4;
-  const passo = 4;
-  let index = qtdInicio;
-
-  // === MENSAGEM DE NENHUM REGISTRO ===
-  const msgNenhum = document.createElement("p");
-  msgNenhum.textContent = "Nenhum registro encontrado.";
-  msgNenhum.classList.add("mensagem-nenhum");
-  msgNenhum.style.display = "none";
-  containerNoticias.parentElement.insertBefore(msgNenhum, containerNoticias.nextSibling);
-
-  // === ESTADO INICIAL ===
-  function aplicarEstadoInicial() {
-    cards.forEach((card, i) => {
-      if (i < qtdInicio) {
-        card.style.display = "block";
-        card.classList.remove("hidden");
-      } else {
-        card.style.display = "none";
-        card.classList.add("hidden");
-      }
-    });
-
-    // Esconde os títulos dos meses no início
-    meses.forEach(m => (m.style.display = "none"));
-
-    btnVerMais.style.display = cards.length > qtdInicio ? "block" : "none";
-    msgNenhum.style.display = "none";
-    btnLimpar.style.display = "none";
-
-    filtroAno.value = "todos";
-    if (filtroCategoria) filtroCategoria.value = "todas";
-
-    index = qtdInicio;
-  }
-
-  aplicarEstadoInicial();
-
-  // === BOTÃO VER MAIS ===
-  if (btnVerMais) {
-    btnVerMais.addEventListener("click", () => {
-      let mostradas = 0;
-      for (let i = 0; i < cards.length && mostradas < passo; i++) {
-        if (cards[i].style.display === "none") {
-          cards[i].style.display = "block";
-          cards[i].classList.remove("hidden");
-          mostradas++;
-          index++;
-        }
-      }
-
-      // Mostra os meses quando clica em “Ver mais”
-      meses.forEach(m => (m.style.display = "block"));
-
-      if (index >= cards.length) btnVerMais.style.display = "none";
-    });
-  }
-
-  // === FUNÇÃO DE FILTRO (ANO + CATEGORIA) ===
-  function aplicarFiltros() {
-    const anoSelecionado = filtroAno.value;
-    const categoriaSelecionada = filtroCategoria ? filtroCategoria.value : "todas";
-    let encontrou = false;
-    let contadorVisiveis = 0;
-
-    cards.forEach(card => {
-      const timeElement = card.querySelector("time");
-      const tag = card.querySelector(".tagEvent");
-      if (!timeElement || !tag) return;
-
-      const anoNoticia = timeElement.getAttribute("datetime").slice(0, 4);
-      const categoriaNoticia = tag.dataset.category;
-
-      const anoOK = (anoSelecionado === "todos" || anoSelecionado === anoNoticia);
-      const categoriaOK = (categoriaSelecionada === "todas" || categoriaSelecionada === categoriaNoticia);
-
-      if (anoOK && categoriaOK) {
-        card.style.display = "block";
-        card.classList.remove("hidden");
-        encontrou = true;
-      } else {
-        card.style.display = "none";
-      }
-    });
-
-    // Mostra apenas os meses que têm notícias visíveis
-    meses.forEach(mes => {
-      let temVisivel = false;
-      let next = mes.nextElementSibling;
-      while (next && !next.classList.contains("titulo-mes")) {
-        if (next.tagName === "A" && next.style.display !== "none") {
-          temVisivel = true;
-          break;
-        }
-        next = next.nextElementSibling;
-      }
-      mes.style.display = temVisivel ? "block" : "none";
-    });
-
-    // Exibe só 4 após filtrar
-    cards.forEach(card => {
-      if (card.style.display !== "none") {
-        contadorVisiveis++;
-        if (contadorVisiveis > qtdInicio) card.classList.add("hidden");
-      }
-    });
-
-    const temMais = contadorVisiveis > qtdInicio;
-    btnVerMais.style.display = temMais ? "block" : "none";
-    msgNenhum.style.display = encontrou ? "none" : "block";
-
-    // Aparece o botão limpar se QUALQUER filtro for usado
-const filtroAtivo = (anoSelecionado !== "todos" || categoriaSelecionada !== "todas");
-    btnLimpar.style.display = filtroAtivo ? "inline-block" : "none";
-  }
-
-  // === APLICA OS FILTROS ===
-  if (filtroAno) filtroAno.addEventListener("change", aplicarFiltros);
-  if (filtroCategoria) filtroCategoria.addEventListener("change", aplicarFiltros);
-
-  // === LIMPAR FILTRO ===
-  btnLimpar.addEventListener("click", () => {
-    filtroAno.value = "todos";
-    if (filtroCategoria) filtroCategoria.value = "todas";
-    aplicarEstadoInicial();
-  });
+        carregarTodasNoticias();
+    } 
+    // PÁGINA HOME
+    else if (containerDestaques) {
+        carregarDestaques();
+    }
+    
+    configurarCarrosseis();
+    configurarCompartilhamento();
 });
 
-// === CONTROLE DE SETAS ===
-document.addEventListener("DOMContentLoaded", () => {
-  const setaEsquerda = document.querySelector(".seta-esquerda");
-  const setaDireita = document.querySelector(".seta-direita");
-  const setaCima = document.querySelector(".seta-cima");
-  const setaBaixo = document.querySelector(".seta-baixo");
+// =========================================
+// LÓGICA PRINCIPAL
+// =========================================
+async function carregarTodasNoticias() {
+    const container = document.getElementById('container-noticias-dinamicas');
+    container.innerHTML = '<p class="loading">Carregando notícias...</p>';
 
-  const cardsDefesas = document.querySelector(".cards-defesas");
-  const conteudoLinha = document.querySelector(".conteudo-linha");
+    try {
+        const response = await fetch('/api/noticias');
+        if (!response.ok) throw new Error('Erro na API');
+        
+        // Armazena dados brutos
+        todasAsNoticias = await response.json();
+        
+        // Aplica filtros e ordenação inicial
+        aplicarFiltros(true);
 
-  // Carrossel horizontal (Defesas)
-  if (setaEsquerda && setaDireita && cardsDefesas) {
-    setaEsquerda.addEventListener("click", () => {
-      cardsDefesas.scrollBy({
-        left: -300,
-        behavior: "smooth"
-      });
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = '<p class="erro">Erro ao carregar notícias.</p>';
+    }
+}
+
+function aplicarFiltros(resetar = false) {
+    const filtroAnoEl = document.getElementById("YearSelection");
+    const filtroCatEl = document.getElementById("CategorySelection");
+
+    // Pega valores ou define padrões
+    const filtroAno = filtroAnoEl ? filtroAnoEl.value : "todos"; // Assume "todos" se não houver filtro
+    const filtroCategoria = filtroCatEl ? filtroCatEl.value : "todas";
+
+    // 1. FILTRAGEM
+    noticiasFiltradas = todasAsNoticias.filter(noticia => {
+        if (!noticia.data_criacao) return false;
+        
+        const dataObj = new Date(noticia.data_criacao);
+        const anoNoticia = dataObj.getUTCFullYear().toString();
+        
+        const catNoticia = noticia.categoria ? noticia.categoria.toLowerCase().trim() : '';
+        const filtroCatValor = filtroCategoria.toLowerCase().trim();
+
+        // Lógica flexível para "todos/todas"
+        const anoValido = ["todos", "todas", "ano"].includes(filtroAno.toLowerCase());
+        const matchAno = anoValido || (anoNoticia === filtroAno);
+        
+        const catValida = ["todos", "todas", "categoria"].includes(filtroCatValor);
+        const matchCat = catValida || (catNoticia === filtroCatValor);
+
+        return matchAno && matchCat;
     });
 
-    setaDireita.addEventListener("click", () => {
-      cardsDefesas.scrollBy({
-        left: 300,
-        behavior: "smooth"
-      });
-    });
-  }
+    // 2. ORDENAÇÃO ESPECÍFICA (Janeiro -> Dezembro)
+    // Isso resolve "Novembro antes de Janeiro"
+    noticiasFiltradas.sort((a, b) => {
+        const dataA = new Date(a.data_criacao);
+        const dataB = new Date(b.data_criacao);
 
-  // Carrossel vertical (Eventos)
-  if (setaCima && setaBaixo && conteudoLinha) {
-    setaCima.addEventListener("click", () => {
-      conteudoLinha.scrollBy({
-        top: -150,
-        behavior: "smooth"
-      });
+        // Primeiro compara o MÊS (0 a 11)
+        const mesDiff = dataA.getMonth() - dataB.getMonth();
+        
+        if (mesDiff !== 0) {
+            return mesDiff; // Retorna ordem crescente de mês (Jan antes de Fev)
+        }
+        
+        // Se for o mesmo mês (ex: Jan 2025 e Jan 2024), mostra o ano mais recente primeiro
+        return dataB.getFullYear() - dataA.getFullYear();
     });
 
-    setaBaixo.addEventListener("click", () => {
-      conteudoLinha.scrollBy({
-        top: 150,
-        behavior: "smooth"
-      });
+    // 3. RESET VISUAL
+    if (resetar) {
+        itensVisiveis = 0;
+        document.getElementById('container-noticias-dinamicas').innerHTML = ''; 
+        ultimoMesRenderizado = ''; 
+    }
+
+    carregarMaisNoticias();
+}
+
+function carregarMaisNoticias() {
+    const container = document.getElementById('container-noticias-dinamicas');
+    const btnContainer = document.querySelector(".ver-todas");
+
+    if (noticiasFiltradas.length === 0) {
+        container.innerHTML = '<p class="aviso">Nenhuma notícia encontrada.</p>';
+        if (btnContainer) btnContainer.style.display = 'none';
+        return;
+    }
+
+    // Paginação: pega o próximo bloco
+    const proximoLote = noticiasFiltradas.slice(itensVisiveis, itensVisiveis + ITENS_POR_PAGINA);
+
+    proximoLote.forEach(noticia => {
+        const dataNoticia = noticia.data_criacao; 
+        const nomeMes = getNomeMes(dataNoticia);
+        
+        // CORREÇÃO DO AGRUPAMENTO:
+        // Usa apenas o nome do mês como chave. 
+        // Isso junta Jan 2025 e Jan 2024 sob o mesmo título "Janeiro"
+        const chaveMes = nomeMes;
+
+        if (chaveMes !== ultimoMesRenderizado) {
+            const nomeMesCap = nomeMes.charAt(0).toUpperCase() + nomeMes.slice(1);
+            container.insertAdjacentHTML('beforeend', 
+                `<h2 class="titulo-mes">${nomeMesCap}</h2>`
+            );
+            ultimoMesRenderizado = chaveMes;
+        }
+
+        // HTML do Card
+        const html = `
+            <a href="${noticia.url_noticia || '#'}" class="link-card">
+                <div class="card-noticia">
+                    <img class="imageNotice" src="${noticia.url_imagem}" onerror="this.style.display='none'" alt="${noticia.titulo}">
+                    <div class="texto">
+                        <span class="tagEvent">${noticia.categoria || 'Geral'}</span>
+                        <h3>${noticia.titulo}</h3>
+                        <p>${noticia.texto ? noticia.texto.substring(0, 120) + '...' : ''}</p>
+                        <span class="dateEvent">
+                            <time datetime="${dataNoticia}">${formatarData(dataNoticia)}</time>
+                        </span>
+                        <p class="continuar-lendo">Ler mais</p>
+                    </div>
+                </div>
+            </a>
+        `;
+        container.insertAdjacentHTML('beforeend', html);
     });
-  }
-});
+
+    itensVisiveis += proximoLote.length;
+
+    // Controla visibilidade do botão
+    if (itensVisiveis >= noticiasFiltradas.length) {
+        if (btnContainer) btnContainer.style.display = 'none';
+    } else {
+        if (btnContainer) btnContainer.style.display = 'block';
+    }
+}
+// =========================================
+// LÓGICA: PÁGINA HOME (DESTAQUES)
+// =========================================
+async function carregarDestaques() {
+    const container = document.getElementById('cards-noticias');
+    const btnVerTodasOriginal = container.querySelector('.ver-todas');
+    container.innerHTML = '<p>Carregando destaques...</p>';
+
+    try {
+        const response = await fetch('/api/noticias/destaques'); 
+        if (!response.ok) throw new Error('Erro API Destaques');
+        
+        const destaques = await response.json();
+        container.innerHTML = ''; 
+
+        destaques.slice(0, 3).forEach(noticia => {
+            const dataFormatada = new Date(noticia.data_criacao).toLocaleDateString('pt-BR', {
+                day: '2-digit', month: 'short', year: 'numeric'
+            }).toUpperCase().replace('.', '');
+
+            const html = `
+                <a href="${noticia.url_noticia || '#'}" class="card-destaque-link">
+                    <div class="card-noticia">
+                        <img src="${noticia.url_imagem}" alt="${noticia.titulo}" onerror="this.style.display='none'">
+                        <div class="texto">
+                            <h3>${noticia.titulo}</h3>
+                            <p>${noticia.subtitulo || ''}</p>
+                            <span>${dataFormatada}</span>
+                            <p class="continuar-lendo">Ler mais</p>
+                        </div>
+                    </div>
+                </a>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+        });
+
+        if (btnVerTodasOriginal) container.appendChild(btnVerTodasOriginal);
+
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = '<p>Não foi possível carregar os destaques.</p>';
+    }
+}
+async function carregarDefesas() {
+
+}
+
+// =========================================
+// FUNÇÕES GERAIS
+// =========================================
+function configurarCarrosseis() {
+    const cardsDefesas = document.querySelector('.cards-defesas');
+    if (cardsDefesas) {
+        document.querySelector('.seta-direita')?.addEventListener('click', () => {
+            cardsDefesas.scrollBy({ left: 200, behavior: 'smooth' });
+        });
+        document.querySelector('.seta-esquerda')?.addEventListener('click', () => {
+            cardsDefesas.scrollBy({ left: -200, behavior: 'smooth' });
+        });
+    }
+
+    const conteudoLinha = document.querySelector('.conteudo-linha');
+    if (conteudoLinha) {
+        document.querySelector('.seta-baixo')?.addEventListener('click', () => {
+            conteudoLinha.scrollBy({ top: 100, behavior: 'smooth' });
+        });
+        document.querySelector('.seta-cima')?.addEventListener('click', () => {
+            conteudoLinha.scrollBy({ top: -100, behavior: 'smooth' });
+        });
+    }
+}
+
+function configurarCompartilhamento() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    
+    const setHref = (id, link) => {
+        const el = document.getElementById(id);
+        if (el) el.href = link;
+    };
+
+    setHref("shareWhatsApp", `https://api.whatsapp.com/send?text=${title}%20${url}`);
+    setHref("shareEmail", `mailto:?subject=${title}&body=Veja%20essa%20matéria:%20${url}`);
+    setHref("shareLinkedIn", `https://www.linkedin.com/sharing/share-offsite/?url=${url}`);
+}
+

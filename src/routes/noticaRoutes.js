@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const noticeController = require('../controllers/noticia.controller');
+const noticeController = require('../controllers/noticiaController');
 
 // Rotas para o CRUD de notícias
 router.get('/', noticeController.getAllNoticias);
