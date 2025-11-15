@@ -5,6 +5,7 @@ const multer = require('multer');
 const path = require('path');
 
 // --- Configuração do Multer para Upload de Imagem ---
+// (Define onde salvar a imagem e qual nome dar a ela)
 const uploadDir = path.resolve(__dirname, '..', '..', 'public', 'uploads', 'noticias');
 
 // Garante que o diretório exista
@@ -23,7 +24,7 @@ const storage = multer.diskStorage({
         cb(null, 'noticia-' + uniqueSuffix + ext);
     }
 });
-// Define o 'upload' como 'imagem' (o nome do campo no formulário)
+// Define o 'upload' como 'imagem' (o nome do campo "name" no formulário HTML)
 const upload = multer({ storage: storage });
 // ----------------------------------------------------
 
@@ -38,10 +39,11 @@ router.get('/eventos', noticeController.getEventosMesAtual);
 // GET: Lista TODAS as notícias (incluindo as ocultas)
 router.get('/admin', noticeController.getAllNoticiasAdmin);
 
-// POST: Criar notícia (ADICIONADO O 'upload.single')
+// POST: Criar notícia (CORRIGIDO: Adicionado 'upload.single("imagem")')
+// Isso "desempacota" o FormData e cria o req.body e o req.file
 router.post('/', upload.single('imagem'), noticeController.createNoticia);
 
-// PUT: Atualizar notícia (ADICIONADO O 'upload.single')
+// PUT: Atualizar notícia (CORRIGIDO: Adicionado 'upload.single("imagem")')
 router.put('/:id', upload.single('imagem'), noticeController.updateNoticia);
 
 // PATCH: Mudar o status 'exibir' (o switch)
@@ -49,5 +51,6 @@ router.patch('/:id/toggle', noticeController.toggleNoticiaExibir);
 
 // DELETE: Deletar notícia
 router.delete('/:id', noticeController.deleteNoticia);
+
 
 module.exports = router;

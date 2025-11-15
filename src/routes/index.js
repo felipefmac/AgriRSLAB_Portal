@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 
-const noticias = require("./noticaRoutes");
+const noticias = require("./noticiaRoutes");
 const artigos = require("./artigosRoutes")
 const membros = require("./membrosRoutes");
 

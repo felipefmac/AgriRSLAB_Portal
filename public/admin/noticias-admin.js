@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const dataNoticia = noticia.data_criacao; 
             const nomeMes = getNomeMes(dataNoticia);
             const anoNoticia = new Date(dataNoticia).getUTCFullYear();
-            const chaveMes = nomeMes + anoNoticia;
+            const chaveMes = nomeMes;
 
             if (chaveMes !== ultimoMesRenderizado) {
                 const nomeMesCap = nomeMes.charAt(0).toUpperCase() + nomeMes.slice(1);
