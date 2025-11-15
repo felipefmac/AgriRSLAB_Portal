@@ -2,10 +2,12 @@ const { pool } = require('../database/dbConfig');
 const fs = require('fs');
 const path = require('path');
 
+// Caminho base da pasta de uploads de notícias
 const uploadDir = path.resolve(__dirname, '..', '..', 'public', 'uploads', 'noticias');
 
+// --- Funções Públicas ---
 
-// GET ALL notícias
+// GET ALL notícias (Público - Filtra por exibir=true)
 async function getAllNoticias(_req, res) {
   try {
     const result = await pool.query('SELECT * FROM noticias WHERE exibir = true ORDER BY data_criacao DESC');
@@ -13,17 +15,6 @@ async function getAllNoticias(_req, res) {
   } catch (error) {
     console.error('Erro ao buscar notícias:', error);
     res.status(500).json({ error: 'Erro ao buscar notícias' });
-  }
-};
-
-//GET ALL notícias (Admin - Traz todas com ou sem exibir true)
-async function getAllNoticiasAdmin(_req, res) {
-  try {
-    const result = await pool.query('SELECT * FROM noticias ORDER BY data_criacao DESC');
-    res.status(200).json(result.rows);
-  } catch (error) {
-    console.error('Erro ao buscar notícias (admin):', error);
-    res.status(500).json({ error: 'Erro ao buscar notícias (admin)' });
   }
 };
 
@@ -39,7 +30,7 @@ async function getDestaqueNoticias(_req, res) {
   }
 };
 
-//GET notícias DEFESA
+// GET apenas Defesas
 async function getDefesasNoticias(_req, res) {
   try {
     const result = await pool.query(
@@ -70,56 +61,30 @@ async function getEventosMesAtual(_req, res) {
   }
 };
 
-//DELETE noticia (com fs.unlink)
-async function deleteNoticia(req, res) {
-  const { id } = req.params;
 
+// --- Funções de Admin ---
+
+// (NOVO) GET ALL notícias (Admin - Traz todas)
+async function getAllNoticiasAdmin(_req, res) {
   try {
-    // 1. Pega o caminho da imagem antes de deletar
-    const oldData = await pool.query('SELECT url_imagem FROM noticias WHERE id_noticias = $1', [id]);
-    if (oldData.rows.length === 0) {
-      return res.status(404).json({ error: 'Notícia não encontrada para exclusão' });
-    }
-    const oldImagePath = oldData.rows[0].url_imagem;
-
-    // 2. Deleta do banco
-    const result = await pool.query('DELETE FROM noticias WHERE id_noticias = $1 RETURNING *', [id]);
-
-    // 3. Deleta o arquivo de imagem do disco
-    if (oldImagePath) {
-        const fullOldPath = path.join(uploadDir, path.basename(oldImagePath));
-        if (fs.existsSync(fullOldPath)) {
-          fs.unlinkSync(fullOldPath);
-        }
-    }
-
-    res.status(200).json({ message: 'Notícia deletada com sucesso!' });
+    const result = await pool.query('SELECT * FROM noticias ORDER BY data_criacao DESC');
+    res.status(200).json(result.rows);
   } catch (error) {
-    console.error('Erro ao deletar notícia:', error);
-    res.status(500).json({ error: 'Erro ao deletar notícia' });
+    console.error('Erro ao buscar notícias (admin):', error);
+    res.status(500).json({ error: 'Erro ao buscar notícias (admin)' });
   }
-}
+};
 
-//DELETE all noticias
-async function deleteAllNoticias(_req, res) {
-  try {
-    await pool.query('TRUNCATE TABLE noticias RESTART IDENTITY CASCADE');
-    res.status(200).json({ message: 'Todas as notícias foram deletadas com sucesso!' });
-  } catch (error) {
-    console.error('Erro ao deletar todas as notícias:', error);
-    res.status(500).json({ error: 'Erro ao deletar todas as notícias' });
-  }
-}
-
-//CREATE noticia (com Multer)
+// (MODIFICADO) CREATE noticia (com Multer)
 async function createNoticia(req, res) {
+  // Dados de texto vêm de 'req.body' (graças ao multer)
   let { titulo, subtitulo, data_criacao, texto, categoria, destaque, url_noticia, exibir } = req.body;
   
   // Trata 'exibir' e 'destaque' que vêm do FormData
   exibir = (exibir === 'on' || exibir === 'true' || exibir === true);
   destaque = (destaque === 'on' || destaque === 'true' || destaque === true);
 
-  // Verifica se o arquivo foi enviado
+  // O arquivo de imagem vem de 'req.file'
   if (!req.file) {
     return res.status(400).json({ error: 'A imagem da notícia é obrigatória.' });
   }
@@ -145,9 +110,11 @@ async function createNoticia(req, res) {
     res.status(500).json({ error: 'Erro ao criar notícia' });
   }
 }
-//UPDATE noticia (com Multer)
+
+// (MODIFICADO) UPDATE noticia (com Multer)
 async function updateNoticia(req, res) {
   const { id } = req.params;
+  // Dados de texto vêm de 'req.body'
   let { titulo, subtitulo, data_criacao, texto, categoria, destaque, url_noticia, exibir } = req.body;
 
   // Trata 'exibir' e 'destaque'
@@ -161,13 +128,15 @@ async function updateNoticia(req, res) {
 
     let nova_url_imagem;
 
-    // 2. Se uma nova imagem foi enviada...
+    // 2. Se uma nova imagem foi enviada (req.file existe)...
     if (req.file) {
       nova_url_imagem = `/uploads/noticias/${req.file.filename}`;
       
-      // 3. ...deleta a imagem antiga do disco
+      // 3. ...deleta a imagem antiga do disco (se ela existir)
       if (oldImagePath) {
-        const fullOldPath = path.join(uploadDir, path.basename(oldImagePath));
+        // Remove o /public/ do caminho se ele existir, para achar o arquivo certo
+        const relativeOldPath = oldImagePath.replace('/public/', ''); 
+        const fullOldPath = path.join(__dirname, '..', '..', 'public', relativeOldPath);
         if (fs.existsSync(fullOldPath)) {
           fs.unlinkSync(fullOldPath);
         }
@@ -202,6 +171,38 @@ async function updateNoticia(req, res) {
   }
 }
 
+// (MODIFICADO) DELETE noticia (com fs.unlink)
+async function deleteNoticia(req, res) {
+  const { id } = req.params;
+
+  try {
+    // 1. Pega o caminho da imagem antes de deletar
+    const oldData = await pool.query('SELECT url_imagem FROM noticias WHERE id_noticias = $1', [id]);
+    if (oldData.rows.length === 0) {
+      return res.status(404).json({ error: 'Notícia não encontrada para exclusão' });
+    }
+    const oldImagePath = oldData.rows[0].url_imagem;
+
+    // 2. Deleta do banco
+    await pool.query('DELETE FROM noticias WHERE id_noticias = $1', [id]);
+
+    // 3. Deleta o arquivo de imagem do disco
+    if (oldImagePath) {
+        const relativeOldPath = oldImagePath.replace('/public/', '');
+        const fullOldPath = path.join(__dirname, '..', '..', 'public', relativeOldPath);
+        if (fs.existsSync(fullOldPath)) {
+          fs.unlinkSync(fullOldPath);
+        }
+    }
+
+    res.status(200).json({ message: 'Notícia deletada com sucesso!' });
+  } catch (error) {
+    console.error('Erro ao deletar notícia:', error);
+    res.status(500).json({ error: 'Erro ao deletar notícia' });
+  }
+}
+
+// (NOVO) PATCH (Toggle) Exibir
 async function toggleNoticiaExibir(req, res) {
   const { id } = req.params;
   try {
@@ -222,17 +223,30 @@ async function toggleNoticiaExibir(req, res) {
   }
 }
 
+// (Mantenha se quiser a funcionalidade de "Deletar Tudo")
+async function deleteAllNoticias(_req, res) {
+  try {
+    // Você pode querer deletar os arquivos da pasta /uploads/noticias aqui também
+    await pool.query('TRUNCATE TABLE noticias RESTART IDENTITY CASCADE');
+    res.status(200).json({ message: 'Todas as notícias foram deletadas com sucesso!' });
+  } catch (error) {
+    console.error('Erro ao deletar todas as notícias:', error);
+    res.status(500).json({ error: 'Erro ao deletar todas as notícias' });
+  }
+}
+
 
 module.exports = {
-  createNoticia,
+  // Públicas
   getAllNoticias,
-  getEventosMesAtual,
   getDestaqueNoticias,
   getDefesasNoticias,
+  getEventosMesAtual,
+  // Admin
+  getAllNoticiasAdmin,
+  createNoticia,
   updateNoticia,
   deleteNoticia,
   deleteAllNoticias,
-  getAllNoticiasAdmin,
   toggleNoticiaExibir
 };
-

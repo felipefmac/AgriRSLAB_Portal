@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (chaveMes !== ultimoMesRenderizado) {
                 const nomeMesCap = nomeMes.charAt(0).toUpperCase() + nomeMes.slice(1);
                 container.insertAdjacentHTML('beforeend', 
-                    `<h2 class="titulo-mes-admin">${nomeMesCap} ${anoNoticia}</h2>`
+                    `<h2 class="titulo-mes-admin">${nomeMesCap}</h2>`
                 );
                 ultimoMesRenderizado = chaveMes;
             }
@@ -144,9 +144,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                     <div class="card-info">
                         <h4>${noticia.titulo}</h4>
-                        <p><strong>Categoria:</strong> ${noticia.categoria}</p>
+                        <p>${noticia.subtitulo}</p>
+                        <p>${noticia.texto}</p>
+                        <span><p><strong>Categoria:</strong> ${noticia.categoria}</p>
                         <p><strong>Data:</strong> ${formatarDataExibicao(noticia.data_criacao)}</p>
-                        <p><strong>Destaque:</strong> ${noticia.destaque ? 'Sim' : 'Não'}</p>
+                        <p><strong>Destaque:</strong> ${noticia.destaque ? 'Sim' : 'Não'}</p></span>
                     </div>
                     <div class="card-actions">
                         <div class="switch-container">
