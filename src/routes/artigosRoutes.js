@@ -1,5 +1,3 @@
-// src/rotas/artigosRoutes.js
-
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
@@ -33,24 +31,22 @@ const upload = multer({
     { name: 'pdf', maxCount: 1 }     // Campo 'pdf' para o upload
 ]); 
 // ------------------------------------------
+
+
+// controller para listar os artigos no site (publico)
 router.get('/publicos', artigosController.listarArtigosPublicos);
 
-// Rotas CRUD
+
+// Rotas para o CRUD de Artigos/Publicações (pág. ADMIN)
+
 // POST: Criar Artigo (com upload)
 // Note que usamos "upload" como um middleware antes do controller
 router.post('/', upload, artigosController.criarArtigo);
-
-// GET: Listar todos os Artigos
 router.get('/', artigosController.listarArtigos);
-
-// PUT: Atualizar Artigo (pode incluir novo upload)
 router.put('/:id', upload, artigosController.atualizarArtigo);
-
-// DELETE: Deletar Artigo
 router.delete('/:id', artigosController.deletarArtigo);
 
 // GET: Rota específica para download do PDF
 router.get('/:id/download', artigosController.downloadPdf);
-
 
 module.exports = router;

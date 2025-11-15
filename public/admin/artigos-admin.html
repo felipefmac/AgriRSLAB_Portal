@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin AgriRSlab - Início</title>
+    <title>Admin AgriRSlab - Publicações</title>
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,26 +18,38 @@
 
     <header>
         <div class="headerTop">
-            <h1 class="h1HEADER">Painel Administrativo</h1>
+            <h1 class="h1HEADER">Painel de Publicações</h1>
         </div>
-        <!-- <button id="btn-abrir-cadastro" class="btn-primary btnCadastro">
-            + Cadastrar Nova Publicação
-        </button> -->
-
-        <a href="artigos.html" class="btn-primary btnCadastro">
-            Painel de Publicações
-        </a>
-
-        <a href="membros.html" class="btn-primary btnCadastro">
-            Painel de Membros
-        </a>
     </header>
 
-    <!-- <main id="container-artigos">
-        <h2>Carregando Publicações...</h2>
-    </main> -->
+    <div class="admin-layout">
+        <aside class="admin-sidebar-placeholder">
+            <!-- espaço reservado para o menu lateral  -->
+        </aside>
 
-    <!-- <div id="modal-cadastro" class="modal">
+        <main>
+            <div class="admin-membros-header">
+                <div class="admin-membros-texto">
+                    <h2 class="titulo-secao">Administração de Publicações</h2>
+                    <p class="admin-membros-descricao">
+                        Aqui você pode cadastrar, atualizar e remover publicações do AgriRSLab,
+                        controlando também se elas aparecem ou não na página pública.
+                    </p>
+                </div>
+
+                <button id="btn-abrir-cadastro" class="btn-primary btnCadastro">
+                    + Cadastrar Nova Publicação
+                </button>
+            </div>
+
+            <section id="container-artigos">
+                <h2>Carregando Publicações...</h2>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL CADASTRO -->
+    <div id="modal-cadastro" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h3>Cadastrar Nova Publicação</h3>
@@ -85,7 +97,7 @@
                     </div>
                 </div>
 
-                <!-- Interruptor para Exibir/Ocultar --><!--
+                <!-- Interruptor para Exibir/Ocultar -->
                 <div class="form-group">
                     <label for="exibir">Exibir Publicação na Página Pública?</label>
                     <label class="switch">
@@ -97,9 +109,10 @@
                 <button type="submit" class="btn-primary">Cadastrar Publicação</button>
             </form>
         </div>
-    </div> -->
+    </div>
 
-    <!-- <div id="modal-atualizacao" class="modal">
+    <!-- MODAL ATUALIZAÇÃO -->
+    <div id="modal-atualizacao" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h3>Atualizar Publicação</h3>
@@ -152,7 +165,7 @@
                 </div>
 
                 <!-- Interruptor para Exibir/Ocultar -->
-    <!-- <div class="form-group">
+                <div class="form-group">
                     <label for="edit-exibir">Exibir Publicação na Página Pública?</label>
                     <label class="switch">
                         <input type="checkbox" id="edit-exibir" name="exibir">
@@ -163,9 +176,10 @@
                 <button type="submit" class="btn-primary">Atualizar Publicação</button>
             </form>
         </div>
-    </div> -->
+    </div>
 
-    <!-- <div id="modal-delecao" class="modal">
+    <!-- MODAL DELEÇÃO -->
+    <div id="modal-delecao" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h3>Confirmação de Deleção</h3>
@@ -173,14 +187,14 @@
             <button id="btn-confirmar-delecao" class="btn-danger">Deletar Publicação</button>
             <button id="btn-cancelar-delecao" class="btn-secondary">Cancelar</button>
         </div>
-    </div> -->
+    </div>
 
-    <!-- Elemento de Notificação (Toast) -->
-    <!-- <div id="custom-toast">
+    <!-- TOAST -->
+    <div id="custom-toast">
         <span id="toast-message"></span>
-    </div> -->
+    </div>
 
-    <!-- <script src="script.js"></script> -->
+    <script src="artigos-admin.js"></script>
 </body>
 
 </html>

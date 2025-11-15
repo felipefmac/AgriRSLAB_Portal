@@ -1,130 +1,145 @@
+/* ================================
+   LISTAGEM DE PUBLICAÇÕES (CARDS)
+================================ */
+
 #container-artigos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
 }
 
-/* Estilo do Card do Artigo */
 .artigo-card {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: calc(25% - 20px);
-    /* 3 cards por linha */
-    min-width: 300px;
-    overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: calc(25% - 20px);
+  min-width: 300px;
+  overflow: hidden;
 }
 
 .artigo-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-bottom: 1px solid #eee;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
 }
 
 .card-content {
-    padding: 15px;
+  padding: 15px;
 }
 
 .card-content h3 {
-    margin-top: 0;
-    color: #0056b3;
+  margin-top: 0;
+  color: #0056b3;
 }
 
 .card-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
 }
 
-/* Estilos de Botões */
+
+/* ================================
+   BOTÕES PADRÃO DO ADMIN
+================================ */
+
 .btn-primary,
 .btn-secondary,
 .btn-danger {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: transform 0.06s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
 }
 
 .btn-primary {
-    background-color: #007bff;
-    color: white;
-}
-
-.btnCadastro {
-    margin: 5px 0 0 5px;
+  background-color: #007bff;
+  color: #ffffff;
 }
 
 .btn-secondary {
-    background-color: #6c757d;
-    color: white;
+  background-color: #6c757d;
+  color: #ffffff;
 }
 
 .btn-danger {
-    background-color: #dc3545;
-    color: white;
+  background-color: #dc3545;
+  color: #ffffff;
 }
 
-/* Estilos do Modal */
+.btnCadastro {
+  margin: 5px 0 0 5px;
+}
+
+/* botões menores apenas dentro da tabela de membros */
+.tabela-admin-membros .btn-secondary,
+.tabela-admin-membros .btn-danger {
+  font-size: 0.8rem;
+  padding: 6px 10px;
+}
+
+
+/* ================================
+   MODAIS (COMPARTILHADO)
+================================ */
+
 .modal {
-    display: none;
-    /* Escondido por padrão */
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Fundo escuro transparente */
-    /* Usando Flexbox para centralizar o modal na tela */
-    align-items: center;
-    /* Alinha verticalmente */
-    justify-content: center;
-    /* Alinha horizontalmente */
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 0;
-    /* A centralização é controlada pelo pai (.modal) */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  width: min(800px, 95vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
 .close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-/* Estilo para Formulários dentro do Modal */
+/* labels e campos dentro dos modais */
 .modal-content label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
+  display: block;
+  margin-top: 10px;
+  font-weight: 500;
 }
 
 .urlUpload {
-    font-size: 13px;
+  font-size: 13px;
 }
 
 .modal-content input[type="text"],
@@ -132,134 +147,385 @@
 .modal-content input[type="number"],
 .modal-content input[type="file"],
 .modal-content select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .modal-content button {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
-/* Novas classes para layout em colunas no formulário */
+/* linhas em colunas nos formulários */
 .form-row {
-    display: flex;
-    gap: 20px; /* Espaço entre as colunas */
-    width: 100%;
-    align-items: flex-end; /* Alinha os inputs na base */
-    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  align-items: flex-end;
+  flex-wrap: wrap;
 }
 
 .form-group-half {
-    flex: 1; /* Permite que o item cresça */
-    min-width: 200px; /* Define uma largura mínima para evitar que seja espremido demais */
+  flex: 1;
+  min-width: 200px;
+}
+
+/* linha de fotos dos formulários de membros */
+.linha-fotos-form {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.campo-form {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* textareas dos modais (membros e publicações) */
+#form-cadastro textarea,
+#form-atualizacao textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 130px;
+  resize: vertical;
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
 }
 
 
-/* Adicionado para corrigir o alinhamento da imagem de preview */
+/* ================================
+   PREVIEW DE IMAGEM (Membros + Publicações)
+================================ */
+
 .image-preview-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 
 .image-preview-container img {
-    display: inline-block; /* Sobrescreve o 'display: block' global */
+  display: inline-block;
 }
 
-/* Estilos para a Notificação Customizada (Toast) */
+.image-preview-container img,
+#cadastro-img-preview,
+#edit-img-preview,
+#cadastro-foto-preview,
+#edit-foto-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--verde-claro);
+}
+
+
+/* ================================
+   TOAST (NOTIFICAÇÃO)
+================================ */
+
 #custom-toast {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 15px 25px;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    z-index: 20; /* Acima dos modais */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s, bottom 0.3s;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 25px;
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: #707070;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s, bottom 0.3s;
 }
 
 #custom-toast.show {
-    opacity: 1;
-    visibility: visible;
-    bottom: 30px;
+  opacity: 1;
+  visibility: visible;
+  bottom: 30px;
 }
 
-.success { background-color: #28a745; } /* Verde para sucesso */
-.error { background-color: #dc3545; }   /* Vermelho para erro */
+.success {
+  background-color: #28a745;
+}
 
-/* Estilo para o interruptor (switch) */
+.error {
+  background-color: #dc3545;
+}
+
+
+/* ================================
+   SWITCH EXIBIR / OCULTAR
+   (Membros + Publicações)
+================================ */
+
 .form-group {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 24px;
-}
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 24px;
-}
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-}
-input:checked + .slider {
-    background-color: #2196F3; /* Azul quando ligado */
-}
-input:checked + .slider:before {
-    transform: translateX(26px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
-/* Estilos para o status de visibilidade e card oculto */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+
+/* ================================
+   STATUS DE VISIBILIDADE (Publicações)
+================================ */
+
 .status-visible {
-    color: #28a745; /* Verde */
-    font-weight: bold;
+  color: #28a745;
+  font-weight: bold;
 }
 
 .status-oculto {
-    color: #dc3545; /* Vermelho */
-    font-weight: bold;
+  color: #dc3545;
+  font-weight: bold;
 }
 
 .artigo-card.oculto {
-    opacity: 0.65;
-    border-left: 5px solid #dc3545;
+  opacity: 0.65;
+  border-left: 5px solid #dc3545;
+}
+
+
+/* ================================
+   LAYOUT GERAL DO ADMIN
+================================ */
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.admin-layout {
+  display: flex;
+  flex: 1;
+  width: 100%;
+}
+
+/* placeholder para menu lateral futuro */
+.admin-sidebar-placeholder {
+  width: 230px;
+  flex-shrink: 0;
+  background-color: var(--verde-escuro);
+  border-right: 1px solid #e0e0e0;
+}
+
+/* main das páginas de admin (membros e publicações) */
+main {
+  flex: 1;
+  width: 100%;
+  margin: 20px 0 24px 0;
+  padding: 0 24px 24px;
+}
+
+
+/* ================================
+   CABEÇALHO DA ÁREA DE MEMBROS
+================================ */
+
+.admin-membros-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.admin-membros-texto h2 {
+  margin: 0 0 6px 0;
+}
+
+.admin-membros-descricao {
+  margin: 0;
+  max-width: 100%;
+  font-size: 1rem;
+  color: #555;
+}
+
+.admin-membros-header .btnCadastro {
+  white-space: nowrap;
+}
+
+
+/* ================================
+   TABELA DE MEMBROS
+================================ */
+
+.tabela-admin-membros {
+  width: 100%;
+  margin-top: 8px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.tabela-admin-membros thead th {
+  background-color: #4f4f4f;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.tabela-admin-membros tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #e4e4e4;
+  font-size: 0.9rem;
+  color: #333;
+  text-align: center;
+}
+
+.tabela-admin-membros tbody tr:nth-child(even) {
+  background-color: #f7f8fa;
+}
+
+.tabela-admin-membros tbody tr:hover {
+  background-color: #eef5ff;
+}
+
+.col-membro {
+  width: 40%;
+  text-align: left;
+}
+
+.col-acoes {
+  width: 20%;
+  text-align: center;
+}
+
+/* bloco com foto + nome + grupo */
+.celula-membro {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.thumb-tabela {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--verde-claro);
+}
+
+.info-membro-tabela {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nome-membro-tabela {
+  font-weight: 550;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+}
+
+.grupo-membro-tabela {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+/* badge exibindo / oculto */
+.badge-exibir {
+  display: inline-block;
+  margin-top: 2px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-exibir--on {
+  background-color: rgba(85, 163, 87, 0.15);
+  color: var(--verde-escuro);
+  border: 1px solid var(--verde-claro);
+}
+
+.badge-exibir--off {
+  background-color: rgba(128, 128, 128, 0.12);
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.tabela-admin-membros tbody tr.membro-oculto {
+  opacity: 0.65;
+}
+
+.tabela-admin-membros tbody tr.membro-oculto td:first-child {
+  border-left: 5px solid #dc3545;
+}
+
+/* transição suave na tabela inteira (opcional, mas fica bonito) */
+.tabela-admin-membros tbody tr {
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+/* ações na coluna da direita da tabela */
+.acoes-tabela {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
 }

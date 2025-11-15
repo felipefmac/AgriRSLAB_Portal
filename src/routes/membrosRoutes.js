@@ -1,129 +1,53 @@
-const { pool } = require('../database/dbConfig');
-const fs = require('fs'); // Para deletar arquivos no servidor
+// src/rotas/membrosRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const membrosController = require('../controllers/membrosController');
 
-router.get("/__health", (req, res) => {
-  res.json({
-    pid: process.pid,
-    file: __filename,
-    uploads_route: "/uploads -> " + UPLOAD_BASE,
-    now: new Date().toISOString()
-  })
-})
+// --- Configuração do Multer para Upload ---
+const uploadDir = path.resolve(__dirname, '..', 'upload', 'membros');
 
-// Listar membros
-router.get("/membros", async (req, res) => {
-  try {
-    const r = await pool.query(`
-      SELECT m.id, m.nome, m.descricao, m.link, m.foto, g.nome AS grupo
-      FROM membros m
-      JOIN grupos g ON m.grupo_id = g.id
-      ORDER BY g.nome, m.nome
-    `)
-    res.json(r.rows.map(row => withFotoUrl(req, row)))
-  } catch (e) {
-    res.status(500).json({ erro: e.message })
-  }
-})
-
-// Criar membro com upload
-router.post("/membros", upload.single("foto"), async (req, res) => {
-  try {
-    const { nome, descricao, link, grupo_id } = req.body
-    const grupo_id_num = Number(grupo_id)
-
-    let foto = req.file ? `/uploads/membros/${req.file.filename}` : null
-    console.log("[POST] filename:", req.file?.filename, "foto antes:", foto)
-    foto = normalizeFotoPath(foto)
-
-    // VALIDAÇÃO DURA: se sobrou singular, recusa
-    if (foto && !foto.startsWith("/uploads/membros/")) {
-      return res.status(400).json({ erro: "Caminho de foto inválido" })
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        // O Multer vai salvar os arquivos na pasta 'src/upload/membros'
+        cb(null, uploadDir); 
+    },
+    filename: (req, file, cb) => {
+        // Define o nome do arquivo como: timestamp-nomeoriginal.ext
+        const ext = path.extname(file.originalname);
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, file.fieldname + '-' + uniqueSuffix + ext);
     }
+});
 
-    const r = await pool.query(
-      `INSERT INTO membros (nome, descricao, link, foto, grupo_id)
-       VALUES ($1, $2, $3, $4, $5)
-       RETURNING *`,
-      [nome, descricao, link, foto, grupo_id_num]
-    )
-    console.log("[POST] foto salva:", r.rows[0].foto)
-
-    res.status(201).json(withFotoUrl(req, r.rows[0]))
-  } catch (e) {
-    console.error(e)
-    res.status(500).json({ erro: e.message })
-  }
-})
-
-// Atualizar membro com foto opcional
-router.put("/membros/:id", upload.single("foto"), async (req, res) => {
-  try {
-    const { id } = req.params
-    const a = await pool.query("SELECT * FROM membros WHERE id = $1", [id])
-    if (!a.rows.length) return res.status(404).json({ erro: "Membro não encontrado" })
-    const row = a.rows[0]
-
-    const nome = req.body.nome?.trim() ? req.body.nome : row.nome
-    const descricao = req.body.descricao?.trim() ? req.body.descricao : row.descricao
-    const link = req.body.link?.trim() ? req.body.link : row.link
-    const grupo_id = req.body.grupo_id !== undefined && req.body.grupo_id !== "" ? Number(req.body.grupo_id) : row.grupo_id
-
-    let foto = req.file ? `/uploads/membros/${req.file.filename}` : (req.body.foto || row.foto)
-    console.log("[PUT ] filename:", req.file?.filename, "foto antes:", foto)
-    foto = normalizeFotoPath(foto)
-
-    // VALIDAÇÃO DURA
-    if (foto && !foto.startsWith("/uploads/membros/")) {
-      return res.status(400).json({ erro: "Caminho de foto inválido" })
+// Inicializa o Multer: aceita 1 foto
+const upload = multer({ 
+    storage: storage,
+    limits: { 
+        fileSize: 1024 * 1024 * 10 // Limite de 5MB por arquivo, ajuste se necessário
     }
+}).fields([
+    { name: 'foto', maxCount: 1 } // Campo 'foto' para o upload
+]); 
+// ------------------------------------------
 
-    const r = await pool.query(
-      `UPDATE membros
-       SET nome = $1, descricao = $2, link = $3, foto = $4, grupo_id = $5
-       WHERE id = $6
-       RETURNING *`,
-      [nome, descricao, link, foto, grupo_id, id]
-    )
-    console.log("[PUT ] foto salva:", r.rows[0].foto)
+// Rotas CRUD
+// POST: Criar Membro (com upload)
+// Note que usamos "upload" como um middleware antes do controller
+router.post('/', upload, membrosController.criarMembro);
 
-    if (req.file && row.foto) {
-      try {
-        const antigo = path.join(UPLOAD_MEMBROS, path.basename(row.foto))
-        await fs.promises.unlink(antigo)
-      } catch {}
-    }
+// GET: Listar todos os Membros
+router.get('/', membrosController.listarMembros);
 
-    res.json(withFotoUrl(req, r.rows[0]))
-  } catch (e) {
-    console.error(e)
-    res.status(500).json({ erro: e.message })
-  }
-})
+// GET: Listar Membros públicos (para o site)
+router.get('/publicos', membrosController.listarMembrosPublicos);
 
-// Deletar membro e apagar foto em disco
-router.delete("/membros/:id", async (req, res) => {
-  try {
-    const { id } = req.params
-    const b = await pool.query("SELECT foto FROM membros WHERE id = $1", [id])
-    if (!b.rows.length) return res.status(404).json({ erro: "Membro não encontrado" })
+// PUT: Atualizar Membro (pode incluir novo upload)
+router.put('/:id', upload, membrosController.atualizarMembro);
 
-    const foto = normalizeFotoPath(b.rows[0].foto)
-    const r = await pool.query("DELETE FROM membros WHERE id = $1 RETURNING *", [id])
+// DELETE: Deletar Membro
+router.delete('/:id', membrosController.deletarMembro);
 
-    if (foto) {
-      try {
-        const arq = path.join(UPLOAD_MEMBROS, path.basename(foto))
-        await fs.promises.unlink(arq)
-      } catch {}
-    }
-
-    res.json({ mensagem: "Membro excluído", membro: r.rows[0] })
-  } catch (e) {
-    console.error(e)
-    res.status(500).json({ erro: e.message })
-  }
-})
+module.exports = router;

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin AgriRSLab - Membros</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wdth,wght@0,18..144,87..112,300..900;1,18..144,87..112,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="headerTop">
+            <h1 class="h1HEADER">Painel de Membros</h1>
+        </div>
+
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar-placeholder">
+            <!-- espaço reservado para o menu lateral futuramente -->
+        </aside>
+
+        <main>
+            <div class="admin-membros-header">
+                <div class="admin-membros-texto">
+                    <h2 class="titulo-secao">Administração de Membros</h2>
+                    <p class="admin-membros-descricao">
+                        Aqui você pode incluir, excluir e alterar os membros que atuam no AgriRSLab,
+                        controlando também em qual seção eles aparecem e se ficam visíveis na página pública.
+                    </p>
+                </div>
+
+                <button id="btn-abrir-cadastro" class="btn-primary btnCadastro">
+                    + Cadastrar Novo Membro
+                </button>
+            </div>
+
+            <section id="container-membros"></section>
+        </main>
+    </div>
+
+    <!-- MODAL CADASTRO -->
+    <div id="modal-cadastro" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Incluir Novo Membro</h3>
+
+            <form id="form-cadastro" enctype="multipart/form-data">
+                <!-- Nome + Grupo lado a lado -->
+                <div class="linha-form-dupla">
+                    <div class="campo-form">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" maxlength="22"  placeholder="Nome e sobrenome" >
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="grupo_id">Grupo do membro</label>
+                        <select id="grupo_id" name="grupo_id" required>
+                            <option value="" disabled selected>Selecione um grupo</option>
+                            <option value="1">Coordenação</option>
+                            <option value="2">Pesquisadores</option>
+                            <option value="3">Doutorandos</option>
+                            <option value="4">Mestrandos</option>
+                            <option value="5">Bolsistas</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Link do currículo -->
+                <label for="link">Link do perfil (Lattes, LinkedIn, etc.)</label>
+                <input type="url" id="link" name="link" placeholder="Cole o link do currículo ou perfil profissional">
+
+                <!-- Descrição -->
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" name="descricao" rows="4" maxlength="400"
+                    placeholder="Descreva o membro (formação, área de atuação, projetos etc.) &#10;Máximo de 400 caracteres."></textarea>
+
+                <!-- Foto atual (preview) + nova foto lado a lado -->
+                <div class="linha-fotos-form">
+                    <div class="campo-form">
+                        <label></label>
+                        <div class="image-preview-container">
+                            <!-- preview começa escondido, o JS mostra quando escolher o arquivo -->
+                            <img id="cadastro-foto-preview" src="" alt="Preview da Foto" style="display: none;">
+                        </div>
+                    </div>
+
+                    <div class="campo-form">
+                        <label>Carregar foto</label>
+                        <div class="form-row">
+                            <div class="form-group-half">
+                                <input type="file" id="foto_file_input" name="foto" accept="image/*" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exibir + botão Incluir -->
+                <div class="form-group form-group-final">
+                    <div>
+                        <label for="exibir">Exibir membro na página pública</label>
+                        <label class="switch">
+                            <input type="checkbox" id="exibir" name="exibir" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Incluir Membro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- MODAL ATUALIZAÇÃO -->
+    <div id="modal-atualizacao" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Atualizar Membro</h3>
+
+            <form id="form-atualizacao" enctype="multipart/form-data">
+                <input type="hidden" id="edit-id" name="id">
+
+                <!-- Nome + Grupo lado a lado -->
+                <div class="linha-form-dupla">
+                    <div class="campo-form">
+                        <label for="edit-nome">Nome</label>
+                        <input type="text" id="edit-nome" name="nome" maxlength="22" required> 
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="edit-grupo_id">Grupo do membro</label>
+                        <select id="edit-grupo_id" name="grupo_id" required>
+                            <option value="" disabled selected>Selecione um grupo</option>
+                            <option value="1">Coordenação</option>
+                            <option value="2">Pesquisadores</option>
+                            <option value="3">Doutorandos</option>
+                            <option value="4">Mestrandos</option>
+                            <option value="5">Bolsistas</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Link do currículo -->
+                <label for="edit-link">Link do perfil (Lattes, LinkedIn, etc.)</label>
+                <input type="url" id="edit-link" name="link">
+
+                <!-- Descrição -->
+                <label for="edit-descricao">Descrição</label>
+                <textarea id="edit-descricao" name="descricao" rows="4" maxlength="400" required></textarea>
+
+                <!-- Foto atual + nova foto lado a lado -->
+                <div class="linha-fotos-form">
+                    <div class="campo-form">
+                        <label></label>
+                        <div class="image-preview-container">
+                            <input type="hidden" id="edit-foto_existente" name="foto_existente">
+                            <img id="edit-foto-preview" src="" alt="Foto Atual">
+                        </div>
+                    </div>
+
+                    <div class="campo-form">
+                        <label>Atualizar foto</label>
+                        <div class="form-row">
+                            <div class="form-group-half">
+                                <input type="file" id="edit-foto_file_input" name="foto" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exibir + botão Atualizar -->
+                <div class="form-group form-group-final">
+                    <div>
+                        <label for="edit-exibir">Exibir membro na página pública</label>
+                        <label class="switch">
+                            <input type="checkbox" id="edit-exibir" name="exibir">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Atualizar Membro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- MODAL DELEÇÃO -->
+    <div id="modal-delecao" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Confirmação de deleção</h3>
+            <p>Tem certeza que deseja deletar o membro <strong id="delete-nome-confirm"></strong>?</p>
+            <button id="btn-confirmar-delecao" class="btn-danger">Deletar Membro</button>
+            <button id="btn-cancelar-delecao" class="btn-secondary">Cancelar</button>
+        </div>
+    </div>
+
+    <div id="custom-toast">
+        <span id="toast-message"></span>
+    </div>
+
+    <script src="membros-admin.js"></script>
+</body>
+
+</html>

@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 
-const noticia = require("./noticaRoutes");
-const artigo = require("./artigosRoutes")
+const noticias = require("./noticaRoutes");
+const artigos = require("./artigosRoutes")
+const membros = require("./membrosRoutes");
 
-
-router.use('/noticias', noticia);
-router.use('/artigos', artigo);
-
+router.use('/noticias', noticias);
+router.use('/artigos', artigos);
+router.use('/membros', membros); 
 
 module.exports = router;
