@@ -2,9 +2,9 @@
 
 const API_PUBLIC_MEMBROS = '/api/membros/publicos';
 
-// Mapeia grupo_id do banco -> slug da seção + texto de cargo
-function getInfoGrupo(grupoId) {
-  switch (Number(grupoId)) {
+// Mapeia id_categoria do banco -> slug da seção + texto de cargo
+function getInfoGrupo(id_categoria) {
+  switch (Number(id_categoria)) {
     case 1:
       return { slug: 'coordenadores', cargo: 'Pesquisador(a)/ Coordenador(a)' };
     case 2:
@@ -49,7 +49,7 @@ async function carregarMembrosPublicos(secoes) {
 
     // Cria os cards em cada grupo
     membros.forEach(membro => {
-      const infoGrupo = getInfoGrupo(membro.grupo_id);
+      const infoGrupo = getInfoGrupo(membro.id_categoria);
       if (!infoGrupo) return;
 
       const entry = secoes[infoGrupo.slug];

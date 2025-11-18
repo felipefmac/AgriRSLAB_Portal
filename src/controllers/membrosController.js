@@ -17,7 +17,7 @@ if (!fs.existsSync(uploadDir)) {
 // [C]RIAR Membro (POST)
 async function criarMembro(req, res) {
     // Dados de texto enviados no corpo da requisição (body)
-    let { nome, descricao, foto: fotoUrl, link, grupo_id, exibir } = req.body;
+    let { nome, descricao, foto: fotoUrl, link, id_categoria, exibir } = req.body;
 
     // Converte 'on' (de um checkbox/switch) para true, e a ausência para false.
     exibir = (exibir === 'on' || exibir === 'true' || exibir === true);
@@ -29,18 +29,18 @@ async function criarMembro(req, res) {
     const final_foto = fotoFile ? `/uploads/membros/${fotoFile.filename}` : fotoUrl;
 
     // Verifica se os campos obrigatórios foram preenchidos
-    if (!nome || !descricao || !final_foto || !grupo_id) {
+    if (!nome || !descricao || !final_foto || !id_categoria) {
         return res.status(400).json({
             mensagem: 'Faltam dados obrigatórios (nome, descrição, foto e grupo).'
         });
     }
 
     const query = `
-        INSERT INTO membros (nome, descricao, foto, link, grupo_id, exibir)
+        INSERT INTO membros (nome, descricao, foto, link, id_categoria, exibir)
         VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING *;
     `;
-    const values = [nome, descricao, final_foto, link || null, grupo_id, exibir];
+    const values = [nome, descricao, final_foto, link || null, id_categoria, exibir];
 
     try {
         const resultado = await pool.query(query, values);
@@ -56,10 +56,10 @@ async function criarMembro(req, res) {
 async function listarMembros(req, res) {
     const query = `
         SELECT 
-            m.id, m.nome, m.descricao, m.foto, m.link, m.grupo_id, m.exibir,
+            m.id, m.nome, m.descricao, m.foto, m.link, m.id_categoria, m.exibir,
             g.nome AS grupo_nome
         FROM membros m
-        LEFT JOIN grupos g ON m.grupo_id = g.id
+        LEFT JOIN categoria_membros g ON m.id_categoria = g.id
         ORDER BY g.nome, m.nome;
     `;
 
@@ -89,7 +89,7 @@ async function atualizarMembro(req, res) {
         const membroAntigo = resAntigo.rows[0];
 
         // 2. Processa os dados recebidos
-        let { nome, descricao, link, grupo_id, exibir } = req.body;
+        let { nome, descricao, link, id_categoria, exibir } = req.body;
         
         // Converte 'on' (de um checkbox/switch) para true. 
         // Se o campo não for enviado (checkbox desmarcado), o valor será false.
@@ -128,9 +128,9 @@ async function atualizarMembro(req, res) {
             setClauses.push(`link = $${paramIndex++}`);
             values.push(link);
         }
-        if (grupo_id) {
-            setClauses.push(`grupo_id = $${paramIndex++}`);
-            values.push(grupo_id);
+        if (id_categoria) {
+            setClauses.push(`id_categoria = $${paramIndex++}`);
+            values.push(id_categoria);
         }
 
         // Apenas adiciona a cláusula de atualização da foto se um novo valor foi realmente fornecido
@@ -233,10 +233,10 @@ async function deletarMembro(req, res) {
 async function listarMembrosPublicos(req, res) {
     const query = `
         SELECT 
-            m.id, m.nome, m.descricao, m.foto, m.link, m.grupo_id, m.exibir,
+            m.id, m.nome, m.descricao, m.foto, m.link, m.id_categoria, m.exibir,
             g.nome AS grupo_nome
         FROM membros m
-        LEFT JOIN grupos g ON m.grupo_id = g.id
+        LEFT JOIN categoria_membros g ON m.id_categoria = g.id
         WHERE m.exibir = TRUE
         ORDER BY g.nome, m.nome;
     `;

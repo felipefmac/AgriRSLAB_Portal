@@ -1,3 +1,7 @@
+DROP table if exists categoria_noticias, noticias, categoria_artigos, artigos, categoria_membros, membros, projetos;
+
+-- ======  NOTICIAS  ===========================
+
 CREATE TABLE IF NOT EXISTS categoria_noticias (
     id_categoria_noticias serial PRIMARY KEY,
     categoria varchar(50) NOT NULL UNIQUE
@@ -17,20 +21,18 @@ CREATE TABLE IF NOT EXISTS noticias (
     CONSTRAINT noticias_fk_categoria FOREIGN KEY (categoria) REFERENCES categoria_noticias (categoria) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-INSERT INTO categoria_noticias (categoria) VALUES ('Curso');
+INSERT INTO categoria_noticias (categoria)
+VALUES ('Curso'), ('Defesa'), ('Informativo');
 
-INSERT INTO categoria_noticias (categoria) VALUES ('Defesa');
+-- ======================================================================================
 
-INSERT INTO categoria_noticias (categoria) VALUES ('Informativo');
 
--- Tabela para armazenar as categorias das publicações
--- É criada primeiro porque a tabela 'artigos' depende dela.
+-- ======  ARTIGOS/PUBLICAÇÕES  ===========================
 CREATE TABLE IF NOT EXISTS categoria_artigos (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL UNIQUE
 );
 
--- Tabela principal para armazenar os dados dos artigos/publicações
 CREATE TABLE IF NOT EXISTS artigos (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
@@ -39,38 +41,21 @@ CREATE TABLE IF NOT EXISTS artigos (
     url_imagem TEXT,
     data_cadastro TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     exibir BOOLEAN DEFAULT TRUE,
-
--- Chave estrangeira que referencia a tabela de categorias
-id_categoria INTEGER NOT NULL,
-
--- Define a relação entre 'artigos' e 'categoria_artigos'
--- ON DELETE CASCADE significa que se uma categoria for deletada,
--- todos os artigos associados a ela também serão.
-CONSTRAINT fk_categoria
-        FOREIGN KEY(id_categoria) 
-        REFERENCES categoria_artigos(id)
-        ON DELETE CASCADE
+    id_categoria INTEGER NOT NULL,
+    CONSTRAINT fk_categoria FOREIGN KEY(id_categoria) REFERENCES categoria_artigos(id) ON DELETE CASCADE
 );
 
-INSERT INTO
-    categoria_artigos (nome)
-VALUES ('Artigos'),
-    ('Artigos de Conferência (AC)'),
-    ('Capítulos de livros (CL)'),
-    ('Notas Técnicas (NT)');
+INSERT INTO categoria_artigos (nome)
+VALUES ('Artigos'), ('Artigos de Conferência (AC)'), ('Capítulos de livros (CL)'), ('Notas Técnicas (NT)');
 
-CREATE TABLE IF NOT EXISTS grupos (
+-- ======================================================================================
+
+
+-- ======  EQUIPE  ===========================
+CREATE TABLE IF NOT EXISTS categoria_membros (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL
 );
-
-INSERT INTO
-    grupos (id, nome)
-VALUES (1, 'Coordenação'),
-    (2, 'Pesquisadores'),
-    (3, 'Doutorandos'),
-    (4, 'Mestrandos'),
-    (5, 'Bolsistas');
 
 CREATE TABLE IF NOT EXISTS membros (
     id SERIAL PRIMARY KEY,
@@ -78,21 +63,16 @@ CREATE TABLE IF NOT EXISTS membros (
     descricao VARCHAR(400) NOT NULL,
     foto VARCHAR(400) NOT NULL,
     link VARCHAR(400),
-    grupo_id INTEGER NOT NULL,
+    id_categoria INTEGER NOT NULL,
     exibir BOOLEAN DEFAULT TRUE,
-    CONSTRAINT fk_membros_grupos FOREIGN KEY (grupo_id) REFERENCES grupos (id) ON DELETE CASCADE
+    CONSTRAINT fk_categoria FOREIGN KEY (id_categoria) REFERENCES categoria_membros (id) ON DELETE CASCADE
 );
 
--- 1) COORDENAÇÃO (grupo_id = 1)
-INSERT INTO
-    membros (
-        nome,
-        descricao,
-        foto,
-        link,
-        grupo_id,
-        exibir
-    )
+INSERT INTO categoria_membros (nome)
+VALUES ('Coordenação'), ('Pesquisadores'), ('Doutorandos'), ('Mestrandos'), ('Bolsistas');
+
+-- 1) COORDENAÇÃO (id_categoria = 1)
+INSERT INTO membros (nome, descricao, foto, link, id_categoria, exibir)
 VALUES (
         'Marcos Adami',
         'Pesquisador titular do INPE, formado em Ciências Econômicas e com mestrado e doutorado em Sensoriamento Remoto pela mesma instituição. Atua com sistemas de informação geográfica e sensoriamento remoto, focando em séries temporais, mudanças no uso da terra, amostragem e estatísticas agrícolas.',
@@ -100,18 +80,10 @@ VALUES (
         'http://lattes.cnpq.br/7484071887086439',
         1,
         TRUE
-    );
+);
 
--- 2) PESQUISADORES (grupo_id = 2)
-INSERT INTO
-    membros (
-        nome,
-        descricao,
-        foto,
-        link,
-        grupo_id,
-        exibir
-    )
+-- 2) PESQUISADORES (id_categoria = 2)
+INSERT INTO membros (nome, descricao, foto, link, id_categoria, exibir)
 VALUES (
         'ANDRES VELÁSTEGUI',
         'Engenheiro Mecânico (ESPOL-Equador), mestre em Engenharia Ambiental (UB-Espanha) e doutor em Ciências Ambientais (UFPA). Atualmente é professor na ESPOL, com experiência em geociências e engenharia ambiental, focando em SIG, sensoriamento remoto, análise de séries temporais e mudança de uso da terra.',
@@ -177,16 +149,8 @@ VALUES (
         TRUE
     );
 
--- 3) DOUTORANDOS (grupo_id = 3)
-INSERT INTO
-    membros (
-        nome,
-        descricao,
-        foto,
-        link,
-        grupo_id,
-        exibir
-    )
+-- 3) DOUTORANDOS (id_categoria = 3)
+INSERT INTO membros (nome, descricao, foto, link, id_categoria, exibir)
 VALUES (
         'ÂNGELA PIRES',
         'Engenheira Cartográfica e de Agrimensura pelo IFG. Possui experiência profissional no INCRA com a elaboração de mapas temáticos para georreferenciamento de imóveis rurais. Na academia, pesquisou a combinação de imagens ópticas e SAR em nuvem (GEE) para mapear o uso e cobertura da terra.',
@@ -276,16 +240,8 @@ VALUES (
         TRUE
     );
 
--- 4) MESTRANDOS (grupo_id = 4)
-INSERT INTO
-    membros (
-        nome,
-        descricao,
-        foto,
-        link,
-        grupo_id,
-        exibir
-    )
+-- 4) MESTRANDOS (id_categoria = 4)
+INSERT INTO membros (nome, descricao, foto, link, id_categoria, exibir)
 VALUES (
         'ANA JÚLIA DIAS',
         'Mestranda em Sensoriamento Remoto (INPE) e Bacharel em Geografia (UNESP). Sua pesquisa foca na identificação de degradação da vegetação no Cerrado. Atua também no projeto Lethal Psi (Leeds-UK), coletando e processando dados radiométricos da vegetação amazônica, com experiência em geoprocessamento.',
@@ -303,16 +259,8 @@ VALUES (
         TRUE
     );
 
--- 5) BOLSISTAS (grupo_id = 5)
-INSERT INTO
-    membros (
-        nome,
-        descricao,
-        foto,
-        link,
-        grupo_id,
-        exibir
-    )
+-- 5) BOLSISTAS (id_categoria = 5)
+INSERT INTO membros (nome, descricao, foto, link, id_categoria, exibir)
 VALUES (
         'ANDRÉ GÁRCIA',
         'Agrônomo (IFES) e Doutor em Sensoriamento Remoto (INPE), com foco em aplicações para a agricultura. É membro do AgriRSLab, desenvolvendo metodologias para mapeamento de cultivos. Atualmente é bolsista (CNPq) no projeto AgriRS/CONAB, onde mapeia o uso do solo com imagens ópticas e de micro-ondas (SAR).',
@@ -361,3 +309,57 @@ VALUES (
         5,
         TRUE
     );
+
+-- ======================================================================================
+
+
+-- ======  PROJETOS  ===========================
+CREATE TABLE projetos (
+  id SERIAL PRIMARY KEY,
+  titulo VARCHAR(255) NOT NULL,
+  conteudo TEXT NOT NULL,
+  autores TEXT,
+  url_imagem VARCHAR(255),
+  exibir BOOLEAN DEFAULT FALSE,
+  data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  fase VARCHAR(20) NOT NULL DEFAULT 'finalizado'
+    CHECK (fase IN ('em-andamento', 'finalizado'))
+)
+
+
+INSERT INTO projetos (titulo, conteudo, autores, url_imagem, exibir, fase)
+VALUES (
+    'Estimativa de cobertura do solo por resíduos culturais',
+    'Os resíduos culturais mantidos na superfície das áreas agrícolas auxiliam na conservação do solo e da água. Por sua estimativa em campo ser onerosa, uma opção é utilizar dados e técnicas de sensoriamento remoto para detectá-los. Nesse contexto, esta pesquisa tem como objetivo estimar o percentual de cobertura do solo por resíduos culturais a partir de imagens multiespectrais de sensoriamento remoto orbital, utilizando dados do sensor MSI/Sentinel-2, regressões linear e quadrática, e o algoritmo Random Forest (RF). Espera-se encontrar no sensoriamento remoto orbital um método eficaz para estimar a cobertura do solo por resíduos culturais em larga escala, tornando a variável de fácil aplicabilidade em programas nacionais que incentivem o manejo sustentável do solo.',
+    'Marina Galdez de Castro Silva - Mestranda INPE
+    Marcos Adami - Orientador INPE
+    Julio Franchini - Embrapa Soja',
+    NULL,
+    TRUE,
+    'finalizado'
+),
+(
+    'Teste 1 - Projeto em andamento',
+    'Projeto em fase de desenvolvimento para testes do CRUD de projetos no portal do AgriRSLab.',
+    'Marina Galdez de Castro Silva - Mestranda INPE
+    Marcos Adami - Orientador INPE',
+    NULL,
+    TRUE,
+    'em-andamento'
+),
+(
+    'Mapeamento de uso e cobertura da terra',
+    'Projeto focado na análise temporal de uso e cobertura da terra em áreas agrícolas utilizando séries históricas de imagens orbitais.',
+    'Equipe AgriRSLab',
+    NULL,
+    FALSE,
+    'finalizado'
+),
+(
+    'Monitoramento de safras com NDVI',
+    'Desenvolvimento de metodologia para monitorar a dinâmica das safras agrícolas a partir de índices de vegetação derivados de sensores orbitais.',
+    'Equipe AgriRSLab',
+    NULL,
+    TRUE,
+    'em-andamento'
+);

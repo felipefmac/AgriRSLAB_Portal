@@ -10,13 +10,16 @@
 }
 
 .artigo-card {
-  background: #ffffff;
+      display: flex;
+    flex-direction: column;
+    background: #ffffff;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: calc(25% - 20px);
   min-width: 300px;
   overflow: hidden;
+
 }
 
 .artigo-card img {
@@ -27,7 +30,11 @@
 }
 
 .card-content {
-  padding: 15px;
+      flex: 1; 
+    display: flex;
+    flex-direction: column;
+    padding: 12px 14px;  
+    line-height: 1.3;
 }
 
 .card-content h3 {
@@ -36,10 +43,11 @@
 }
 
 .card-actions {
+  margin-top: auto;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 15px;
+ justify-content: center;
 }
 
 
@@ -456,7 +464,7 @@ main {
   text-align: center;
 }
 
-/* bloco com foto + nome + grupo */
+/* bloco com foto + nome + categoria */
 .celula-membro {
   display: flex;
   align-items: center;
@@ -483,7 +491,7 @@ main {
   text-transform: uppercase;
 }
 
-.grupo-membro-tabela {
+.categoria-membro-tabela {
   font-size: 0.8rem;
   color: #555;
 }
@@ -518,18 +526,69 @@ main {
   border-left: 5px solid #dc3545;
 }
 
-/* transição suave na tabela inteira (opcional, mas fica bonito) */
 .tabela-admin-membros tbody tr {
   transition: background-color 0.2s ease, opacity 0.2s ease;
 }
 
-/* ações na coluna da direita da tabela */
 .acoes-tabela {
   display: flex;
   justify-content: center;
   gap: 8px;
 }
 
+#container-projetos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.artigo-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: calc(25% - 20px); /* 4 cards por linha */
+  min-width: 300px;
+  overflow: hidden;
+}
+
+
+
+
+/* FACILITAR NAVEGACAO PAG ADM. IGNORAR
+
+/* SIDEBAR ADMIN */
+.admin-sidebar {
+    width: 230px;
+    background-color: #36794E;
+    height: 100vh;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 15px;
+}
+
+.sidebar-menu a {
+    padding: 12px 15px;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: rgba(255,255,255,0.1);
+    transition: background-color .2s, transform .1s;
+}
+
+.sidebar-menu a:hover {
+    background-color: rgba(255,255,255,0.25);
+    transform: translateX(4px);
+}
 /* ========================================= */
 /* ESTILOS DA PÁGINA DE NOTÍCIAS ADMIN
 /* ========================================= */

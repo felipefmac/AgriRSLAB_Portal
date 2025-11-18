@@ -32,9 +32,9 @@ function fecharModal(modal) {
     }
 }
 
-// Mapeia grupo_id -> texto do grupo (para exibir na listagem admin)
-function getGrupoNome(grupoId) {
-    switch (Number(grupoId)) {
+// Mapeia id_categoria -> texto da categoria (para exibir na listagem admin)
+function getCategoriaNome(id_categoria) {
+    switch (Number(id_categoria)) {
         case 1: return 'Coordenação';
         case 2: return 'Pesquisadores';
         case 3: return 'Doutorandos';
@@ -61,11 +61,11 @@ async function carregarMembros() {
 
     let membros = await resp.json();
 
-    // 1) Ordena por grupo_id (1 coordenação, 5 bolsistas)
-    // 2) Dentro de cada grupo, ordena por nome em ordem alfabética
+    // 1) Ordena por id_categoria (1 coordenação, 5 bolsistas)
+    // 2) Dentro de cada categoria, ordena por nome em ordem alfabética
     membros.sort((a, b) => {
-      const ga = Number(a.grupo_id);
-      const gb = Number(b.grupo_id);
+      const ga = Number(a.id_categoria);
+      const gb = Number(b.id_categoria);
 
       if (ga !== gb) {
         return ga - gb;
@@ -88,7 +88,7 @@ async function carregarMembros() {
       <thead>
         <tr>
           <th class="col-membro">Membro</th>
-          <th class="col-grupo">Grupo</th>
+          <th class="col-categoria">Categoria</th>
           <th class="col-exibir">Status</th>
           <th class="col-acoes">Ações</th>
         </tr>
@@ -99,7 +99,7 @@ async function carregarMembros() {
     const tbody = tabela.querySelector('tbody');
 
 membros.forEach((membro) => {
-  const cargo = getGrupoNome(membro.grupo_id);
+  const cargo = getCategoriaNome(membro.id_categoria);
 
   const tr = document.createElement('tr');
 
@@ -116,7 +116,7 @@ membros.forEach((membro) => {
       </div>
     </td>
     <td>
-      <span class="badge-grupo">${cargo}</span>
+      <span class="badge-categoria">${cargo}</span>
     </td>
     <td>
       <span class="badge-exibir ${membro.exibir ? 'badge-exibir--on' : 'badge-exibir--off'}">
@@ -189,7 +189,7 @@ function abrirModalEdicao(membro) {
     form.querySelector('#edit-id').value = membro.id;
     form.querySelector('#edit-nome').value = membro.nome || '';
     form.querySelector('#edit-descricao').value = membro.descricao || '';
-    form.querySelector('#edit-grupo_id').value = membro.grupo_id || '';
+    form.querySelector('#edit-id_categoria').value = membro.id_categoria || '';
     form.querySelector('#edit-link').value = membro.link || '';
 
     const checkboxExibir = form.querySelector('#edit-exibir');

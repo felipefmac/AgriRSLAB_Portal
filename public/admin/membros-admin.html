@@ -25,6 +25,13 @@
 
     <div class="admin-layout">
         <aside class="admin-sidebar-placeholder">
+            <!-- PROVISORIO -->
+            <nav class="sidebar-menu">
+                <a href="membros-admin.html">Membros</a>
+                <a href="artigos-admin.html">Artigos e Publicações</a>
+                <a href="projetos-admin.html">Projetos</a>
+                <a href="../pagina-inicial" target="_blank">Ir ao Site</a>
+            </nav>
             <!-- espaço reservado para o menu lateral futuramente -->
         </aside>
 
@@ -54,7 +61,7 @@
             <h3>Incluir Novo Membro</h3>
 
             <form id="form-cadastro" enctype="multipart/form-data">
-                <!-- Nome + Grupo lado a lado -->
+                <!-- Nome + categoria lado a lado -->
                 <div class="linha-form-dupla">
                     <div class="campo-form">
                         <label for="nome">Nome</label>
@@ -62,8 +69,8 @@
                     </div>
 
                     <div class="campo-form">
-                        <label for="grupo_id">Grupo do membro</label>
-                        <select id="grupo_id" name="grupo_id" required>
+                        <label for="id_categoria">Grupo do membro</label>
+                        <select id="id_categoria" name="id_categoria" required>
                             <option value="" disabled selected>Selecione um grupo</option>
                             <option value="1">Coordenação</option>
                             <option value="2">Pesquisadores</option>
@@ -129,7 +136,7 @@
             <form id="form-atualizacao" enctype="multipart/form-data">
                 <input type="hidden" id="edit-id" name="id">
 
-                <!-- Nome + Grupo lado a lado -->
+                <!-- Nome + categoria lado a lado -->
                 <div class="linha-form-dupla">
                     <div class="campo-form">
                         <label for="edit-nome">Nome</label>
@@ -137,8 +144,8 @@
                     </div>
 
                     <div class="campo-form">
-                        <label for="edit-grupo_id">Grupo do membro</label>
-                        <select id="edit-grupo_id" name="grupo_id" required>
+                        <label for="edit-id_categoria">Grupo do membro</label>
+                        <select id="edit-id_categoria" name="id_categoria" required>
                             <option value="" disabled selected>Selecione um grupo</option>
                             <option value="1">Coordenação</option>
                             <option value="2">Pesquisadores</option>

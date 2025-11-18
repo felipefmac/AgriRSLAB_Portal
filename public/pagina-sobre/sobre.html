@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <script src="script.js" defer></script>
 </head>
 <body>
   <!-- HEADER  -->
@@ -27,17 +28,17 @@
         <div class="sobre-img">
           <img src="../../imagens/5. Parceiros/membros.png" alt="Equipe AgrIRS Lab">
         </div>
+        <button onclick="setLanguage('pt')">PT</button>
+        <button onclick="setLanguage('en')">EN</button>
 
         <!-- caixa de cima (verde clara) -->
         <div class="sobre-card-top">
-          <p>O AgrIRS Lab é um laboratório vinculado a Divisão de Observação da Terra e Geoinformática (DIOTG) do Instituto Nacional de Pesquisas Espaciais (INPE).</p>
+          <p data-i18n="hero.title"></p>
         </div>
 
         <!-- caixa de baixo (verde escura) -->
         <div class="sobre-card-bottom">
-          <p>Somos um laboratório de sensoriamento remoto com foco na agricultura, estudando e monitorando cultivos agrícolas com o apoio de imagens de satélite e dados geoespaciais.</p>
-          <p>Também desenvolvemos pesquisas em áreas ambientais e sociais, como detecção do desmatamento e mudanças no uso e cobertura da terra.</p>
-          <p>Buscamos conectar tecnologia, ciência e responsabilidade socioambiental para gerar conhecimento e apoiar a tomada de decisões.</p>
+          <p data-i18n="hero.subtitle"></p>
         </div>
       </div>
     </section>

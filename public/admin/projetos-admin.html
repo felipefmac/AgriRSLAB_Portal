@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin do AgriRSLab - Projetos</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300..900&family=Montserrat:wght@100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="headerTop">
+            <h1 class="h1HEADER">Painel Administrativo</h1>
+        </div>
+    </header>
+
+    <!-- /* COLOCADO PARA FACILITAR NAVEGACAO ENTRE AS PAG ADM. IGNORAR-->
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <nav class="sidebar-menu">
+                <a href="membros-admin.html">Membros</a>
+                <a href="artigos-admin.html">Artigos e Publicações</a>
+                <a href="projetos-admin.html">Projetos</a>
+                <a href="../pagina-inicial" target="_blank">Ir ao Site</a>
+            </nav>
+        </aside>
+  <!-- /* COLOCADO PARA FACILITAR NAVEGACAO ENTRE AS PAG ADM. IGNORAR-->
+
+
+        <main>
+            <div class="admin-membros-header">
+                <div class="admin-membros-texto">
+                    <h2 class="titulo-secao">Administração de Projetos</h2>
+                    <p class="admin-membros-descricao">
+                        Aqui você cadastra, atualiza e remove projetos do AgriRSLab.
+                        Também controla se cada projeto aparece ou não na página pública.
+                    </p>
+                </div>
+
+                <button id="btn-abrir-cadastro" class="btn-primary btnCadastro">
+                    + Cadastrar Novo Projeto
+                </button>
+            </div>
+
+            <!-- LISTAGEM DE PROJETOS -->
+            <section id="container-projetos">
+                <h2>Carregando Projetos...</h2>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL CADASTRO -->
+    <div id="modal-cadastro" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Cadastrar Novo Projeto</h3>
+
+            <form id="form-cadastro">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" required>
+
+                <label for="autores">Autores (separe por vírgula):</label>
+                <input type="text" id="autores" name="autores">
+
+                <label for="fase">Fase do Projeto:</label>
+                <select id="fase" name="fase">
+                    <option value="" selected disabled>Selecione a fase</option>
+                    <option value="em-andamento">Em andamento</option>
+                    <option value="finalizado">Finalizado</option>
+                </select>
+
+                <label for="conteudo">Descrição / Resumo:</label>
+                <textarea id="conteudo" name="conteudo" rows="5" required></textarea>
+
+                <label>Imagem do Projeto:</label>
+                <input type="file" id="imagem_cadastro" name="imagem" accept="image/*">
+
+                <div class="form-group">
+                    <label for="exibir">Exibir Projeto na página pública?</label>
+                    <label class="switch">
+                        <input type="checkbox" id="exibir" name="exibir" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary">Cadastrar Projeto</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE ATUALIZAÇÃO -->
+    <div id="modal-atualizacao" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Atualizar Projeto</h3>
+
+            <form id="form-atualizacao">
+                <input type="hidden" id="edit-id">
+
+                <label for="edit-titulo">Título:</label>
+                <input type="text" id="edit-titulo" name="titulo" required>
+
+                <label for="edit-autores">Autores (separe por vírgula):</label>
+                <input type="text" id="edit-autores" name="autores">
+
+                <label for="edit-fase">Fase do Projeto:</label>
+                <select id="edit-fase" name="fase">
+                    <option value="" disabled>Selecione a fase</option>
+                    <option value="em-andamento">Em andamento</option>
+                    <option value="finalizado">Finalizado</option>
+                </select>
+
+
+                <label for="edit-conteudo">Descrição / Resumo:</label>
+                <textarea id="edit-conteudo" name="conteudo" rows="5" required></textarea>
+
+                <label>Imagem Atual:</label>
+                <img id="edit-img-preview" src="" style="max-width:120px; margin-bottom:8px; border-radius:4px;">
+
+                <label>Nova Imagem:</label>
+                <input type="file" id="edit-imagem" name="imagem" accept="image/*">
+
+                <div class="form-group">
+                    <label for="edit-exibir">Exibir Projeto na página pública?</label>
+                    <label class="switch">
+                        <input type="checkbox" id="edit-exibir" name="exibir">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary">Atualizar Projeto</button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- MODAL DELETAR -->
+    <div id="modal-delecao" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Confirmar Deleção</h3>
+            <p>Deseja realmente deletar o projeto <strong id="delete-titulo-confirm"></strong>?</p>
+
+            <button id="btn-confirmar-delecao" class="btn-danger">Deletar</button>
+            <button id="btn-cancelar-delecao" class="btn-secondary">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="custom-toast">
+        <span id="toast-message"></span>
+    </div>
+
+    <script src="projetos-admin.js"></script>
+</body>
+
+</html>
