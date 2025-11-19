@@ -5,22 +5,21 @@
 
 | item | Funcionalidade | Descrição | Prioridade |
 |------|----------------|-----------|------------|
-|      |               |         |           |
-|      |               |           |           |
-|      |               |         |          |
-|      |               |            |           |
-|      |               |        |          |
-|      |              |        |          |
-|      |             |          |          |
-|      |               |          |          |
-|      |             |        |          |
-|     |                |          |           |
+|  RF01    | Linkar o usuário às outras páginas. |  Dinamizar página inicial.        |     Alta 🟥      |
+|  RF03    | Apresentar ao usuário a equipe do laboratório.  |   Dinamizar página de membros.         |    Alta 🟥       |
+|  RF04    | Manter o usuário informado sobre possíveis vagas, concursos etc. |  Ligar filtros da página de vagas ao BD / Dinamizar página de vagas / Formulário de candidatura via email. |    Alta 🟥    |
+|  RF05    | Documentar e divulgar a produção científica e as atividades em andamento do laboratório para a comunidade acadêmica, agências de fomento, potenciais parceiros e o público em geral.  |  Dinamizar página de projetos. | Alta 🟥     |
+|  RF06    | Atuar como um canal de comunicação dinâmico e atualizado, demonstrando a vitalidade e a relevância contínua do grupo. |  Dinamização da página de notícias. |  Alta 🟥  |
+|  RF07    | Atuar como o registro oficial e o repositório organizado da produção intelectual do laboratório, comprovando o impacto e o rigor científico do grupo. |  Ligar filtros da página de artigos ao BD. |   Alta 🟥 |
+|  RF08 | Garantir que qualquer pessoa (seja um estudante, um pesquisador parceiro, um representante da mídia ou a comunidade em geral) possa se comunicar com o laboratório de forma eficiente. |  Formulário do fale conosco. |    Alta 🟥   |
+| RNF02     | Permitir o acesso seguro aos recursos de gerenciamento e edição do site. | Puxar o header e o footer da página admin / Design da página de login administrativo / Login funcional e seguro da página admin / Subir login da pág admin |     Alta 🟥      |
+| RNF04     | Garantir a acessibilidade global do seu conteúdo, atendendo tanto ao público local quanto à comunidade científica internacional. |   Seletor de idioma (Português/Inglês.   |   Média 🟧    |
+| RNF04     | Garantir a acessibilidade global do seu conteúdo, atendendo tanto ao público local quanto à comunidade científica internacional. |   Tradução em libras.  |   Média 🟧    |
 |      |             |           |         |
 |      |            |            |         |
 |      |               |        |           |
 |      |               |            |         |
 |      |                |           |         |
-
 
 
 ## Burndown Sprint 3
