@@ -30,7 +30,7 @@ Use esta tabela para acompanhar todas as tasks do projeto. Marque ⬜ para pende
 |---------|----------------------------|-----------------|-------|-----------|------------|---------------------|--------|
 | ES-016 | Subir projeto                    |   William e Felipe        |   --    |     20      |    ES        |     RNF05                 |  ⬜    |
 | SO-006 | Documentação                  |   Pedro         |   10/11   |    20       |    SO        |        --             |  ✅    |
-| DW-013 | Botão de pesquisa            |  Ariana           | 18/11  |     10      |     DW       |                     |   ⬜   |
+| DW-013 | Botão de pesquisa            |  Ariana           | 18/11  |     10      |     DW       |       RF01              |   ⬜   |
 | MB-002 | Ligar filtros da página de artigos ao BD                    |  Felipe e William           | 06/11 |     10      |    MB        |       RF07              |  ✅    |
 | MB-002.1 | Ligar filtros da página de vagas ao BD             | Felipe e William   | 12/11 |    10       |     MB       |       RF04              |   ✅   |
 | MB-003 | Dinamizar página de vagas                 |   Ariana e William          | 18/11 |     8     |     MB       |       RF04              |   ⬜   |
