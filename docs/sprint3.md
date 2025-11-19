@@ -15,11 +15,6 @@
 | RNF02     | Permitir o acesso seguro aos recursos de gerenciamento e edição do site. | Puxar o header e o footer da página admin / Design da página de login administrativo / Login funcional e seguro da página admin / Subir login da pág admin |     Alta 🟥      |
 | RNF04     | Garantir a acessibilidade global do seu conteúdo, atendendo tanto ao público local quanto à comunidade científica internacional. |   Seletor de idioma (Português/Inglês.   |   Média 🟧    |
 | RNF04     | Garantir a acessibilidade global do seu conteúdo, atendendo tanto ao público local quanto à comunidade científica internacional. |   Tradução em libras.  |   Média 🟧    |
-|      |             |           |         |
-|      |            |            |         |
-|      |               |        |           |
-|      |               |            |         |
-|      |                |           |         |
 
 
 ## Burndown Sprint 3
@@ -35,7 +30,7 @@ Use esta tabela para acompanhar todas as tasks do projeto. Marque ⬜ para pende
 |---------|----------------------------|-----------------|-------|-----------|------------|---------------------|--------|
 |  | Subir projeto                    |           |       |           |            |     RNF05                 |  ⬜    |
 | SO-006 | Documentação                  |   Pedro         |   10/11   |    20       |    SO        |        --             |  ✅    |
-| DW-013 | Botão de pesquisa            |  Ariana           |   |           |     DW       |                     |   ⬜   |
+| DW-013 | Botão de pesquisa            |  Ariana           | 18/11  |     10      |     DW       |                     |   ⬜   |
 | MB-002 | Ligar filtros da página de artigos ao BD                    |  Felipe e William           | 06/11 |     10      |    MB        |       RF07              |  ✅    |
 | MB-002.1 | Ligar filtros da página de vagas ao BD             | Felipe e William   | 12/11 |    10       |     MB       |       RF04              |   ✅   |
 | MB-003 | Dinamizar página de vagas                 |  Eloah e William          | 18/11 |     8     |     MB       |       RF04              |   ⬜   |
@@ -50,8 +45,9 @@ Use esta tabela para acompanhar todas as tasks do projeto. Marque ⬜ para pende
 | DW-018 | Tradução em libras                | João Leal            | 12/11 |    5      |    DW        |      RNF04               |   ⬜   |
 | MB-006 | Dinamizar página de membros                | Ariana            | 06/11 |    10      |    MB        |    RF03                 |   ✅   |
 | MB-008 | Subir login da pág admin                | João Otávio            | 14/11 |    8      |    MB        |     RNF02                |   ✅   |
-| MB-009 | Subir a dinamização da pág de membros e projetos              | Felipe            | 14/11 |    8      |    MB        |     RF05/RF03                |   ✅   |
-| MB-007 | Dinamização da pág de notícias              | William           | 14/11 |    10      |    MB        |       RF06              |   ✅   |
+| MB-009 | Dinamização da página de projetos              | Ariana            | 14/11 |    10      |    MB        |     RF05                |   ✅   |
+| MB-010 | Subir a dinamização da pág de membros e projetos              | Felipe            | 14/11 |    8      |    MB        |     RF05/RF03                |   ✅   |
+| MB-007 | Dinamização da página de notícias              | William           | 14/11 |    10      |    MB        |       RF06              |   ✅   |
 
 
 
