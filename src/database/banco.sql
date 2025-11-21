@@ -324,7 +324,7 @@ CREATE TABLE projetos (
   data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   fase VARCHAR(20) NOT NULL DEFAULT 'finalizado'
     CHECK (fase IN ('em-andamento', 'finalizado'))
-)
+);
 
 
 INSERT INTO projetos (titulo, conteudo, autores, url_imagem, exibir, fase)
