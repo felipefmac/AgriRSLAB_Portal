@@ -5,7 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function carregarProjetos() {
     try {
-        const resposta = await fetch('/api/projetos/publicos');
+        // Pega o idioma do localStorage para fazer a requisição correta
+        const lang = localStorage.getItem('site_lang') || 'pt';
+        const resposta = await fetch(`/api/projetos/publicos?lang=${lang}`);
         const projetos = await resposta.json();
 
         // salva para filtros
@@ -21,6 +23,12 @@ async function carregarProjetos() {
 // ===============================================
 // RENDERIZA LISTA IGUAL AO MODELO ESTÁTICO
 // ===============================================
+// Função auxiliar para pegar texto baseado no idioma
+function getTexto(item, campo) {
+    // O backend agora envia o campo já traduzido. Apenas retornamos o valor.
+    return item[campo];
+}
+
 function renderizarProjetos(lista) {
     const container = document.getElementById('lista-projetos');
     const mensagem = document.getElementById('mensagem');
@@ -38,6 +46,9 @@ function renderizarProjetos(lista) {
 
     lista.forEach((proj, index) => {
 
+        // Pega o título (já traduzido pelo backend) para cada projeto
+        const tituloExibicao = getTexto(proj, 'titulo');
+
         // destaque = primeiro item
         const destaqueClasse = index === 0 ? 'item-destaque' : '';
 
@@ -46,8 +57,8 @@ function renderizarProjetos(lista) {
         a.className = `item-galeria ${destaqueClasse} ${proj.fase || ''}`;
 
         a.innerHTML = `
-            <img src="${proj.url_imagem}" alt="${proj.titulo}">
-            <div class="overlay-texto">${proj.titulo}</div>
+            <img src="${proj.url_imagem}" alt="${tituloExibicao}">
+            <div class="overlay-texto">${tituloExibicao}</div>
         `;
 
         container.appendChild(a);
