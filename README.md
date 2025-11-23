@@ -5,7 +5,7 @@
 
 
 <p align="center">
-  <img src="imagens/1.1Imagens%20Git/logo_404notfound.png"
+  <img src="https://github.com/404NotFound-ABP/AgriRSLAB_Portal/blob/76a8c62e6c347c423505e24162cd9b520b5d316c/imagens/1.1Imagens%20Git/logo_404notfound.png"
        alt="Logo 404NotFound"
        style="max-width: 260px; width: 60%; height: auto;">
 </p>
