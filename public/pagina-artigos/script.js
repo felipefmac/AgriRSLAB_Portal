@@ -19,19 +19,32 @@ function getFullUrl(path) {
  * @param {Object} artigo - Os dados do artigo.
  * @returns {HTMLElement} O elemento do card.
  */
+// Função auxiliar para pegar texto baseado no idioma
+function getTexto(item, campo) {
+    const lang = localStorage.getItem('site_lang') || 'pt';
+
+    // Se for inglês E existir tradução, retorna inglês. Senão, retorna PT.
+    if (lang === 'en' && item[campo + '_en']) {
+        return item[campo + '_en'];
+    }
+    // O controller agora retorna 'titulo_pt', mas vamos garantir compatibilidade
+    return item[campo + '_pt'] || item[campo];
+}
+
 function criarArtigoCard(artigo) {
     const card = document.createElement('div');
-    // Mantém a estrutura de classes original da página de artigos
     card.className = 'publication-card article-card publicacao';
+    // Usa a função getTexto para decidir o título
+    const tituloExibicao = getTexto(artigo, 'titulo');
 
     const imagemUrl = getFullUrl(artigo.url_imagem);
     const pdfUrl = getFullUrl(artigo.link_pdf);
 
     card.innerHTML = `
         <div class="card-image-box">
-            <img src="${imagemUrl}" alt="Capa do Artigo: ${artigo.titulo}" onerror="this.src='https://via.placeholder.com/300x200?text=Sem+Imagem';">
+            <img src="${imagemUrl}" alt="Capa do Artigo: ${tituloExibicao}" onerror="this.src='https://via.placeholder.com/300x200?text=Sem+Imagem';">
         </div>
-        <p class="card-title">${artigo.titulo}</p>
+        <p class="card-title">${tituloExibicao}</p>
         <div class="card-links">
             <a href="${artigo.link_doi}" target="_blank" rel="noopener noreferrer" class="btn-card doi">
                 DOI
@@ -63,7 +76,7 @@ async function carregarArtigosPublicos() {
     try {
         const response = await fetch(API_PUBLIC_URL);
         if (!response.ok) throw new Error(`Erro HTTP! Status: ${response.status}`);
-        
+
         const artigos = await response.json();
 
         // Limpa o "Carregando..." de todos os containers

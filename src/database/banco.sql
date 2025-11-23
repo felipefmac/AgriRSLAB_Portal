@@ -21,6 +21,15 @@ CREATE TABLE IF NOT EXISTS noticias (
     CONSTRAINT noticias_fk_categoria FOREIGN KEY (categoria) REFERENCES categoria_noticias (categoria) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+CREATE TABLE IF NOT EXISTS noticias_en (
+    id_traducao SERIAL PRIMARY KEY,
+    id_noticia INTEGER NOT NULL,
+    titulo VARCHAR(255),
+    subtitulo VARCHAR(500),
+    texto TEXT,
+    CONSTRAINT fk_noticia_en FOREIGN KEY (id_noticia) REFERENCES noticias (id_noticias) ON DELETE CASCADE
+);
+
 INSERT INTO categoria_noticias (categoria)
 VALUES ('Curso'), ('Defesa'), ('Informativo');
 
@@ -43,6 +52,13 @@ CREATE TABLE IF NOT EXISTS artigos (
     exibir BOOLEAN DEFAULT TRUE,
     id_categoria INTEGER NOT NULL,
     CONSTRAINT fk_categoria FOREIGN KEY(id_categoria) REFERENCES categoria_artigos(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS artigos_en (
+    id_traducao SERIAL PRIMARY KEY,
+    id_artigo INTEGER NOT NULL,
+    titulo VARCHAR(255),
+    CONSTRAINT fk_artigo_en FOREIGN KEY (id_artigo) REFERENCES artigos (id) ON DELETE CASCADE
 );
 
 INSERT INTO categoria_artigos (nome)
@@ -326,6 +342,13 @@ CREATE TABLE projetos (
     CHECK (fase IN ('em-andamento', 'finalizado'))
 )
 
+CREATE TABLE IF NOT EXISTS projetos_en (
+    id_traducao SERIAL PRIMARY KEY,
+    id_projeto INTEGER NOT NULL,
+    titulo VARCHAR(255),
+    conteudo TEXT,
+    CONSTRAINT fk_projeto_en FOREIGN KEY (id_projeto) REFERENCES projetos (id) ON DELETE CASCADE
+);
 
 INSERT INTO projetos (titulo, conteudo, autores, url_imagem, exibir, fase)
 VALUES (

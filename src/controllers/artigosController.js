@@ -3,6 +3,8 @@
 const { pool } = require('../database/dbConfig');
 const fs = require('fs'); // Para deletar arquivos no servidor
 const path = require('path');
+// Importa a biblioteca de tradução
+const translate = require('@iamtraction/google-translate');
 
 // Caminho absoluto para a pasta de uploads
 const uploadDir = path.resolve(__dirname, '..', 'upload');
@@ -16,35 +18,56 @@ async function criarArtigo(req, res) {
 
     // Converte 'on' (de um checkbox/switch) para true, e a ausência para false.
     exibir = (exibir === 'on' || exibir === 'true' || exibir === true);
-    
+
     // Dados dos arquivos de upload (se houver)
     const imagemFile = req.files['imagem'] ? req.files['imagem'][0] : null;
     const pdfFile = req.files['pdf'] ? req.files['pdf'][0] : null;
-
-    // Se a imagem for uma URL, ela virá no body, senão usaremos o caminho do arquivo upado
     const final_url_imagem = imagemFile ? `/uploads/${imagemFile.filename}` : url_imagem;
-    
-    // O PDF pode ser um arquivo local ou uma URL externa
     const final_link_pdf = pdfFile ? `/uploads/${pdfFile.filename}` : linkPdfUrl;
 
     // Verifica se os campos obrigatórios foram preenchidos
     if (!titulo || !link_doi || !id_categoria || !final_url_imagem || !final_link_pdf) {
-        return res.status(400).json({ mensagem: 'Faltam dados obrigatórios (título, DOI, categoria, imagem e PDF).' });
+        return res.status(400).json({ mensagem: 'Faltam dados obrigatórios.' });
     }
 
-    const query = `
-        INSERT INTO artigos (titulo, link_doi, link_pdf, url_imagem, id_categoria, exibir)
-        VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING *;
-    `;
-    const values = [titulo, link_doi, final_link_pdf, final_url_imagem, id_categoria, exibir];
+    const client = await pool.connect(); // Usar client para transação (rollback se falhar tradução)
 
     try {
-        const resultado = await pool.query(query, values);
-        res.status(201).json(resultado.rows[0]);
+        await client.query('BEGIN');
+
+        // 1. Insere em PT-BR (Tabela Original)
+        const queryPT = `
+        INSERT INTO artigos (titulo, link_doi, link_pdf, url_imagem, id_categoria, exibir)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING id, titulo;
+        `;
+        const valuesPT = [titulo, link_doi, final_link_pdf, final_url_imagem, id_categoria, exibir];
+        const resPT = await client.query(queryPT, valuesPT);
+        const novoArtigo = resPT.rows[0];
+
+        // 2. Realiza a Tradução para Inglês
+        // Nota: A biblioteca pode falhar se houver muitas requisições, ideal tratar erros.
+        let tituloEn = titulo;
+        try {
+            const traducao = await translate(titulo, { from: 'pt', to: 'en' });
+            tituloEn = traducao.text;
+        } catch (errTraducao) {
+            console.warn('Falha na tradução automática, usando original:', errTraducao.message);
+        }
+
+        // 3. Insere em EN-US (Nova Tabela)
+        const queryEN = `INSERT INTO artigos_en (id_artigo, titulo) VALUES ($1, $2)`;
+        await client.query(queryEN, [novoArtigo.id, tituloEn]);
+
+        await client.query('COMMIT');
+        res.status(201).json({ ...novoArtigo, titulo_en: tituloEn });
+
     } catch (error) {
+        await client.query('ROLLBACK');
         console.error('Erro ao cadastrar artigo:', error.message);
-        res.status(500).json({ mensagem: 'Erro interno do servidor ao criar artigo.' });
+        res.status(500).json({ mensagem: 'Erro interno ao criar artigo.' });
+    } finally {
+        client.release();
     }
 }
 
@@ -73,7 +96,7 @@ async function listarArtigos(req, res) {
 // [U]PDATE - Atualizar Artigo (PUT)
 async function atualizarArtigo(req, res) {
     const { id } = req.params;
-    
+
     try {
         // 1. Busca o artigo existente para obter os caminhos de arquivo antigos
         const resAntigo = await pool.query('SELECT link_pdf, url_imagem FROM artigos WHERE id = $1', [id]);
@@ -84,11 +107,11 @@ async function atualizarArtigo(req, res) {
 
         // 2. Processa os dados recebidos
         let { titulo, link_doi, id_categoria, url_imagem_existente, link_pdf, exibir } = req.body;
-        
+
         // Converte 'on' (de um checkbox/switch) para true. 
         // Se o campo não for enviado (checkbox desmarcado), o valor será false.
         const exibirFinal = (exibir === 'on' || exibir === 'true' || exibir === true);
-        
+
         // Garante que só consideramos um arquivo se ele realmente foi enviado (tem um nome)
         const imagemFile = (req.files && req.files['imagem'] && req.files['imagem'][0].filename) ? req.files['imagem'][0] : null;
         const pdfFile = (req.files && req.files['pdf'] && req.files['pdf'][0].filename) ? req.files['pdf'][0] : null;
@@ -121,15 +144,15 @@ async function atualizarArtigo(req, res) {
         if (titulo) { setClauses.push(`titulo = $${paramIndex++}`); values.push(titulo); }
         if (link_doi) { setClauses.push(`link_doi = $${paramIndex++}`); values.push(link_doi); }
         if (id_categoria) { setClauses.push(`id_categoria = $${paramIndex++}`); values.push(id_categoria); }
-        
+
         // Apenas adiciona a cláusula de atualização da imagem se um novo valor foi realmente fornecido
         if (nova_url_imagem !== undefined) { setClauses.push(`url_imagem = $${paramIndex++}`); values.push(nova_url_imagem); }
-        
+
         // Apenas adiciona a cláusula de atualização do PDF se um novo valor foi realmente fornecido
         if (novo_link_pdf !== undefined) {
             setClauses.push(`link_pdf = $${paramIndex++}`); values.push(novo_link_pdf);
         }
-        
+
         // Sempre atualiza o campo 'exibir' com base no estado do switch (marcado ou não)
         setClauses.push(`exibir = $${paramIndex++}`);
         values.push(exibirFinal);
@@ -152,7 +175,7 @@ async function atualizarArtigo(req, res) {
         if (resultado.rowCount === 0) {
             return res.status(404).json({ mensagem: 'Artigo não encontrado.' });
         }
-        
+
         // 4. Deleta arquivos antigos do servidor se eles foram substituídos
         // Deleta PDF antigo se um novo foi fornecido e o antigo era um upload
         if (novo_link_pdf && artigoAntigo.link_pdf && artigoAntigo.link_pdf.startsWith('/uploads/')) {
@@ -197,7 +220,7 @@ async function deletarArtigo(req, res) {
         if (resultado.rowCount === 0) {
             return res.status(404).json({ mensagem: 'Artigo não encontrado.' });
         }
-        
+
         // 3. Deleta o arquivo PDF (e imagem, se for caminho local) do servidor
         if (link_pdf && link_pdf.startsWith('/uploads/')) {
             const fullPathPdf = path.join(uploadDir, link_pdf.replace('/uploads/', ''));
@@ -231,7 +254,7 @@ function downloadPdf(req, res) {
     // O correto seria buscar o link_pdf no banco de dados primeiro!
     // Para simplificar a demonstração da função:
     res.status(501).json({ mensagem: "Funcionalidade de Download: Buscar 'link_pdf' no DB e usar 'res.download(caminho_completo)'." });
-    
+
     // Exemplo de como DEVERIA SER (inclua o código abaixo no DELETE para funcionar):
     /*
     pool.query('SELECT link_pdf FROM artigos WHERE id = $1', [id])
@@ -261,10 +284,13 @@ function downloadPdf(req, res) {
 async function listarArtigosPublicos(req, res) {
     const query = `
         SELECT 
-            a.id, a.titulo, a.link_doi, a.link_pdf, a.url_imagem, a.data_cadastro, a.exibir,
+            a.id, a.titulo AS titulo_pt, 
+            ae.titulo AS titulo_en,
+            a.link_doi, a.link_pdf, a.url_imagem, a.data_cadastro, a.exibir,
             c.nome AS categoria_nome
         FROM artigos a
         JOIN categoria_artigos c ON a.id_categoria = c.id
+        LEFT JOIN artigos_en ae ON a.id = ae.id_artigo
         WHERE a.exibir = TRUE
         ORDER BY a.data_cadastro DESC;
     `;
