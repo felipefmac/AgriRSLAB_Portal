@@ -177,7 +177,7 @@
     font-size: larger;
 }
 
-.sidebar a:hover {
+.sidebar > .admin-selecionavel:hover {
     background-color: var(--verde-claro);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;

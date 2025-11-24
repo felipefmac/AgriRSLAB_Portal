@@ -21,32 +21,28 @@
 <body>
     <header>
         <div class="headerTop">
-            <img class="imageLogo" src="/public/assets/Imagens do laboratorio/logo.png" alt="">
+            <img class="imageLogo" src="/assets/Imagens do laboratorio/logo.png" alt="">
             <h1 class="h1HEADER">Painel Administrativo</h1>
         </div>
     </header>
     <div class="login-container">
 
-        <div class="form-container">
-            <h2 class="h2-admin">Faça seu login</h2>
-
-
-            <form class="form-admin" action="/login-admin" method="POST">
-
-
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input class="input-admin" type="email" id="email" name="email_admin" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="senha">Senha:</label>
-                    <input class="input-admin" type="password" id="senha" name="senha_admin" required>
-                </div>
-
-                <button class="button-admin" type="submit">Entrar</button>
-            </form>
+<div class="form-container">
+    <h2 class="h2-admin">Faça seu login</h2>
+    <p id="msg" class="error-msg"></p> <form class="form-admin" id="login-form"> 
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input class="input-admin" type="email" id="mail" required> 
         </div>
+
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input class="input-admin" type="password" id="senha" required>
+        </div>
+
+        <button class="button-admin" type="submit">Entrar</button>
+    </form>
+</div>
 
     </div>
     <div class="admin-footer-wrapper">
@@ -54,6 +50,8 @@
             <span>2025 AgrisLab | Suporte</span>
         </footer>
     </div>
+
+    <script src="./js/login-integration.js"></script>
 </body>
 <!-- =======================    Feito por João Otávio   ======================= -->
 

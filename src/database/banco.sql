@@ -1,4 +1,4 @@
-DROP table if exists categoria_noticias, noticias, categoria_artigos, artigos, categoria_membros, membros, projetos;
+DROP table if exists categoria_noticias, noticias, categoria_artigos, artigos, categoria_membros, membros, projetos, requisitos_vaga, beneficios_vaga, vagas, usuarios;
 
 -- ======  NOTICIAS  ===========================
 
@@ -324,7 +324,7 @@ CREATE TABLE projetos (
   data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   fase VARCHAR(20) NOT NULL DEFAULT 'finalizado'
     CHECK (fase IN ('em-andamento', 'finalizado'))
-)
+);
 
 
 INSERT INTO projetos (titulo, conteudo, autores, url_imagem, exibir, fase)
@@ -402,7 +402,7 @@ VALUES (
     'Atuação com análise de imagens satelitais, geração de índices espectrais e apoio em projetos agrícolas.',
     'https://example.com/candidatura',
     TRUE
-)
+);
 
 INSERT INTO requisitos_vaga (vaga_id, descricao)
 VALUES
@@ -419,3 +419,13 @@ VALUES
 (1, 'Flexibilidade de horário'),
 (1, 'Acesso a dados exclusivos do laboratório'),
 (1, 'Possibilidade de aprendizado avançado em geotecnologias');
+
+CREATE TABLE usuarios (
+  idusuario SERIAL,
+  mail VARCHAR(100) NOT NULL,
+  senha VARCHAR(100) NOT NULL,
+  PRIMARY KEY(idusuario)
+);
+
+INSERT INTO usuarios (mail,senha)
+VALUES ('admin@agrirslab.com', '$2b$10$N8Ao/yDmkoWWV927aMlrTO7pizSNtUy0RiEa9VXEjaarC0Aw2ndbm');
