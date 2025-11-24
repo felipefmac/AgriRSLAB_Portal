@@ -62,5 +62,5 @@ Legenda IDs
 | MB-007 | Dinamização da página de notícias              | William           | 14/11 |    10      |    MB        |       RF06              |   ✅   |
 | SO-005 | Organização github              | Eloah           | 18/11 |    20      |    SO        |       --              |   ⬜   |
 | MB-011 | Adicionar botão de navegação na pág admin               | João Otávio            | 24/11 |    8      |    MB        |     RNF02                |   ⬜   |
-
+| MB-012 | Correção de erros na pág de notícias              | William           | 24/11 |    10      |    MB        |       RF06              |   ⬜   |
 
