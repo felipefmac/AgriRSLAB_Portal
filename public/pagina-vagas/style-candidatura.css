@@ -155,6 +155,11 @@ main{
   cursor:pointer;
   transition:transform .1s ease-in-out, box-shadow .2s ease, background-color .2s ease;
   text-decoration:none;
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn-primary-canditadura{
   background:#55A357;
@@ -165,6 +170,59 @@ main{
 .btn-primary-canditadura:active{
   transform:translateY(3px);
   box-shadow:0 1px 0 #36794E;
+}
+
+/* ==================== SPINNER DE CARREGAMENTO ==================== */
+
+.spinner-faleconosco {
+  display: none; 
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid var(--cor-texto-branco);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.btn-canditadura.loading .spinner-faleconosco {
+    display: inline-block !important;
+}
+.btn-canditadura.loading {
+    cursor: not-allowed;
+    pointer-events: none; 
+    background: #4b924d;
+    color: transparent !important; 
+}
+.btn-canditadura.loading span {
+    display: none !important; 
+}
+
+/* ==================== MENSAGEM DE FEEDBACK ==================== */
+.form-message {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  display: none; /* Inicia oculto */
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-message.success {
+  background-color: #e6f6e7;
+  color: var(--texto-sucesso);
+  border: 1px solid var(--texto-sucesso);
+}
+
+.form-message.error {
+  background-color: #fce7e7;
+  color: var(--texto-erro);
+  border: 1px solid var(--texto-erro);
 }
 
 /* ====== Responsivo geral ====== */
