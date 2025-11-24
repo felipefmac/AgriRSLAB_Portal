@@ -70,7 +70,7 @@ function criarArtigoCard(artigo) {
     </div>
 
     <div class="line-bottom">
-        <button class="btn-secondary btn-abrir-atualizacao" data-id="${artigo.id}">Atualizar</button>
+        <button class="btn-secondary btn-abrir-atualizacao" data-id="${artigo.id}">Editar</button>
         <button class="btn-danger btn-abrir-delecao" data-id="${artigo.id}" data-titulo="${artigo.titulo}">Deletar</button>
     </div>
 

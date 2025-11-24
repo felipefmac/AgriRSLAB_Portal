@@ -26,7 +26,7 @@ async function carregarProjetos() {
 }
 
 // ===============================================
-// RENDERIZA LISTA IGUAL AO MODELO ESTÁTICO
+// RENDERIZA LISTA 
 // ===============================================
 // Função auxiliar para pegar texto baseado no idioma
 function getTexto(item, campo) {
@@ -35,6 +35,12 @@ function getTexto(item, campo) {
 }
 
 function renderizarProjetos(lista) {
+
+    lista.sort((a, b) => {
+        if (a.destaque === b.destaque) return 0;
+        return a.destaque ? -1 : 1;
+    });
+
     const container = document.getElementById('lista-projetos');
     const mensagem = document.getElementById('mensagem');
 
@@ -55,7 +61,7 @@ function renderizarProjetos(lista) {
         const tituloExibicao = getTexto(proj, 'titulo');
 
         // destaque = primeiro item
-        const destaqueClasse = index === 0 ? 'item-destaque' : '';
+        const destaqueClasse = proj.destaque ? 'item-destaque' : '';
 
         const a = document.createElement('a');
         a.href = `projeto-detalhe.html?id=${proj.id}`;
@@ -71,7 +77,7 @@ function renderizarProjetos(lista) {
 }
 
 // ===============================================
-// FILTROS (igual ao antigo)
+// FILTROS 
 // ===============================================
 function configurarFiltros() {
     const botoes = document.querySelectorAll('.botao-filtro');

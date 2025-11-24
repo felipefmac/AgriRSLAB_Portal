@@ -260,7 +260,7 @@ MENU HAMBURGUER
 
 /* Menu */
 .headerBottom {
-  background-color: var(--verde-claro);
+  background-color: var(--verde-escuro);
   min-height: 50px;
   display: flex;
   align-items: center;
