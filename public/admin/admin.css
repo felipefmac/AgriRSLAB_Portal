@@ -104,26 +104,23 @@
     border-color: var(--verde-escuro);
 }
 
+.mensagem-admin svg {
+    margin-left: 5px; /* Espaço entre o texto e o ícone */
+    vertical-align: middle; /* Alinha o ícone com o texto */
+}
+
 .admin-footer-wrapper {
     position: fixed;
-    /* Fixa na tela */
     bottom: 0;
-    /* Encosta no fundo da janela */
     left: 0;
-    /* Alinha à esquerda */
     width: 100%;
-    /* Ocupa toda a largura da página */
     z-index: 9999;
-    /* Fica por cima de todos os elementos */
-
 }
 
 .admin-footer {
     display: flex;
     justify-content: center;
-    /* Centraliza horizontalmente */
     align-items: center;
-    /* Centraliza verticalmente */
     background-color: #604639;
     color: white;
     height: 50px;
@@ -133,8 +130,20 @@
 
 
 /* =====================
-    CSS DA PAG PRINCIPAL
+    CSS DAS PAGINAS ADMIN
    ===================== */
+.mensagem-admin {
+    font-size: 16px;
+}
+
+.mensagem-admin > a {
+    font-weight: bold;
+    color: var(--fundo-branco);
+    text-decoration: underline;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+}
 
 .sidebar {
     height: 100vh;
@@ -189,6 +198,7 @@
     margin-left: 220px;
     /* cria espaço pro menu */
     padding: 20px;
+    margin-top: 100px;
 }
 
 .admin-h2 {
@@ -269,6 +279,16 @@ img {
 /* ======================================
    HEADER
 ====================================== */
+
+header {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    z-index: 1000; 
+    background-color: var(--verde-escuro);
+}
+
 .headerTop {
     display: flex;
     align-items: center;
