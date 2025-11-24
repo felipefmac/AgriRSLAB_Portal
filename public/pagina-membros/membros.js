@@ -2,25 +2,54 @@
 
 const API_PUBLIC_MEMBROS = '/api/membros/publicos';
 
-// Mapeia id_categoria do banco -> slug da seção + texto de cargo
-function getInfoGrupo(id_categoria) {
+// Dicionário de tradução para cargos
+const dicionario = {
+  'pt': {
+    'coordenador': 'Pesquisador(a)/ Coordenador(a)',
+    'pesquisador': 'Pesquisador(a) Associado(a)',
+    'doutorando': 'Doutorando(a)',
+    'mestrando': 'Mestrando(a)',
+    'bolsista': 'Bolsista',
+    'ver': 'Ver',
+    'curriculo': 'CURRÍCULO',
+    'lattes': 'LATTES'
+  },
+  'en': {
+    'coordenador': 'Researcher/ Coordinator',
+    'pesquisador': 'Associate Researcher',
+    'doutorando': 'PhD Student',
+    'mestrando': 'Master\'s Student',
+    'bolsista': 'Fellow',
+    'ver': 'View',
+    'curriculo': 'CURRICULUM',
+    'lattes': 'LATTES'
+  }
+};
+
+// Mapeia id_categoria do banco -> slug da seção + chave de tradução
+function getInfoGrupo(id_categoria, lang = 'pt') {
+  const traducoes = dicionario[lang] || dicionario['pt'];
+
   switch (Number(id_categoria)) {
     case 1:
-      return { slug: 'coordenadores', cargo: 'Pesquisador(a)/ Coordenador(a)' };
+      return { slug: 'coordenadores', cargo: traducoes.coordenador };
     case 2:
-      return { slug: 'pesquisadores', cargo: 'Pesquisador(a) Associado(a)' };
+      return { slug: 'pesquisadores', cargo: traducoes.pesquisador };
     case 3:
-      return { slug: 'doutorandos', cargo: 'Doutorando(a)' };
+      return { slug: 'doutorandos', cargo: traducoes.doutorando };
     case 4:
-      return { slug: 'mestrandos', cargo: 'Mestrando(a)' };
+      return { slug: 'mestrandos', cargo: traducoes.mestrando };
     case 5:
-      return { slug: 'bolsistas', cargo: 'Bolsista' };
+      return { slug: 'bolsistas', cargo: traducoes.bolsista };
     default:
       return null;
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', inicializarMembros);
+window.addEventListener('languageChange', inicializarMembros);
+
+function inicializarMembros() {
   const secoes = {};
 
   // Mapeia cada <section class="grupo-membros" data-grupo="...">
@@ -35,11 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   carregarMembrosPublicos(secoes);
-});
+}
 
 async function carregarMembrosPublicos(secoes) {
   try {
-    const resp = await fetch(API_PUBLIC_MEMBROS);
+    const lang = localStorage.getItem('selectedLanguage') || 'pt';
+    const traducoes = dicionario[lang] || dicionario['pt'];
+
+    const resp = await fetch(`${API_PUBLIC_MEMBROS}?lang=${lang}`);
     if (!resp.ok) {
       console.error('Erro ao buscar membros públicos:', resp.status);
       return;
@@ -47,9 +79,14 @@ async function carregarMembrosPublicos(secoes) {
 
     const membros = await resp.json();
 
+    // Limpa grades antes de recarregar
+    Object.values(secoes).forEach(({ grade }) => {
+      if (grade) grade.innerHTML = '';
+    });
+
     // Cria os cards em cada grupo
     membros.forEach(membro => {
-      const infoGrupo = getInfoGrupo(membro.id_categoria);
+      const infoGrupo = getInfoGrupo(membro.id_categoria, lang);
       if (!infoGrupo) return;
 
       const entry = secoes[infoGrupo.slug];
@@ -68,15 +105,14 @@ async function carregarMembrosPublicos(secoes) {
         </div>
         <div class="card-verso">
           <p>${membro.descricao || ''}</p>
-          ${
-            membro.link
-              ? `<a href="${membro.link}" target="_blank" class="lattes-link" title="Currículo / Perfil">
-                   <span class="lattes-ver">Ver</span>
-                   <span class="lattes-curriculo">CURRÍCULO</span>
-                   <span class="lattes-lattes">LATTES</span>
+          ${membro.link
+          ? `<a href="${membro.link}" target="_blank" class="lattes-link" title="Currículo / Perfil">
+                   <span class="lattes-ver">${traducoes.ver}</span>
+                   <span class="lattes-curriculo">${traducoes.curriculo}</span>
+                   <span class="lattes-lattes">${traducoes.lattes}</span>
                  </a>`
-              : ''
-          }
+          : ''
+        }
         </div>
       `;
 
@@ -100,7 +136,11 @@ async function carregarMembrosPublicos(secoes) {
       if (grade) grade.style.display = 'grid';
 
       if (botao && grade) {
-        botao.addEventListener('click', () => {
+        // Remove listeners antigos para evitar duplicação (clonando o nó)
+        const novoBotao = botao.cloneNode(true);
+        botao.parentNode.replaceChild(novoBotao, botao);
+
+        novoBotao.addEventListener('click', () => {
           secao.classList.toggle('aberto');
           grade.style.display = secao.classList.contains('aberto') ? 'grid' : 'none';
         });

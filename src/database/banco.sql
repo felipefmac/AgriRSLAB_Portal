@@ -442,3 +442,52 @@ VALUES
 (1, 'Flexibilidade de horário'),
 (1, 'Acesso a dados exclusivos do laboratório'),
 (1, 'Possibilidade de aprendizado avançado em geotecnologias');
+
+-- ======================================================================================
+-- TABELAS DE TRADUÇÃO (INGLÊS)
+-- ======================================================================================
+
+-- Tabela de tradução para vagas em inglês
+CREATE TABLE IF NOT EXISTS vagas_en (
+    id_traducao SERIAL PRIMARY KEY,
+    vaga_id INTEGER NOT NULL,
+    titulo VARCHAR(255),
+    descricao TEXT,
+    CONSTRAINT fk_vaga_en 
+        FOREIGN KEY (vaga_id) 
+        REFERENCES vagas (vaga_id) 
+        ON DELETE CASCADE
+);
+
+-- Tabela de tradução para requisitos em inglês
+CREATE TABLE IF NOT EXISTS requisitos_vaga_en (
+    id_traducao SERIAL PRIMARY KEY,
+    req_id INTEGER NOT NULL,
+    descricao VARCHAR(255),
+    CONSTRAINT fk_requisito_en 
+        FOREIGN KEY (req_id) 
+        REFERENCES requisitos_vaga (req_id) 
+        ON DELETE CASCADE
+);
+
+-- Tabela de tradução para benefícios em inglês
+CREATE TABLE IF NOT EXISTS beneficios_vaga_en (
+    id_traducao SERIAL PRIMARY KEY,
+    benef_id INTEGER NOT NULL,
+    descricao VARCHAR(255),
+    CONSTRAINT fk_beneficio_en 
+        FOREIGN KEY (benef_id) 
+        REFERENCES beneficios_vaga (benef_id) 
+        ON DELETE CASCADE
+);
+
+-- Tabela de tradução para membros em inglês
+CREATE TABLE IF NOT EXISTS membros_en (
+    id_traducao SERIAL PRIMARY KEY,
+    id_membro INTEGER NOT NULL,
+    descricao VARCHAR(400),
+    CONSTRAINT fk_membro_en 
+        FOREIGN KEY (id_membro) 
+        REFERENCES membros (id) 
+        ON DELETE CASCADE
+);

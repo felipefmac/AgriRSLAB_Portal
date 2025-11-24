@@ -55,12 +55,14 @@
             </div>
             <script>
                 // Define o idioma padrão ou recupera do localStorage
-                if (!localStorage.getItem('site_lang')) {
-                    localStorage.setItem('site_lang', 'pt');
+                if (!localStorage.getItem('selectedLanguage')) {
+                    localStorage.setItem('selectedLanguage', 'pt');
                 }
 
                 function mudarIdioma(lang) {
-                    localStorage.setItem('site_lang', lang);
+                    localStorage.setItem('selectedLanguage', lang);
+                    // Dispara evento customizado para notificar outras partes da página
+                    window.dispatchEvent(new Event('languageChange'));
                     window.location.reload(); // Recarrega a página para aplicar a tradução nos cards
                 }
             </script>

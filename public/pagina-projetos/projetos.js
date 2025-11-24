@@ -3,10 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
     configurarFiltros();
 });
 
+// Recarrega projetos quando o idioma mudar
+window.addEventListener('languageChange', () => {
+    carregarProjetos();
+});
+
 async function carregarProjetos() {
     try {
         // Pega o idioma do localStorage para fazer a requisição correta
-        const lang = localStorage.getItem('site_lang') || 'pt';
+        const lang = localStorage.getItem('selectedLanguage') || 'pt';
         const resposta = await fetch(`/api/projetos/publicos?lang=${lang}`);
         const projetos = await resposta.json();
 

@@ -21,7 +21,7 @@ function getFullUrl(path) {
  */
 // Função auxiliar para pegar texto baseado no idioma
 function getTexto(item, campo) {
-    const lang = localStorage.getItem('site_lang') || 'pt';
+    const lang = localStorage.getItem('selectedLanguage') || 'pt';
 
     // Se for inglês E existir tradução, retorna inglês. Senão, retorna PT.
     if (lang === 'en' && item[campo + '_en']) {
@@ -110,3 +110,6 @@ async function carregarArtigosPublicos() {
 
 // Carrega os artigos quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', carregarArtigosPublicos);
+
+// Recarrega artigos quando o idioma mudar
+window.addEventListener('languageChange', carregarArtigosPublicos);
