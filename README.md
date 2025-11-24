@@ -71,7 +71,7 @@ A apresentação da *Sprint 2* em vídeo pode ser acessada [aqui](https://youtu.
 ## Definition of Done (DoD)
 
 O *DoD* pode ser acessado [aqui]([https://youtu.be/8m5mneY6ezg](https://github.com/404NotFound-ABP/AgriRSLAB_Portal/blob/e8aae51d47e695c02c723c4ff65f78f73a937011/docs/DoD.md
-)).
+)
 
 
 # 📌 Backlog Geral do Projeto
