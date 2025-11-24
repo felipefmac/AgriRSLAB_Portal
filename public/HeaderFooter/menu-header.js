@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Só executa o controle do menu depois do header existir
       inicializarMenuHamburguer();
+      inicializarBuscaGlobal();
+
     })
     .catch(error => console.error("Erro ao carregar header:", error));
 
@@ -56,4 +58,28 @@ function inicializarMenuHamburguer() {
   });
 }
 
+// === ATIVAR BUSCA GLOBAL ===
+function inicializarBuscaGlobal() {
+  const input = document.getElementById("search");
+  const botao = document.getElementById("searchBtn");
 
+  if (!input || !botao) {
+    console.warn("Campo de busca não encontrado no header.");
+    return;
+  }
+
+  // Quando tecla Enter
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") executarBusca();
+  });
+
+  // Quando clica no botão
+  botao.addEventListener("click", executarBusca);
+
+  function executarBusca() {
+    const termo = input.value.trim();
+    if (termo) {
+      window.location.href = `/pagina-busca/buscar.html?q=${encodeURIComponent(termo)}`;
+    }
+  }
+}

@@ -38,8 +38,16 @@
 }
 
 .card-content h3 {
+  font-size: 1rem;
   margin-top: 0;
   color: #0056b3;
+}
+
+.card-content p {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #333333;
+  margin-bottom: 12px;
 }
 
 .card-actions {
@@ -498,25 +506,22 @@ main {
 
 /* badge exibindo / oculto */
 .badge-exibir {
-  display: inline-block;
-  margin-top: 2px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
+    font-size: 0.85rem;
+    font-weight: 600;
 }
 
 .badge-exibir--on {
-  background-color: rgba(85, 163, 87, 0.15);
-  color: var(--verde-escuro);
-  border: 1px solid var(--verde-claro);
+    color: #28a745; /* verde bonito */
 }
 
 .badge-exibir--off {
-  background-color: rgba(128, 128, 128, 0.12);
-  color: #dc3545;
-  border: 1px solid #dc3545;
+    color: #dc3545; /* vermelho */
 }
+.badge-exibir::before {
+    content: "● ";
+    font-size: 0.9rem;
+}
+
 
 .tabela-admin-membros tbody tr.membro-oculto {
   opacity: 0.65;
@@ -542,6 +547,7 @@ main {
   gap: 20px;
   padding: 20px;
 }
+
 
 .artigo-card {
   background: #ffffff;
@@ -729,4 +735,65 @@ main {
     display: flex;
     justify-content: center;
     padding: 20px 0;
+}
+
+
+/* =======================================
+   BOTÕES PADRÃO ESTILO NOTÍCIAS
+======================================= */
+
+button,
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btnCadastro,
+.btn-editar,
+.btn-deletar {
+    padding: 10px 20px;
+    border-radius: 25px;           /* borda grande igual notícias */
+    border: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+/* hover */
+button:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-danger:hover,
+.btnCadastro:hover,
+.btn-editar:hover,
+.btn-deletar:hover {
+    transform: scale(1.03);
+    opacity: 0.95;
+}
+
+/* cadastrar / salvar */
+.btn-primary,
+.btnCadastro {
+    background-color: #0077b6;   /* azul do btn-update */
+    color: white;
+}
+
+/* editar */
+.btn-secondary,
+.btn-editar {
+    background-color: #2a9d8f;   /* verde do btn-add */
+    color: white;
+}
+
+/* excluir */
+.btn-danger,
+.btn-deletar {
+    background-color: #e63946;   /* vermelho do btn-delete */
+    color: white;
+}
+
+/* botões pequenos da tabela */
+.btn-editar,
+.btn-deletar {
+    padding: 6px 12px;
+    font-size: 0.8rem;
 }

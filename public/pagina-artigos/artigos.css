@@ -9,6 +9,7 @@
   height: auto;
 }
 
+/* ===================== SEARCH BOX ===================== */
 .search-box {
   flex: 1;
   min-width: 220px;
@@ -17,41 +18,69 @@
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 6px;
-  overflow: hidden;
   background-color: var(--cor-texto-branco);
+  padding-right: 4px !important; 
+  overflow: visible;           
+  gap: 2px !important;                
 }
 
-.search-box input {
-  width: 100%;
-  padding: 8px 10px;
-  border: none;
-  outline: none;
+/* Campo de texto */
+#searchArtigos {
+  flex: 1 !important;
+  padding: 8px 10px !important;
+  border: none !important;
+  outline: none !important;
+  background: var(--cor-texto-branco) !important;
   font-size: 0.95rem;
   color: var(--texto-escuro);
-  background-color: var(--cor-texto-branco);
 }
 
-.search-box button {
-  background-color: var(--fundo-branco);
-  color: var(--texto-escuro);
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+/* Botão lupa */
+#btnBuscarArtigos {
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background: var(--cor-texto-branco) !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0 !important;
 }
 
-.search-box button:hover {
-  background-color: #eaeaea;
+/* Ícone da lupa */
+#btnBuscarArtigos svg {
+  width: 22px !important;
+  height: 22px !important;
+  fill: #5A5A5A !important;
+  stroke: #5A5A5A !important;
+  display: block !important;
 }
 
-.btn-contato {
-  background-color: var(--amarelo-ver);
-  color: var(--texto-escuro);
-  text-decoration: none;
-  padding: 5px 15px;
-  border-radius: 4px;
-  font-weight: bold;
-  font-size: 0.9rem;
+/* Botão X (igual header) */
+#btnLimparBusca {
+  width: 36px !important;
+  height: 36px !important;
+  display: none;                    /* só aparece quando digita */
+  justify-content: center !important;
+  align-items: center !important;
+  background: var(--cor-texto-branco) !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+}
+
+#btnLimparBusca svg {
+  width: 22px !important;
+  height: 22px !important;
+  fill: #5A5A5A !important;
+}
+
+/* Remover X automático do Chrome */
+#searchArtigos::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
 }
 
 /* ===================== MENU PRINCIPAL ===================== */
@@ -76,10 +105,10 @@
   border-radius: 4px;
 }
 
-/* ===================== FILTROS INTERATIVOS ===================== */
+/* ===================== FILTROS ===================== */
 .interactive-filters {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: stretch;
   gap: 15px;
   flex-wrap: wrap;
@@ -91,7 +120,6 @@
 .filter-dropdown {
   position: relative;
   flex: 1;
-  width: 100%;
   min-width: 240px;
   max-width: 260px;
   display: flex;
@@ -104,16 +132,12 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--cor-texto-branco);
-  color: var(--texto-escuro);
+  color: rgba(51, 51, 51, 0.6);
   border: 1px solid #ccc;
   border-radius: 6px;
   padding: 8px 12px;
   font-size: 0.95rem;
   font-weight: 500;
-  transition: all 0.3s;
-  box-sizing: border-box;
-      color: rgba(51, 51, 51, 0.6);
-
 }
 
 .filter-toggle:hover {
@@ -134,7 +158,7 @@
   background-color: var(--cor-texto-branco);
   border: 1px solid #ddd;
   border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   padding: 10px;
   min-width: 100%;
   display: none;
@@ -148,14 +172,9 @@
 }
 
 .filter-panel label,
-.filter-panel input,
-.filter-panel .filter-input-text {
+.filter-panel input {
   color: var(--texto-escuro);
   font-size: 0.95rem;
-}
-
-.filter-panel input[type="checkbox"] {
-  accent-color: var(--verde-titulo);
 }
 
 .filter-input-text {
@@ -163,8 +182,6 @@
   padding: 6px 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  background-color: var(--fundo-branco);
-  font-size: 0.9rem;
 }
 
 .btn-apply-filter {
@@ -176,28 +193,18 @@
   border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.btn-apply-filter:hover {
-  background-color: var(--azul-escuro);
-}
-
-.publicacao.hidden {
-  display: none !important;
-}
-
-/* ===================== CONTEÚDO E CARDS ===================== */
+/* ===================== CONTEÚDO ===================== */
 .publications-main-content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3,1fr);
   gap: 20px;
 }
 
@@ -209,7 +216,6 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  height: 100%;
 }
 
 .card-image-box {
@@ -224,36 +230,29 @@
   width: 100%;
   height: 160px;
   object-fit: cover;
-  display: block;
 }
 
 .card-title {
   font-size: 0.95rem;
   font-weight: 400;
   color: var(--texto-escuro);
-  flex-grow: 1;
   margin-bottom: 15px;
-  line-height: 1.4;
 }
 
 .card-links {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: auto;
 }
 
 .btn-card {
   background-color: var(--cor-texto-branco);
   color: var(--azul-escuro);
-  text-decoration: none;
   padding: 5px 12px;
   border-radius: 5px;
   border: 1px solid var(--azul-escuro);
   font-size: 0.8rem;
   font-weight: bold;
-  min-width: 60px;
-  transition: background-color 0.3s, color 0.3s;
 }
 
 .btn-card:hover {
@@ -261,57 +260,21 @@
   color: var(--cor-texto-branco);
 }
 
-/* ===================== RESPONSIVIDADE ===================== */
+/* ===================== MOBILE ===================== */
 @media (max-width: 768px) {
-  main {
-    padding: 15px;
-  }
-
   .cards-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 
   .interactive-filters {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    width: 100%;
-    padding: 0 10px;
-  }
-
-  .card-image-box img {
-    height: 130px;
-  }
-
-  .publication-card {
-    border-radius: 0.5em;
-  }
-
-  .filter-dropdown {
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-  }
-
-  .filter-toggle {
-    width: 100%;
-    font-size: 0.75rem;
-    padding: 10px;
+    grid-template-columns: repeat(2,1fr);
   }
 
   .search-box {
-    min-width: 50%;
-    max-width: 100%;
+    min-width: 60%;
   }
 
-  .btn-contato {
-    padding: 10px;
-  }
-
-  .search-box input {
+  #searchArtigos {
     font-size: 0.8rem;
   }
-}
-.titulo-secao::after {
-  background-color: green; /* só pra testar */
 }

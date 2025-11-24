@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             </label>
                         </div>
                         <button class="btn-secondary btn-update">Editar</button>
-                        <button class="btn-delete btn-deletar">Deletar</button>
+                        <button class="btn-delete btn-deletar">Excluir</button>
                     </div>
                 </div>
             `);
