@@ -3,6 +3,7 @@ const rotas = require("./routes");
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -36,6 +37,7 @@ app.get('/', (_req, res) => {
 
 // routes da aplicação
 app.use('/api', rotas);
+app.use('/api/auth', authRoutes);
 
 // Inicialização do servidor
 app.listen(PORT, () => {
