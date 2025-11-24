@@ -5,7 +5,7 @@
 
 
 <p align="center">
-  <img src="imagens/1.1Imagens%20Git/logo_404notfound.png"
+  <img src="https://github.com/404NotFound-ABP/AgriRSLAB_Portal/blob/76a8c62e6c347c423505e24162cd9b520b5d316c/imagens/1.1Imagens%20Git/logo_404notfound.png"
        alt="Logo 404NotFound"
        style="max-width: 260px; width: 60%; height: auto;">
 </p>
@@ -66,6 +66,12 @@ A apresentação da *Sprint 2* em vídeo pode ser acessada [aqui](https://youtu.
 3. Necessidade de compliance com estrutura e regras do INPE (instituição pública).
 
 [↑ Voltar ao topo](#topo)
+
+
+## Definition of Done (DoD)
+
+O *DoD* pode ser acessado [aqui](https://github.com/404NotFound-ABP/AgriRSLAB_Portal/blob/e8aae51d47e695c02c723c4ff65f78f73a937011/docs/DoD.md)
+
 
 # 📌 Backlog Geral do Projeto
 
