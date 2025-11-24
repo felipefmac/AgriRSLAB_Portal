@@ -111,11 +111,13 @@
    MODAIS (COMPARTILHADO)
 ================================ */
 
+
+
 .modal {
   display: none;
   position: fixed;
   inset: 0;
-  z-index: 999;
+  z-index: 2000;
   background-color: rgba(0, 0, 0, 0.4);
 }
 
