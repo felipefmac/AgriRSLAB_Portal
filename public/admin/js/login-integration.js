@@ -29,7 +29,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
     // Redireciona para a dashboard
     setTimeout(() => {
-        window.location.href = "/admin/artigos-admin.html"; // Ajuste para sua página inicial do admin
+        window.location.href = "/admin/artigos-admin.html"; // Seletor para a página inicial do admin
     }, 1000);
 
   } catch (err) {
