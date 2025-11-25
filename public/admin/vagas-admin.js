@@ -243,13 +243,13 @@ async function abrirEditar(e) {
         // carregar requisitos
         vaga.requisitos?.forEach(req => {
             document.getElementById("edit-requisitos-list")
-                .appendChild(criarCampoItem(req.descricao, "req"));
+                .appendChild(criarCampoItem(req, "req"));
         });
 
         // carregar benefícios
         vaga.beneficios?.forEach(b => {
             document.getElementById("edit-beneficios-list")
-                .appendChild(criarCampoItem(b.descricao, "benef"));
+                .appendChild(criarCampoItem(b, "benef"));
         });
 
         abrirModal(modalEditar);

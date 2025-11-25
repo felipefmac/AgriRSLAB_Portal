@@ -336,6 +336,7 @@ CREATE TABLE projetos (
   conteudo TEXT NOT NULL,
   destaque BOOLEAN DEFAULT FALSE,
   autores TEXT,
+  destaque BOOLEAN DEFAULT FALSE,
   url_imagem VARCHAR(255),
   exibir BOOLEAN DEFAULT FALSE,
   data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
