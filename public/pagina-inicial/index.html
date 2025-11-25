@@ -17,7 +17,7 @@
     </header>
 
 
-    <section class="anuncio">
+    <!-- <section class="anuncio">
         <div class="anuncio_img">
             <img src="../assets/Imagens do laboratorio/Imagem_AgrisRs.svg" alt="Imagem do AgriRS"
                 class="imagem_anuncio">
@@ -88,7 +88,7 @@
         <!DOCTYPE html>
         <html lang="pt-br">
 
-        <!-- <head>
+        <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>AgriRS - Página Inicial</title>
@@ -102,7 +102,7 @@
         <body class="pagina-noticias">
 
             <header>
-            </header> -->
+            </header>
 
         <a id="projeto-destaque" href="../pagina-projetos/projetos.html" class="projeto-link">
             <img id="projeto-destaque-imagem" alt="Imagem do projeto" class="imagem_projeto">
@@ -116,7 +116,7 @@
 
         <a href="../pagina-projetos/projetos.html" class="acesso-projetos-bt" id="link-projetos">Ver todos os
             projetos</a>
-    </section>
+    </section> -->
 
 
     <section class="anuncio">
@@ -209,11 +209,10 @@
         <h2 class="noticia-titulo">
             Últimas Notícias </h2>
         <div class="linha-divisoria"></div>
-        =======
         <div class="noticia-layout" id="noticias-home">
 
             <!-- Notícia principal dinâmica -->
-            <article class="noticia-principal-card" id="noticia-principal">
+            <a class="noticia-principal-card" id="noticia-principal">
                 <div class="noticia-principal-img">
                     <img id="noticia-principal-imagem" src="" alt="Imagem da notícia principal"
                         class="noticia-principal-imagem">
@@ -226,11 +225,10 @@
                     <p class="noticia-principal-subtitulo" id="noticia-principal-subtitulo"></p>
                     <div class="noticia-principal-footer">
                         <span class="dateEvent"><time id="noticia-principal-data"></time></span>
-                        <a href="../pagina-noticias/noticias.html" id="noticia-principal-link"
-                            class="continuar-lendo">Leia mais</a>
+                        <span id="noticia-principal-link" class="continuar-lendo">Leia mais</span>
                     </div>
                 </div>
-            </article>
+            </a>
 
             <!-- Notícias secundárias dinâmicas -->
             <div class="noticias-secundarias" id="noticias-secundarias">
@@ -249,18 +247,8 @@
     </footer>
     <script src="home.js"></script>
     <script src="../HeaderFooter/menu-header.js"></script>
-    <!-- Container para notícias (via JS) -->
-    <div id="cards-noticias" class="cards-noticias"></div>
-    </section>
-    <footer>
-    </footer>
-    <script src="../HeaderFooter/menu-header.js"></script>
     <script src="../pagina-projetos/projetos.js"></script>
     <script src="../pagina-noticias/noticias.js"></script>
 </body>
-
-</html>
-
-</html>
 
 </html>

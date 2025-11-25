@@ -397,6 +397,10 @@ a {
   color: var(--azul-escuro);
 }
 
+.ver-todas {
+  margin-top: 50px;
+}
+
 .ver-todas a {
   display: inline-block;
   background-color: var(--azul-claro);
@@ -972,6 +976,7 @@ a {
     height: 80px;
   }
 }
+
 .estado-informativo {
   color: #555;
   font-size: 0.95rem;

@@ -180,26 +180,17 @@ async function updateNoticia(req, res) {
       nova_url_imagem = oldImagePath;
     }
 
-<<<<<<< HEAD
-    // Atualiza a notícia
-    const result = await pool.query(
-=======
     const final_url_noticia = (url_noticia === '') ? null : url_noticia;
 
     // 4. Atualiza o banco
   const result = await pool.query(
->>>>>>> afe38cc2d7592930888e7a98b1680037bdf07973
       `UPDATE noticias
        SET 
          titulo = $1, subtitulo = $2, data_criacao = $3, url_imagem = $4, 
          texto = $5, categoria = $6, destaque = $7, url_noticia = $8, exibir = $9
        WHERE id_noticias = $10
        RETURNING *`,
-<<<<<<< HEAD
-      [titulo, subtitulo, data_criacao, nova_url_imagem, texto, categoria, destaque, url_noticia, exibir, id]
-=======
       [titulo, subtitulo, data_criacao, nova_url_imagem, texto, categoria, destaque, final_url_noticia, exibir, id] 
->>>>>>> afe38cc2d7592930888e7a98b1680037bdf07973
     );
 
     if (result.rows.length === 0) {
@@ -309,8 +300,6 @@ async function deleteAllNoticias(_req, res) {
   }
 }
 
-<<<<<<< HEAD
-=======
 async function getNoticiaById(req, res) {
   const { id } = req.params;
   try {
@@ -344,7 +333,6 @@ async function getNoticiasSugeridas(req, res) {
 };
 
 
->>>>>>> afe38cc2d7592930888e7a98b1680037bdf07973
 module.exports = {
   // Públicas
   getAllNoticias,
