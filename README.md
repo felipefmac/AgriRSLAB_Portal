@@ -38,11 +38,11 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 
 <div align="center">
 
-| Sprint | Entrega       | Status |                 Relatório                  | Tasks |
-|------: |---------------|:------:|:------------------------------------------:|:-----:|
-| 1      | 📅 08/10/2025 | ✅     | [Ver Backlog](docs/sprint1.md#backlog)     | ✅     |
-| 2      | 📅 04/11/2025 | ✅  | [Ver Backlog](docs/sprint2.md#backlog)                                         | ✅     |
-| 3      | 📅 25/11/2025 | 🚧      | [Ver Backlog](https://github.com/404NotFound-ABP/AgriRSLAB_Portal/blob/b101f8361ab7a1a88254475e287edebc253a0282/docs/sprint3.md)                                          | —     |
+| Sprint | Entrega       | Status |                 Relatório                  | Vídeo | Tasks |
+|------: |---------------|:------:|:------------------------------------------:|:-----:|:-----:|
+| 1      | 📅 08/10/2025 | ✅     | [Ver Backlog](docs/sprint1.md#backlog)     | [vídeo](https://youtu.be/8NwBtAC9zXE).     | ✅     |
+| 2      | 📅 04/11/2025 | ✅     | [Ver Backlog](docs/sprint2.md#backlog)     | [vídeo](https://youtu.be/8m5mneY6ezg).     | ✅     |
+| 3      | 📅 24/11/2025 | 🚧      | [Ver Backlog](https://github.com/404NotFound-ABP/AgriRSLAB_Portal/blob/b101f8361ab7a1a88254475e287edebc253a0282/docs/sprint3.md) | —     | —     |
 
 
 </div>
@@ -63,11 +63,6 @@ Durante a segunda sprint, iniciou-se a codificação do site, transformando o pr
 # *Sprint 3 – Banco de Dados, Dinamização e Ajustes de Design:*
 A terceira sprint concentrou-se na criação do banco de dados e na implementação da dinamização das páginas, conectando efetivamente frontend e backend. Adicionalmente, foram realizados ajustes no design, aprimorando a experiência do usuário e garantindo consistência visual em todas as páginas. Essa etapa final permitiu integrar funcionalidades essenciais, corrigir inconsistências e aproximar o projeto da versão final planejada.
 
-
-
-A apresentação da *Sprint 1* em vídeo pode ser acessada [aqui](https://youtu.be/8NwBtAC9zXE).
-
-A apresentação da *Sprint 2* em vídeo pode ser acessada [aqui](https://youtu.be/8m5mneY6ezg).
 
 [↑ Voltar ao topo](#topo)
 
