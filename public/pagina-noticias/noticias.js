@@ -108,9 +108,9 @@ function traduzirPagina() {
     // Traduz títulos estáticos
     const titulosSecao = document.querySelectorAll('.titulo-secao');
     if (titulosSecao.length > 0) {
-        titulosSecao[0].textContent = traducoes.principaisNoticias;
-        titulosSecao[1].textContent = traducoes.eventos;
-        titulosSecao[2].textContent = traducoes.proximasDefesas;
+        if (titulosSecao[0]) titulosSecao[0].textContent = traducoes.principaisNoticias;
+        if (titulosSecao[1]) titulosSecao[1].textContent = traducoes.eventos;
+        if (titulosSecao[2]) titulosSecao[2].textContent = traducoes.proximasDefesas;
     }
 
     // Recarrega conteúdo dinâmico com o idioma correto
