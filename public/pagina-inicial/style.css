@@ -572,8 +572,6 @@ a {
     object-fit: cover;
     display: block;
   }
-
-  bottom: 8px;
 }
 
 .card-noticia .dateEvent {
@@ -973,4 +971,14 @@ a {
     width: 80px;
     height: 80px;
   }
+}
+.estado-informativo {
+  color: #555;
+  font-size: 0.95rem;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.card-noticia-link {
+  display: block;
 }

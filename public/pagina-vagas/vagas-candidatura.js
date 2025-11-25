@@ -1,11 +1,14 @@
-
 function showMessage(msgContainer, message, type) {
     msgContainer.textContent = message;
-    // As classes 'form-message', 'success' e 'error' estão definidas no CSS
     msgContainer.className = `form-message ${type}`;
     msgContainer.style.display = 'block';
+<<<<<<< HEAD
     // Oculta a mensagem após 5 segundos
     setTimeout(() => { msgContainer.style.display = 'none'; }, 5000);
+=======
+
+    setTimeout(() => { msgContainer.style.display = 'none'; }, 5000); 
+>>>>>>> afe38cc2d7592930888e7a98b1680037bdf07973
 }
 
 const customAlert = (msgContainer, message, isError = false) => {
@@ -57,6 +60,7 @@ async function carregarVaga() {
             return;
         }
 
+<<<<<<< HEAD
         // 🛑 PREENCHIMENTO DOS DADOS (Requisitos e Benefícios devem ser arrays de strings)
         document.getElementById("vaga-titulo").textContent = getTexto(vaga, 'titulo');
         document.getElementById("vaga-descricao").textContent = getTexto(vaga, 'descricao');
@@ -72,6 +76,21 @@ async function carregarVaga() {
         if (Array.isArray(requisitos)) {
             document.getElementById("vaga-requisitos").innerHTML =
                 requisitos.map(req => `<li>${req}</li>`).join("");
+=======
+        document.getElementById("vaga-titulo").textContent = vaga.titulo;
+        document.getElementById("vaga-descricao").textContent = vaga.descricao;
+
+        if (Array.isArray(vaga.requisitos)) {
+             document.getElementById("vaga-requisitos").innerHTML =
+                vaga.requisitos.map(req => `<li>${req}</li>`).join("");
+        } else {
+             document.getElementById("vaga-requisitos").innerHTML = "<li>Requisitos não listados.</li>";
+        }
+        
+        if (Array.isArray(vaga.beneficios)) {
+            document.getElementById("vaga-beneficios").innerHTML =
+                vaga.beneficios.map(b => `<li>${b}</li>`).join("");
+>>>>>>> afe38cc2d7592930888e7a98b1680037bdf07973
         } else {
             document.getElementById("vaga-requisitos").innerHTML = "<li>Requisitos não listados.</li>";
         }
@@ -97,22 +116,31 @@ async function carregarVaga() {
     }
 }
 
-
-// =====================================================================
-// 2. INICIALIZAR LÓGICA DO FORMULÁRIO (Configura o Spinner)
-// =====================================================================
 function inicializarFormulario() {
-    const form = document.getElementById("form-candidatura"); // ID do formulário em vagas-candidatura.html
     const btnSubmit = document.getElementById("btn-candidatura-submit");
     const msgContainer = document.getElementById("candidatura-message");
+<<<<<<< HEAD
 
     if (!form || !btnSubmit || !msgContainer) {
         console.warn("Elementos do formulário (botão/msgContainer) não encontrados. O envio não será configurado.");
         return;
+=======
+    
+    if (!btnSubmit || !msgContainer) {
+        console.warn("Elementos essenciais não encontrados.");
+        return; 
+    }
+
+    const form = btnSubmit.closest('form'); 
+    
+    if (!form) {
+        console.warn("O formulário pai do botão 'btn-candidatura-submit' não foi encontrado. Verifique se o botão está dentro da tag <form>.");
+        return; 
+>>>>>>> afe38cc2d7592930888e7a98b1680037bdf07973
     }
 
     form.addEventListener("submit", async (event) => {
-        event.preventDefault();
+        event.preventDefault(); //Impede a navegação padrão
 
         const formData = new FormData(form);
 
@@ -127,7 +155,6 @@ function inicializarFormulario() {
             return;
         }
 
-        // 1. 🛑 INÍCIO DO LOADING: Adiciona a classe 'loading' no botão
         btnSubmit.classList.add('loading');
 
         try {

@@ -154,14 +154,14 @@ textarea.caixas-contato {
 
 .form-message.success {
   background-color: #e6f6e7;
-  color: var(--texto-sucesso);
-  border: 1px solid var(--texto-sucesso);
+  color: var(--verde-2);
+  border: 1px solid var(--verde-1);
 }
 
 .form-message.error {
-  background-color: #fce7e7;
-  color: var(--texto-erro);
-  border: 1px solid var(--texto-erro);
+  background-color: #eceaea;
+  color: red;
+  border: 1px solid var(--verde-1);
 }
 
 
