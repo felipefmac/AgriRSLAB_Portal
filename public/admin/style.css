@@ -799,3 +799,19 @@ button:hover,
     padding: 6px 12px;
     font-size: 0.8rem;
 }
+
+.admin-card-noticia .card-info p {
+    /* Garante quebra de linha para strings contínuas muito longas */
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+    
+ 
+    max-height: 4.5em; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+.admin-card-noticia .card-info {
+    flex-grow: 1;
+    min-width: 0; 
+}

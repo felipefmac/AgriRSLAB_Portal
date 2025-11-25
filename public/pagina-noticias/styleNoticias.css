@@ -437,14 +437,37 @@
   color: var(--cor-texto-escuro);
 }
 
+.pagina-noticia {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+
+  max-width: 1400px; 
+  margin: 20px auto;
+  padding: 0 40px; 
+}
+
+
+.noticia-principal {
+  flex: 3; 
+  color: var(--cor-texto-escuro);
+}
+
+
+.mais-noticias {
+  flex: 1; 
+  max-width: 350px; 
+}
+
+
 .noticia-principal .imagem-noticia {
-    max-width: 400px;
+    max-width: 450px; 
     height: auto;
     margin: 25px auto; 
     border-radius: 10px;
     display: block;
 }
-
 .noticia-principal .texto-conteudo {
    
     margin: 10px auto; 

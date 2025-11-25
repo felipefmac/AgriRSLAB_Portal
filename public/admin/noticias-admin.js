@@ -64,6 +64,17 @@ document.addEventListener("DOMContentLoaded", () => {
         return data.toLocaleString('pt-BR', { month: 'long', timeZone: 'UTC' });
     }
 
+    function truncarTexto(texto, limite = 100) {
+        if (!texto) return '';
+        // Remove quebras de linha e espaços múltiplos antes de truncar
+        const textoLimpo = texto.replace(/\s+/g, ' ').trim(); 
+        
+        if (textoLimpo.length <= limite) {
+            return textoLimpo;
+        }
+        return textoLimpo.substring(0, limite).trim() + '...';
+    }
+
     // --- LÓGICA PRINCIPAL (Carregar, Filtrar, Renderizar) ---
 
     async function carregarTodasNoticias() {
@@ -135,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
                 ultimoMesRenderizado = chaveMes;
             }
-
+            const textoResumido = truncarTexto(noticia.texto, 256);
             // Renderiza o Card de Admin
             container.insertAdjacentHTML('beforeend', `
                 <div class="admin-card-noticia" data-id="${noticia.id_noticias}">
@@ -145,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="card-info">
                         <h4>${noticia.titulo}</h4>
                         <p>${noticia.subtitulo}</p>
-                        <p>${noticia.texto}</p>
+                        <p>${textoResumido}</p>
                         <span><p><strong>Categoria:</strong> ${noticia.categoria}</p>
                         <p><strong>Data:</strong> ${formatarDataExibicao(noticia.data_criacao)}</p>
                         <p><strong>Destaque:</strong> ${noticia.destaque ? 'Sim' : 'Não'}</p></span>

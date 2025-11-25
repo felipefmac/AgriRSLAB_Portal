@@ -1,10 +1,8 @@
-
 function showMessage(msgContainer, message, type) {
     msgContainer.textContent = message;
-    // As classes 'form-message', 'success' e 'error' estão definidas no CSS
     msgContainer.className = `form-message ${type}`;
     msgContainer.style.display = 'block';
-    // Oculta a mensagem após 5 segundos
+
     setTimeout(() => { msgContainer.style.display = 'none'; }, 5000); 
 }
 
@@ -44,11 +42,9 @@ async function carregarVaga() {
             return;
         }
 
-        // 🛑 PREENCHIMENTO DOS DADOS (Requisitos e Benefícios devem ser arrays de strings)
         document.getElementById("vaga-titulo").textContent = vaga.titulo;
         document.getElementById("vaga-descricao").textContent = vaga.descricao;
 
-        // Mapeia array de requisitos (que vem como array de strings do backend)
         if (Array.isArray(vaga.requisitos)) {
              document.getElementById("vaga-requisitos").innerHTML =
                 vaga.requisitos.map(req => `<li>${req}</li>`).join("");
@@ -56,7 +52,6 @@ async function carregarVaga() {
              document.getElementById("vaga-requisitos").innerHTML = "<li>Requisitos não listados.</li>";
         }
         
-        // Mapeia array de benefícios
         if (Array.isArray(vaga.beneficios)) {
             document.getElementById("vaga-beneficios").innerHTML =
                 vaga.beneficios.map(b => `<li>${b}</li>`).join("");
@@ -71,22 +66,24 @@ async function carregarVaga() {
     }
 }
 
-
-// =====================================================================
-// 2. INICIALIZAR LÓGICA DO FORMULÁRIO (Configura o Spinner)
-// =====================================================================
 function inicializarFormulario() {
-    const form = document.getElementById("form-candidatura"); // ID do formulário em vagas-candidatura.html
     const btnSubmit = document.getElementById("btn-candidatura-submit");
     const msgContainer = document.getElementById("candidatura-message");
     
-    if (!form || !btnSubmit || !msgContainer) {
-        console.warn("Elementos do formulário (botão/msgContainer) não encontrados. O envio não será configurado.");
-        return;
+    if (!btnSubmit || !msgContainer) {
+        console.warn("Elementos essenciais não encontrados.");
+        return; 
+    }
+
+    const form = btnSubmit.closest('form'); 
+    
+    if (!form) {
+        console.warn("O formulário pai do botão 'btn-candidatura-submit' não foi encontrado. Verifique se o botão está dentro da tag <form>.");
+        return; 
     }
 
     form.addEventListener("submit", async (event) => {
-        event.preventDefault();
+        event.preventDefault(); //Impede a navegação padrão
 
         const formData = new FormData(form);
         
@@ -101,7 +98,6 @@ function inicializarFormulario() {
             return;
         }
 
-        // 1. 🛑 INÍCIO DO LOADING: Adiciona a classe 'loading' no botão
         btnSubmit.classList.add('loading');
 
         try {

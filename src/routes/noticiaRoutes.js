@@ -28,24 +28,15 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 // ----------------------------------------------------
 
-// === ROTAS PÚBLICAS ===
-router.get('/', noticeController.getAllNoticias);
+
+router.get('/admin', noticeController.getAllNoticiasAdmin);
+router.get('/sugeridas', noticeController.getNoticiasSugeridas);
 router.get('/destaques', noticeController.getDestaqueNoticias);
 router.get('/defesas', noticeController.getDefesasNoticias);
 router.get('/eventos', noticeController.getEventosMesAtual);
-router.get('/:id', noticeController.getNoticiaById);
-router.get('/sugeridas', noticeController.getNoticiasSugeridas);
-
-// === ROTAS DE ADMIN ===
-
-// GET: Lista TODAS as notícias (incluindo as ocultas)
-router.get('/admin', noticeController.getAllNoticiasAdmin);
-
-// POST: Criar notícia (CORRIGIDO: Adicionado 'upload.single("imagem")')
-// Isso "desempacota" o FormData e cria o req.body e o req.file
+router.get('/', noticeController.getAllNoticias);
 router.post('/', upload.single('imagem'), noticeController.createNoticia);
 
-// PUT: Atualizar notícia (CORRIGIDO: Adicionado 'upload.single("imagem")')
 router.put('/:id', upload.single('imagem'), noticeController.updateNoticia);
 
 // PATCH: Mudar o status 'exibir' (o switch)
@@ -53,6 +44,11 @@ router.patch('/:id/toggle', noticeController.toggleNoticiaExibir);
 
 // DELETE: Deletar notícia
 router.delete('/:id', noticeController.deleteNoticia);
+
+
+router.get('/:id', noticeController.getNoticiaById);
+
+
 
 
 module.exports = router;

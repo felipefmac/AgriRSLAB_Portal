@@ -318,6 +318,7 @@ CREATE TABLE projetos (
   id SERIAL PRIMARY KEY,
   titulo VARCHAR(255) NOT NULL,
   conteudo TEXT NOT NULL,
+  destaque BOOLEAN DEFAULT FALSE,
   autores TEXT,
   url_imagem VARCHAR(255),
   exibir BOOLEAN DEFAULT FALSE,

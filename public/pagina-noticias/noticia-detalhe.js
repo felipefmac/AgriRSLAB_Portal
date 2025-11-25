@@ -80,10 +80,18 @@ async function carregarNoticiaDetalhe(id) {
 async function carregarSugeridas(idAtual) {
     const container = document.getElementById('sugeridas-container');
     container.innerHTML = '<p>Carregando sugestões...</p>';
+
+    if (!idAtual) {
+        container.innerHTML = '<p>Não é possível carregar sugestões sem o ID da notícia atual.</p>';
+        return;
+    }
     
     try {
         const resposta = await fetch(`/api/noticias/sugeridas?idAtual=${idAtual}`);
-        if (!resposta.ok) throw new Error('Erro ao buscar sugestões');
+        
+       if (!resposta.ok) {
+            throw new Error(`Erro HTTP: ${resposta.status}`);
+        }
         
         const sugeridas = await resposta.json();
         container.innerHTML = ''; 
@@ -96,7 +104,7 @@ async function carregarSugeridas(idAtual) {
         sugeridas.forEach(noticia => {
             const linkHref = noticia.url_noticia 
                 ? noticia.url_noticia 
-                : `noticia-detalhe.html?id=${noticia.id_noticias}`;
+                : `noticias2.html?id=${noticia.id_noticias}`;
             
             const targetAttr = noticia.url_noticia ? '_blank' : '_self';
 
