@@ -5,4 +5,22 @@ node_modules
 /src/upload/*.gif
 /src/upload/*.pdf
 
+/src/upload/candidaturas/*.jpg
+/src/upload/candidaturas/*.jpeg
+/src/upload/candidaturas/*.png
+/src/upload/candidaturas/*.gif
+/src/upload/candidaturas/*.pdf
+
+/src/upload/membros/*.jpg
+/src/upload/membros/*.jpeg
+/src/upload/membros/*.png
+/src/upload/membros/*.gif
+/src/upload/membros/*.pdf
+
+/src/upload/projetos/*.jpg
+/src/upload/projetos/*.jpeg
+/src/upload/projetos/*.png
+/src/upload/projetos/*.gif
+/src/upload/projetos/*.pdf
+
 !/upload/.gitkeep

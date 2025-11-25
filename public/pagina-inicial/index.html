@@ -17,7 +17,7 @@
     </header>
 
 
-    <section class="anuncio">
+    <!-- <section class="anuncio">
         <div class="anuncio_img">
             <img src="../assets/Imagens do laboratorio/Imagem_AgrisRs.svg" alt="Imagem do AgriRS"
                 class="imagem_anuncio">
@@ -85,21 +85,121 @@
 
 
     <section class="section-projetos">
+        <!DOCTYPE html>
+        <html lang="pt-br">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>AgriRS - Página Inicial</title>
+            <link rel="stylesheet" href="../HeaderFooter/style.css">
+            <link rel="stylesheet" href="style.css">
+
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        </head>
+
+        <body class="pagina-noticias">
+
+            <header>
+            </header>
+
+        <a id="projeto-destaque" href="../pagina-projetos/projetos.html" class="projeto-link">
+            <img id="projeto-destaque-imagem" alt="Imagem do projeto" class="imagem_projeto">
+            <div class="projeto-destaque-container">
+                <h2 id="projeto-destaque-titulo" class="projeto-destaque-titulo">Carregando projeto em destaque...</h2>
+                <p id="projeto-destaque-descricao" class="projeto-destaque-p"></p>
+
+            </div>
+        </a>
+        <p id="projeto-mensagem" class="estado-informativo"></p>
+
+        <a href="../pagina-projetos/projetos.html" class="acesso-projetos-bt" id="link-projetos">Ver todos os
+            projetos</a>
+    </section> -->
+
+
+    <section class="anuncio">
+        <div class="anuncio_img">
+            <img src="../assets/Imagens do laboratorio/Imagem_AgrisRs.svg" alt="Imagem do AgriRS"
+                class="imagem_anuncio">
+            <div class="anuncio_container">
+                <div class="anuncio_texto">
+                    <h1>AgriRS</h1>
+                    <p class="anuncio_p">Conectando tecnologia, ciência e responsabilidade socioambiental para
+                        gerar
+                        conhecimento e apoiar a tomada de decisões.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="section-areas">
+        <h2 class="areas-titulo">Inovação no Campo <br>Nossas Áreas de Pesquisa</h2>
+        <div class="linha-divisoria"></div>
+
+        <div class="areas-grid">
+
+            <div class="area-card-fundo">
+                <div class="area-card">
+                    <h3>Mapeamento Agrícola</h3>
+                    <p>O AgriRS Lab usa satélites e sensoriamento remoto para mapear as principais culturas do
+                        Brasil,
+                        auxiliando no planejamento agrícola e na análise de uso e ocupação do solo.</p>
+                </div>
+            </div>
+
+            <div class="area-card-fundo">
+                <div class="area-card">
+                    <h3>Previsão de Safras e Perdas</h3>
+                    <p>Aplicação de modelos climáticos e dados orbitais para mitigar riscos e garantir a
+                        segurança
+                        alimentar.</p>
+                </div>
+            </div>
+
+            <div class="area-card-fundo">
+                <div class="area-card">
+                    <h3>Monitoramento de Safras</h3>
+                    <p>Identificação dos ciclos de cultivo por satélite, apoiando o manejo de campo e a
+                        estimativa de
+                        produtividade.</p>
+                </div>
+            </div>
+
+            <div class="area-card-fundo">
+                <div class="area-card">
+                    <h3>Detecção de Desmatamento</h3>
+                    <p>Uso de sensoriamento remoto e algoritmos para detectar mudanças no uso da terra e apoiar
+                        a
+                        preservação dos biomas.</p>
+                </div>
+            </div>
+
+            <div class="area-card-fundo">
+                <div class="area-card">
+                    <h3>Gestão de Recursos Hídricos</h3>
+                    <p>Análise de bacias hidrográficas e avaliação do impacto ambiental para promover práticas
+                        agrícolas
+                        sustentáveis.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <section class="section-projetos">
         <h2 class="projetos-slogan">
             Nossas pesquisas transformam dados de satélite em soluções para uma agricultura mais produtiva e
             sustentável.
         </h2>
         <div class="linha-divisoria"></div>
 
-        <a href="../pagina-projetos/proj1.html" class="projeto-link">
-            <img src="../assets/2.1 Projetos/Figura_P2_MG.JPG" alt="Imagem do projeto" class="imagem_projeto">
-            <div class="projeto-destaque-container">
-                <h2 class="projeto-destaque-titulo">Sensoriamento de Resíduos Culturais no Solo</h2>
-                <p class="projeto-destaque-p">Estimativa do percentual de cobertura do solo por resíduos culturais
-                    através de sensoriamento remoto orbital.</p>
-
-            </div>
-        </a>
+        <!-- Container para o projeto em destaque (via JS) -->
+        <div id="projeto-destaque-home"></div>
 
         <a href="../pagina-projetos/projetos.html" class="acesso-projetos-bt">Ver todos os projetos</a>
     </section>
@@ -109,79 +209,46 @@
         <h2 class="noticia-titulo">
             Últimas Notícias </h2>
         <div class="linha-divisoria"></div>
+        <div class="noticia-layout" id="noticias-home">
 
-        <div class="noticia-layout">
-
-            <!-- Notícia principal -->
-            <div class="noticia-principal-card">
+            <!-- Notícia principal dinâmica -->
+            <a class="noticia-principal-card" id="noticia-principal">
                 <div class="noticia-principal-img">
-                    <img src="../../imagens/4. Eventos/Nt_AgriRS.png" alt="Imagem da notícia principal"
+                    <img id="noticia-principal-imagem" src="" alt="Imagem da notícia principal"
                         class="noticia-principal-imagem">
                 </div>
 
                 <div class="noticia-principal-content">
-                    <h3 class="noticia-principal-titulo">
-                        AgriRS Lab lança plataforma de monitoramento de culturas
+                    <h3 class="noticia-principal-titulo" id="noticia-principal-titulo">
+                        Carregando notícias...
                     </h3>
-                    <p class="noticia-principal-subtitulo">
-                        Pesquisadores do INPE e parceiros do AgriRS Lab anunciaram um protótipo de satélite capaz de
-                        monitorar o desenvolvimento das raízes das culturas em tempo quase real. A combinação de
-                        sensores de radar e modelos de inteligência artificial permite estimar perdas e ganhos de
-                        produtividade com antecedência de até 30 dias.</p>
+                    <p class="noticia-principal-subtitulo" id="noticia-principal-subtitulo"></p>
                     <div class="noticia-principal-footer">
-                        <span class="dateEvent"><time datetime="2025-10-22">22/10/25</time></span>
-                        <a href="../../Paginas/pagina-noticias/noticias2.html" class="continuar-lendo">Leia mais</a>
+                        <span class="dateEvent"><time id="noticia-principal-data"></time></span>
+                        <span id="noticia-principal-link" class="continuar-lendo">Leia mais</span>
                     </div>
                 </div>
+            </a>
+
+            <!-- Notícias secundárias dinâmicas -->
+            <div class="noticias-secundarias" id="noticias-secundarias">
+                <p class="estado-informativo">Carregando notícias...</p>
             </div>
+        </div>
 
-            <!-- Notícias secundárias -->
-            <div class="noticias-secundarias">
-
-                <div class="card-noticia">
-                    <img src="../../imagens/4. Eventos/Evt_Simpósio-geoprocessamento.png"
-                        alt="Simpósio de Geoprocessamento">
-                    <div class="texto">
-                        <h3>Simpósio de Geoprocessamento destaca avanços na Modelagem de Sistemas Hídricos</h3>
-                        <p>Evento reúne pesquisadores e estudantes para discutir o uso de tecnologias espaciais no
-                            monitoramento e gestão inteligente dos recursos hídricos.</p>
-
-                        <div class="noticia-principal-footer">
-                            <span class="dateEvent"><time datetime="2025-02-22">22/02/25</time></span>
-                            <a href="../../Paginas/pagina-noticias/noticias2.html" class="continuar-lendo">Leia mais</a>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="card-noticia">
-                    <img src="../../imagens/4. Eventos/Evt_SEMAT.jpg" alt="Semana de materiais agricolas">
-                    <div class="texto">
-                        <h3>Último dia de inscrição para a I SEMAT — Semana de Materiais Agrícolas</h3>
-                        <p>Evento reúne especialistas e estudantes para debater inovação, sustentabilidade e
-                            novos materiais aplicados ao setor agrícola.</p>
-
-                        <div class="noticia-principal-footer">
-                            <span class="dateEvent"><time datetime="2025-02-22">22/02/25</time></span>
-                            <a href="../pagina-noticias/noticias1.html" class="continuar-lendo">Leia mais</a>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="ver-todas">
-                    <a href="../pagina-noticias/noticias.html">Ver todas as notícias</a>
-                </div>
-
-            </div>
+        <div class="ver-todas">
+            <a href="../pagina-noticias/noticias.html">Ver todas as notícias</a>
+        </div>
+        <p id="noticias-mensagem" class="estado-informativo"></p>
     </section>
 
 
     <footer>
     </footer>
+    <script src="home.js"></script>
     <script src="../HeaderFooter/menu-header.js"></script>
-
+    <script src="../pagina-projetos/projetos.js"></script>
+    <script src="../pagina-noticias/noticias.js"></script>
 </body>
 
 </html>

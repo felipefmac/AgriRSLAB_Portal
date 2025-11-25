@@ -21,6 +21,15 @@ CREATE TABLE IF NOT EXISTS noticias (
     CONSTRAINT noticias_fk_categoria FOREIGN KEY (categoria) REFERENCES categoria_noticias (categoria) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+CREATE TABLE IF NOT EXISTS noticias_en (
+    id_traducao SERIAL PRIMARY KEY,
+    id_noticia INTEGER NOT NULL,
+    titulo VARCHAR(255),
+    subtitulo VARCHAR(500),
+    texto TEXT,
+    CONSTRAINT fk_noticia_en FOREIGN KEY (id_noticia) REFERENCES noticias (id_noticias) ON DELETE CASCADE
+);
+
 INSERT INTO categoria_noticias (categoria)
 VALUES ('Curso'), ('Defesa'), ('Informativo');
 
@@ -43,6 +52,13 @@ CREATE TABLE IF NOT EXISTS artigos (
     exibir BOOLEAN DEFAULT TRUE,
     id_categoria INTEGER NOT NULL,
     CONSTRAINT fk_categoria FOREIGN KEY(id_categoria) REFERENCES categoria_artigos(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS artigos_en (
+    id_traducao SERIAL PRIMARY KEY,
+    id_artigo INTEGER NOT NULL,
+    titulo VARCHAR(255),
+    CONSTRAINT fk_artigo_en FOREIGN KEY (id_artigo) REFERENCES artigos (id) ON DELETE CASCADE
 );
 
 INSERT INTO categoria_artigos (nome)
@@ -318,6 +334,7 @@ CREATE TABLE projetos (
   id SERIAL PRIMARY KEY,
   titulo VARCHAR(255) NOT NULL,
   conteudo TEXT NOT NULL,
+  destaque BOOLEAN DEFAULT FALSE,
   autores TEXT,
   destaque BOOLEAN DEFAULT FALSE,
   url_imagem VARCHAR(255),
@@ -327,6 +344,13 @@ CREATE TABLE projetos (
     CHECK (fase IN ('em-andamento', 'finalizado'))
 );
 
+CREATE TABLE IF NOT EXISTS projetos_en (
+    id_traducao SERIAL PRIMARY KEY,
+    id_projeto INTEGER NOT NULL,
+    titulo VARCHAR(255),
+    conteudo TEXT,
+    CONSTRAINT fk_projeto_en FOREIGN KEY (id_projeto) REFERENCES projetos (id) ON DELETE CASCADE
+);
 
 INSERT INTO projetos (titulo, conteudo, autores, url_imagem, exibir, fase)
 VALUES (
@@ -421,6 +445,54 @@ VALUES
 (1, 'Acesso a dados exclusivos do laboratório'),
 (1, 'Possibilidade de aprendizado avançado em geotecnologias');
 
+-- ======================================================================================
+-- TABELAS DE TRADUÇÃO (INGLÊS)
+-- ======================================================================================
+
+-- Tabela de tradução para vagas em inglês
+CREATE TABLE IF NOT EXISTS vagas_en (
+    id_traducao SERIAL PRIMARY KEY,
+    vaga_id INTEGER NOT NULL,
+    titulo VARCHAR(255),
+    descricao TEXT,
+    CONSTRAINT fk_vaga_en 
+        FOREIGN KEY (vaga_id) 
+        REFERENCES vagas (vaga_id) 
+        ON DELETE CASCADE
+);
+
+-- Tabela de tradução para requisitos em inglês
+CREATE TABLE IF NOT EXISTS requisitos_vaga_en (
+    id_traducao SERIAL PRIMARY KEY,
+    req_id INTEGER NOT NULL,
+    descricao VARCHAR(255),
+    CONSTRAINT fk_requisito_en 
+        FOREIGN KEY (req_id) 
+        REFERENCES requisitos_vaga (req_id) 
+        ON DELETE CASCADE
+);
+
+-- Tabela de tradução para benefícios em inglês
+CREATE TABLE IF NOT EXISTS beneficios_vaga_en (
+    id_traducao SERIAL PRIMARY KEY,
+    benef_id INTEGER NOT NULL,
+    descricao VARCHAR(255),
+    CONSTRAINT fk_beneficio_en 
+        FOREIGN KEY (benef_id) 
+        REFERENCES beneficios_vaga (benef_id) 
+        ON DELETE CASCADE
+);
+
+-- Tabela de tradução para membros em inglês
+CREATE TABLE IF NOT EXISTS membros_en (
+    id_traducao SERIAL PRIMARY KEY,
+    id_membro INTEGER NOT NULL,
+    descricao VARCHAR(400),
+    CONSTRAINT fk_membro_en 
+        FOREIGN KEY (id_membro) 
+        REFERENCES membros (id) 
+        ON DELETE CASCADE
+);
 CREATE TABLE usuarios (
   idusuario SERIAL,
   mail VARCHAR(100) NOT NULL,
