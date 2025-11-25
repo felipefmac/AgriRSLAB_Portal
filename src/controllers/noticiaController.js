@@ -235,6 +235,38 @@ async function deleteAllNoticias(_req, res) {
   }
 }
 
+async function getNoticiaById(req, res) {
+  const { id } = req.params;
+  try {
+    const result = await pool.query('SELECT * FROM noticias WHERE id_noticias = $1', [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Notícia não encontrada' });
+    }
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error('Erro ao buscar notícia por ID:', error);
+    res.status(500).json({ error: 'Erro ao buscar notícia' });
+  }
+};
+
+async function getNoticiasSugeridas(req, res) {
+  const { idAtual } = req.query; 
+
+  try {
+    const result = await pool.query(
+      `SELECT * FROM noticias 
+       WHERE exibir = true AND id_noticias != $1
+       ORDER BY data_criacao DESC
+       LIMIT 3`,
+      [idAtual]
+    );
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error('Erro ao buscar notícias sugeridas:', error);
+    res.status(500).json({ error: 'Erro ao buscar notícias sugeridas' });
+  }
+};
+
 
 module.exports = {
   // Públicas
@@ -242,6 +274,8 @@ module.exports = {
   getDestaqueNoticias,
   getDefesasNoticias,
   getEventosMesAtual,
+  getNoticiaById,
+  getNoticiasSugeridas,
   // Admin
   getAllNoticiasAdmin,
   createNoticia,

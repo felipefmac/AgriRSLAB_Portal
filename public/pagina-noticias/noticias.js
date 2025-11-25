@@ -151,8 +151,14 @@ async function carregarDestaques() {
                 day: '2-digit', month: 'short', year: 'numeric'
             }).toUpperCase().replace('.', '').replace(/ DE /g, ' ');
 
+            const linkHref = noticia.url_noticia 
+                ? noticia.url_noticia 
+                : `noticias2.html?id=${noticia.id_noticias}`;
+            
+            const targetAttr = noticia.url_noticia ? '_blank' : '_self';
+
             const html = `
-                <a href="${noticia.url_noticia || '#'}" class="card-destaque-link">
+                <a href="${linkHref}" class="card-destaque-link" target="${targetAttr}" class="card-destaque-link">
                     <div class="card-noticia">
                         <img src="${noticia.url_imagem}" alt="${noticia.titulo}" onerror="this.style.display='none'">
                         <div class="texto">
@@ -282,9 +288,15 @@ function carregarMaisNoticias() {
             ultimoMesRenderizado = chaveMes;
         }
 
+        const linkHref = noticia.url_noticia 
+            ? noticia.url_noticia 
+            : `noticias2.html?id=${noticia.id_noticias}`;
+        
+        const targetAttr = noticia.url_noticia ? 'target="_blank"' : '';
+
         // HTML do Card
         const html = `
-            <a href="${noticia.url_noticia || '#'}" class="link-card">
+            <a href="${linkHref}" class="link-card" ${targetAttr} class="link-card">
                 <div class="card-noticia">
                     <img class="imageNotice" src="${noticia.url_imagem}" onerror="this.style.display='none'" alt="${noticia.titulo}">
                     <div class="texto">

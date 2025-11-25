@@ -33,6 +33,8 @@ router.get('/', noticeController.getAllNoticias);
 router.get('/destaques', noticeController.getDestaqueNoticias);
 router.get('/defesas', noticeController.getDefesasNoticias);
 router.get('/eventos', noticeController.getEventosMesAtual);
+router.get('/:id', noticeController.getNoticiaById);
+router.get('/sugeridas', noticeController.getNoticiasSugeridas);
 
 // === ROTAS DE ADMIN ===
 

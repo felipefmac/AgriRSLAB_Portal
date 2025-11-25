@@ -437,7 +437,23 @@
   color: var(--cor-texto-escuro);
 }
 
+.noticia-principal .imagem-noticia {
+    max-width: 400px;
+    height: auto;
+    margin: 25px auto; 
+    border-radius: 10px;
+    display: block;
+}
 
+.noticia-principal .texto-conteudo {
+   
+    margin: 10px auto; 
+    text-indent: 1.5em;
+  }
+
+  .texto-conteudo {
+    word-wrap: break-word;
+}
 .noticia-sugerida {
   display: flex;
   flex-direction: column;
