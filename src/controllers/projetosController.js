@@ -1,6 +1,7 @@
 const { pool } = require('../database/dbConfig');
 const fs = require('fs');
 const path = require('path');
+const translate = require('@iamtraction/google-translate');
 
 // Pasta uploads/projetos
 const uploadDir = path.resolve(__dirname, '..', 'upload', 'projetos');
@@ -28,8 +29,8 @@ async function createProjeto(req, res) {
 
     const imagemFile =
         req.files &&
-        req.files['imagem'] &&
-        req.files['imagem'][0]
+            req.files['imagem'] &&
+            req.files['imagem'][0]
             ? req.files['imagem'][0]
             : null;
 
@@ -42,6 +43,7 @@ async function createProjeto(req, res) {
             mensagem: 'Titulo e conteudo sao obrigatorios.'
         });
     }
+    const client = await pool.connect(); // Usar client para transação (rollback se falhar tradução)
 
     const query = `
         INSERT INTO projetos (titulo, conteudo, autores, url_imagem, exibir, fase, destaque)
@@ -83,15 +85,90 @@ async function getAllProjetos(req, res) {
 // ------------------------------------------------------
 
 async function getProjetosPublicados(req, res) {
-    try {
-        const resultado = await pool.query(
-            'SELECT * FROM projetos WHERE exibir = true ORDER BY id DESC'
-        );
-        res.status(200).json(resultado.rows);
-    } catch (error) {
-        console.error('Erro ao listar projetos publicos:', error.message);
-        res.status(500).json({ mensagem: 'Erro ao listar projetos publicos.' });
+    // Pega o idioma da query e extrai apenas o código principal (ex: 'en' de 'en-us')
+    const langParam = req.query.lang || 'pt';
+    const lang = langParam.split('-')[0];
+
+    if (lang === 'pt') {
+        console.log("Servindo projetos em Português (sem tradução).");
+        // Se for 'pt', retorna os dados originais sem tradução
+        try {
+            const resultado = await pool.query(
+                'SELECT * FROM projetos WHERE exibir = true ORDER BY id DESC'
+            );
+            return res.status(200).json(resultado.rows);
+        } catch (error) {
+            console.error('Erro ao listar projetos publicos:', error.message);
+            return res.status(500).json({ mensagem: 'Erro ao listar projetos publicos.' });
+        }
     }
+
+    try {
+        console.log(`Iniciando tradução para o idioma: ${lang}`);
+        const dbResult = await pool.query(
+            // Agora busca as colunas de tradução também
+            'SELECT *, titulo_en, conteudo_en FROM projetos WHERE exibir = true ORDER BY id DESC'
+        );
+
+        // Chama diretamente a função de cache, que é mais eficiente
+        const projetosTraduzidos = await getProjetosTraduzidosComCache(dbResult.rows, lang);
+        res.status(200).json(projetosTraduzidos);
+    } catch (error) {
+        console.error('Erro ao listar e traduzir projetos públicos:', error.message);
+        res.status(500).json({ mensagem: 'Erro ao listar e traduzir projetos públicos.' });
+    }
+}
+
+/**
+ * Traduz e armazena em cache os projetos, se necessário.
+ * @param {Array} projetos - Lista de projetos do banco de dados.
+ * @param {string} targetLang - Código do idioma de destino (ex: 'en').
+ * @returns {Promise<Array>} Lista de projetos com os campos traduzidos.
+ */
+async function getProjetosTraduzidosComCache(projetos, targetLang) {
+    const projetosProcessados = await Promise.all(
+        projetos.map(async (projeto) => {
+            const tituloTraduzidoCampo = `titulo_${targetLang}`;
+            const conteudoTraduzidoCampo = `conteudo_${targetLang}`;
+
+            // Verifica se a tradução já existe no objeto do projeto
+            if (projeto[tituloTraduzidoCampo] && projeto[conteudoTraduzidoCampo]) {
+                return {
+                    ...projeto,
+                    titulo: projeto[tituloTraduzidoCampo],
+                    conteudo: projeto[conteudoTraduzidoCampo],
+                };
+            }
+
+            // Se não existe, traduz e salva no banco
+            try {
+                console.log(`Traduzindo e salvando cache para o projeto ID ${projeto.id} para o idioma '${targetLang}'...`);
+                const [tituloTraduzido, conteudoTraduzido] = await Promise.all([
+                    translate(projeto.titulo, { from: 'pt', to: targetLang }),
+                    translate(projeto.conteudo, { from: 'pt', to: targetLang }),
+                ]);
+
+                const novoTitulo = tituloTraduzido.text;
+                const novoConteudo = conteudoTraduzido.text;
+
+                // Salva a tradução no banco de dados para futuras requisições
+                const updateQuery = `UPDATE projetos SET ${tituloTraduzidoCampo} = $1, ${conteudoTraduzidoCampo} = $2 WHERE id = $3`;
+                await pool.query(updateQuery, [novoTitulo, novoConteudo, projeto.id]);
+
+                return {
+                    ...projeto,
+                    titulo: novoTitulo,
+                    conteudo: novoConteudo,
+                };
+            } catch (error) {
+                console.error(`Erro ao traduzir/salvar cache para o projeto ID ${projeto.id}:`, error.message);
+                // Em caso de erro, retorna o projeto original para não quebrar a aplicação
+                return projeto;
+            }
+        })
+    );
+
+    return projetosProcessados;
 }
 
 
@@ -112,7 +189,7 @@ async function getProjetoById(req, res) {
 
     } catch (error) {
         console.error('Erro ao buscar projeto por ID:', error.message);
-        res.status(500).json({ mensagem: 'Erro interno ao buscar projeto.' });
+        res.status(500).json({ mensagem: 'Erro interno ao buscar projeto.'});
     }
 }
 
@@ -147,8 +224,8 @@ async function updateProjeto(req, res) {
 
         const imagemFile =
             req.files &&
-            req.files['imagem'] &&
-            req.files['imagem'][0]
+                req.files['imagem'] &&
+                req.files['imagem'][0]
                 ? req.files['imagem'][0]
                 : null;
 
@@ -273,6 +350,10 @@ async function getProjetosPublicosComDestaque(req, res) {
     }
 }
 
+// Função antiga foi substituída pela que usa cache
+// A função 'traduzirProjetos' foi removida pois sua lógica foi integrada e otimizada
+// na chamada direta a 'getProjetosTraduzidosComCache' dentro de 'getProjetosPublicados'.
+
 // ------------------------------------------------------
 
 module.exports = {
@@ -282,6 +363,5 @@ module.exports = {
     getProjetoById,
     updateProjeto,
     deleteProjeto,
-    getProjetosPublicosComDestaque
+    getProjetosPublicosComDestaque,
 };
-

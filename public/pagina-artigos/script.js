@@ -9,21 +9,38 @@ function getFullUrl(path) {
     return path;
 }
 
+/**
+ * Cria o HTML para um único card de artigo.
+ * @param {Object} artigo - Os dados do artigo.
+ * @returns {HTMLElement} O elemento do card.
+ */
+// Função auxiliar para pegar texto baseado no idioma
+function getTexto(item, campo) {
+    const lang = localStorage.getItem('selectedLanguage') || 'pt';
+
+    // Se for inglês E existir tradução, retorna inglês. Senão, retorna PT.
+    if (lang === 'en' && item[campo + '_en']) {
+        return item[campo + '_en'];
+    }
+    // O controller agora retorna 'titulo_pt', mas vamos garantir compatibilidade
+    return item[campo + '_pt'] || item[campo];
+}
 // ======================= CRIAR CARD =======================
 
 function criarArtigoCard(artigo) {
     const card = document.createElement('div');
     card.className = 'publication-card article-card publicacao';
+    // Usa a função getTexto para decidir o título
+    const tituloExibicao = getTexto(artigo, 'titulo');
 
     const imagemUrl = getFullUrl(artigo.url_imagem);
     const pdfUrl = getFullUrl(artigo.link_pdf);
 
     card.innerHTML = `
         <div class="card-image-box">
-            <img src="${imagemUrl}" alt="Capa do Artigo: ${artigo.titulo}" 
-                 onerror="this.src='https://via.placeholder.com/300x200?text=Sem+Imagem';">
+            <img src="${imagemUrl}" alt="Capa do Artigo: ${tituloExibicao}" onerror="this.src='https://via.placeholder.com/300x200?text=Sem+Imagem';">
         </div>
-        <p class="card-title">${artigo.titulo}</p>
+        <p class="card-title">${tituloExibicao}</p>
         <div class="card-links">
             <a href="${artigo.link_doi}" target="_blank" rel="noopener noreferrer" class="btn-card doi">
                 DOI
@@ -155,6 +172,8 @@ async function carregarArtigosPublicos() {
     ativarBuscaInterna();
 }
 
-// ======================= INICIALIZAR =======================
-
+// Carrega os artigos quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', carregarArtigosPublicos);
+
+// Recarrega artigos quando o idioma mudar
+window.addEventListener('languageChange', carregarArtigosPublicos);

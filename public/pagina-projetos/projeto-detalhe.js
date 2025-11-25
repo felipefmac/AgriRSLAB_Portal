@@ -1,5 +1,32 @@
 document.addEventListener('DOMContentLoaded', carregarProjeto);
 
+/**
+ * Retorna o texto no idioma correto (PT ou EN).
+ */
+function getTexto(item, campo) {
+    const lang = localStorage.getItem('selectedLanguage') || 'pt';
+
+    // Se for inglês E existir tradução, retorna inglês. Senão, retorna PT.
+    if (lang === 'en' && item[campo + '_en']) {
+        return item[campo + '_en'];
+    }
+    return item[campo] || item[campo + '_pt']; // Fallback para campo base ou campo _pt
+}
+
+/**
+ * Retorna mensagens traduzidas conforme o idioma selecionado.
+ */
+function getMensagem(chave) {
+    const lang = localStorage.getItem('selectedLanguage') || 'pt';
+    const mensagens = {
+        'autores_nao_informados': {
+            'pt': 'Autores não informados',
+            'en': 'Authors not informed'
+        }
+    };
+    return mensagens[chave] ? mensagens[chave][lang] : '';
+}
+
 async function carregarProjeto() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -23,22 +50,22 @@ async function carregarProjeto() {
         }
 
         // Título do navegador
-        document.getElementById('titulo-pagina').textContent = projeto.titulo;
+        document.getElementById('titulo-pagina').textContent = getTexto(projeto, 'titulo');
 
         // Título
-        document.getElementById('titulo').textContent = projeto.titulo;
+        document.getElementById('titulo').textContent = getTexto(projeto, 'titulo');
 
         // Autores (pulando linha por quebra de vírgula)
         document.getElementById('autores').innerHTML =
-            projeto.autores ? projeto.autores.replace(/,/g, '<br>') : 'Autores não informados';
+            projeto.autores ? projeto.autores.replace(/,/g, '<br>') : getMensagem('autores_nao_informados');
 
         // Conteúdo
-        document.getElementById('conteudo').innerHTML = projeto.conteudo;
+        document.getElementById('conteudo').innerHTML = getTexto(projeto, 'conteudo');
 
         // Imagem
         if (projeto.url_imagem) {
             document.getElementById('imagem').src = projeto.url_imagem;
-            document.getElementById('imagem').alt = projeto.titulo;
+            document.getElementById('imagem').alt = getTexto(projeto, 'titulo');
         } else {
             document.getElementById('imagem').style.display = 'none';
         }

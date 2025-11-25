@@ -1,45 +1,94 @@
 document.addEventListener('DOMContentLoaded', () => {
-    carregarProjetoDestaque();
+    // A função carregarProjetoDestaque foi removida pois o projetos.js já cuida disso
+    // e o elemento #projeto-destaque não existe mais no HTML atual.
+    traduzirHome();
     carregarNoticiasHome();
 });
 
-async function carregarProjetoDestaque() {
-    const card = document.getElementById('projeto-destaque');
-    const imagem = document.getElementById('projeto-destaque-imagem');
-    const titulo = document.getElementById('projeto-destaque-titulo');
-    const descricao = document.getElementById('projeto-destaque-descricao');
-    const mensagem = document.getElementById('projeto-mensagem');
-
-    if (!card || !imagem || !titulo || !descricao) return;
-
-    setEstado(mensagem, 'Carregando projeto em destaque...');
-
-    try {
-        const resposta = await fetch('/api/projetos/publicos-com-destaque');
-        if (!resposta.ok) throw new Error('Erro ao buscar projetos');
-
-        const dados = await resposta.json();
-        const projeto = (dados && dados.destaque) || (dados && dados.outros && dados.outros[0]);
-
-        if (!projeto) {
-            ocultarElemento(card);
-            setEstado(mensagem, 'Nenhum projeto publicado no momento.');
-            return;
+const dicionarioHome = {
+    pt: {
+        carregando: 'Carregando notícias...',
+        semNoticias: 'Nenhuma notícia publicada no momento.',
+        semTitulo: 'Notícia sem título',
+        imagemPrincipal: 'Notícia principal',
+        leiaMais: 'Leia mais',
+        semOutras: 'Nenhuma outra notícia por aqui ainda.',
+        erro: 'Não foi possível carregar as notícias agora.',
+        verTodas: 'Ver todas as notícias',
+        tituloAreas: 'Inovação no Campo <br>Nossas Áreas de Pesquisa',
+        sloganProjetos: 'Nossas pesquisas transformam dados de satélite em soluções para uma agricultura mais produtiva e sustentável.',
+        tituloNoticias: 'Últimas Notícias',
+        btVerProjetos: 'Ver todos os projetos',
+        anuncioTitulo: 'AgriRS',
+        anuncioTexto: 'Conectando tecnologia, ciência e responsabilidade socioambiental para gerar conhecimento e apoiar a tomada de decisões.',
+        areas: {
+            mapeamento: { titulo: 'Mapeamento Agrícola', texto: 'O AgriRS Lab usa satélites e sensoriamento remoto para mapear as principais culturas do Brasil, auxiliando no planejamento agrícola e na análise de uso e ocupação do solo.' },
+            previsao: { titulo: 'Previsão de Safras e Perdas', texto: 'Aplicação de modelos climáticos e dados orbitais para mitigar riscos e garantir a segurança alimentar.' },
+            monitoramento: { titulo: 'Monitoramento de Safras', texto: 'Identificação dos ciclos de cultivo por satélite, apoiando o manejo de campo e a estimativa de produtividade.' },
+            desmatamento: { titulo: 'Detecção de Desmatamento', texto: 'Uso de sensoriamento remoto e algoritmos para detectar mudanças no uso da terra e apoiar a preservação dos biomas.' },
+            recursos: { titulo: 'Gestão de Recursos Hídricos', texto: 'Análise de bacias hidrográficas e avaliação do impacto ambiental para promover práticas agrícolas sustentáveis.' }
         }
-
-        titulo.textContent = projeto.titulo || 'Projeto sem título';
-        descricao.textContent = resumirTexto(projeto.conteudo || '', 220);
-        aplicarImagem(imagem, projeto.url_imagem);
-        imagem.alt = projeto.titulo || 'Projeto em destaque';
-
-        card.href = `../pagina-projetos/projeto-detalhe.html?id=${projeto.id}`;
-        card.style.display = 'block';
-        setEstado(mensagem, '');
-    } catch (erro) {
-        console.error('Erro ao carregar projeto em destaque:', erro);
-        ocultarElemento(card);
-        setEstado(mensagem, 'Não foi possível carregar o projeto em destaque agora.');
+    },
+    en: {
+        carregando: 'Loading news...',
+        semNoticias: 'No news published at the moment.',
+        semTitulo: 'Untitled news',
+        imagemPrincipal: 'Main news',
+        leiaMais: 'Read more',
+        semOutras: 'No other news here yet.',
+        erro: 'Could not load news right now.',
+        verTodas: 'See all news',
+        tituloAreas: 'Innovation in the Field <br>Our Research Areas',
+        sloganProjetos: 'Our research transforms satellite data into solutions for more productive and sustainable agriculture.',
+        tituloNoticias: 'Latest News',
+        btVerProjetos: 'See all projects',
+        anuncioTitulo: 'AgriRS',
+        anuncioTexto: 'Connecting technology, science, and socio-environmental responsibility to generate knowledge and support decision-making.',
+        areas: {
+            mapeamento: { titulo: 'Agricultural Mapping', texto: 'AgriRS Lab uses satellites and remote sensing to map Brazil\'s main crops, assisting in agricultural planning and land use analysis.' },
+            previsao: { titulo: 'Crop and Loss Forecasting', texto: 'Application of climate models and orbital data to mitigate risks and ensure food security.' },
+            monitoramento: { titulo: 'Crop Monitoring', texto: 'Identification of crop cycles by satellite, supporting field management and productivity estimation.' },
+            desmatamento: { titulo: 'Deforestation Detection', texto: 'Use of remote sensing and algorithms to detect changes in land use and support biome preservation.' },
+            recursos: { titulo: 'Water Resources Management', texto: 'Analysis of watersheds and environmental impact assessment to promote sustainable agricultural practices.' }
+        }
     }
+};
+
+function traduzirHome() {
+    const lang = localStorage.getItem('selectedLanguage') || 'pt';
+    const traducoes = dicionarioHome[lang] || dicionarioHome.pt;
+
+    // Traduz textos estáticos
+    const areasTitulo = document.querySelector('.areas-titulo');
+    if (areasTitulo) areasTitulo.innerHTML = traducoes.tituloAreas;
+
+    const projetosSlogan = document.querySelector('.projetos-slogan');
+    if (projetosSlogan) projetosSlogan.textContent = traducoes.sloganProjetos;
+
+    const noticiaTitulo = document.querySelector('.noticia-titulo');
+    if (noticiaTitulo) noticiaTitulo.textContent = traducoes.tituloNoticias;
+
+    const btVerProjetos = document.querySelector('.acesso-projetos-bt');
+    if (btVerProjetos) btVerProjetos.textContent = traducoes.btVerProjetos;
+
+    const anuncioTitulo = document.querySelector('.anuncio_texto h1');
+    if (anuncioTitulo) anuncioTitulo.textContent = traducoes.anuncioTitulo;
+
+    const anuncioTexto = document.querySelector('.anuncio_p');
+    if (anuncioTexto) anuncioTexto.textContent = traducoes.anuncioTexto;
+
+    // Traduz cards de áreas (assumindo ordem fixa ou adicionando IDs seria melhor, mas vamos pela ordem)
+    const cards = document.querySelectorAll('.area-card');
+    const chavesAreas = ['mapeamento', 'previsao', 'monitoramento', 'desmatamento', 'recursos'];
+
+    cards.forEach((card, index) => {
+        if (chavesAreas[index]) {
+            const h3 = card.querySelector('h3');
+            const p = card.querySelector('p');
+            if (h3) h3.textContent = traducoes.areas[chavesAreas[index]].titulo;
+            if (p) p.textContent = traducoes.areas[chavesAreas[index]].texto;
+        }
+    });
 }
 
 async function carregarNoticiasHome() {
@@ -51,18 +100,27 @@ async function carregarNoticiasHome() {
     const principalLink = document.getElementById('noticia-principal-link');
     const secundarias = document.getElementById('noticias-secundarias');
     const mensagem = document.getElementById('noticias-mensagem');
+    const verTodasLink = document.querySelector('.ver-todas a');
 
     if (!principalCard || !secundarias) return;
 
-    setEstado(mensagem, 'Carregando notícias...');
-    secundarias.innerHTML = '<p class="estado-informativo">Carregando notícias...</p>';
+    const lang = localStorage.getItem('selectedLanguage') || 'pt';
+    const traducoes = dicionarioHome[lang] || dicionarioHome.pt;
+
+    // Atualiza texto do link "Ver todas"
+    if (verTodasLink) {
+        verTodasLink.textContent = traducoes.verTodas;
+    }
+
+    setEstado(mensagem, traducoes.carregando);
+    secundarias.innerHTML = `<p class="estado-informativo">${traducoes.carregando}</p>`;
 
     try {
-        const noticias = await buscarNoticiasParaHome();
+        const noticias = await buscarNoticiasParaHome(lang);
 
         if (!Array.isArray(noticias) || noticias.length === 0) {
             ocultarElemento(principalCard);
-            secundarias.innerHTML = '<p class="estado-informativo">Nenhuma notícia publicada no momento.</p>';
+            secundarias.innerHTML = `<p class="estado-informativo">${traducoes.semNoticias}</p>`;
             setEstado(mensagem, '');
             return;
         }
@@ -76,64 +134,84 @@ async function carregarNoticiasHome() {
             subtitulo: principalSubtitulo,
             data: principalData,
             link: principalLink
-        });
+        }, lang, traducoes);
 
-        preencherNoticiasSecundarias(resto.slice(0, 2), secundarias);
+        preencherNoticiasSecundarias(resto.slice(0, 2), secundarias, lang, traducoes);
         setEstado(mensagem, '');
     } catch (erro) {
         console.error('Erro ao carregar notícias da home:', erro);
         ocultarElemento(principalCard);
         secundarias.innerHTML = '';
-        setEstado(mensagem, 'Não foi possível carregar as notícias agora.');
+        setEstado(mensagem, traducoes.erro);
     }
 }
 
-function preencherNoticiaPrincipal(noticia, refs) {
+function preencherNoticiaPrincipal(noticia, refs, lang, traducoes) {
     const { card, imagem, titulo, subtitulo, data, link } = refs;
 
-    titulo.textContent = (noticia && noticia.titulo) || 'Notícia sem título';
+    titulo.textContent = (noticia && noticia.titulo) || traducoes.semTitulo;
     subtitulo.textContent = resumirTexto(
         (noticia && (noticia.subtitulo || noticia.texto)) || '',
         240
     );
 
     aplicarImagem(imagem, noticia && noticia.url_imagem);
-    if (imagem) imagem.alt = (noticia && noticia.titulo) || 'Notícia principal';
+    if (imagem) imagem.alt = (noticia && noticia.titulo) || traducoes.imagemPrincipal;
 
     if (data) {
-        data.textContent = formatarData(noticia && noticia.data_criacao);
+        data.textContent = formatarData(noticia && noticia.data_criacao, lang);
         data.dateTime = (noticia && noticia.data_criacao) || '';
     }
 
+    const linkHref = noticia.url_noticia
+        ? noticia.url_noticia
+        : `../pagina-noticias/noticias2.html?id=${noticia.id_noticias}`;
+
     if (link) {
-        link.href = (noticia && noticia.url_noticia) || '../pagina-noticias/noticias.html';
+        link.textContent = traducoes.leiaMais;
     }
 
-    if (card) card.style.display = 'flex';
+    if (card) {
+        card.href = linkHref;
+        if (noticia.url_noticia) {
+            card.target = '_blank';
+        } else {
+            card.removeAttribute('target');
+        }
+        card.style.display = 'flex';
+    }
 }
 
-function preencherNoticiasSecundarias(lista, container) {
+function preencherNoticiasSecundarias(lista, container, lang, traducoes) {
     container.innerHTML = '';
 
     if (!lista || lista.length === 0) {
-        container.innerHTML = '<p class="estado-informativo">Nenhuma outra notícia por aqui ainda.</p>';
+        container.innerHTML = `<p class="estado-informativo">${traducoes.semOutras}</p>`;
         return;
     }
 
     lista.forEach((noticia) => {
         const link = document.createElement('a');
         link.className = 'card-noticia-link';
-        link.href = (noticia && noticia.url_noticia) || '../pagina-noticias/noticias.html';
+
+        const linkHref = noticia.url_noticia
+            ? noticia.url_noticia
+            : `../pagina-noticias/noticias2.html?id=${noticia.id_noticias}`;
+
+        link.href = linkHref;
+        if (noticia.url_noticia) {
+            link.target = '_blank';
+        }
 
         link.innerHTML = `
             <div class="card-noticia">
                 <img src="${(noticia && noticia.url_imagem) || ''}" alt="${(noticia && noticia.titulo) || 'Notícia'}">
                 <div class="texto">
-                    <h3>${(noticia && noticia.titulo) || 'Notícia sem título'}</h3>
+                    <h3>${(noticia && noticia.titulo) || traducoes.semTitulo}</h3>
                     <p>${resumirTexto((noticia && (noticia.subtitulo || noticia.texto)) || '', 140)}</p>
                     <div class="noticia-principal-footer">
-                        <span class="dateEvent"><time>${formatarData(noticia && noticia.data_criacao)}</time></span>
-                        <span class="continuar-lendo">Leia mais</span>
+                        <span class="dateEvent"><time>${formatarData(noticia && noticia.data_criacao, lang)}</time></span>
+                        <span class="continuar-lendo">${traducoes.leiaMais}</span>
                     </div>
                 </div>
             </div>
@@ -146,9 +224,9 @@ function preencherNoticiasSecundarias(lista, container) {
     });
 }
 
-async function buscarNoticiasParaHome() {
+async function buscarNoticiasParaHome(lang) {
     try {
-        const respostaDestaques = await fetch('/api/noticias/destaques');
+        const respostaDestaques = await fetch(`/api/noticias/destaques?lang=${lang}`);
         if (respostaDestaques.ok) {
             const destaques = await respostaDestaques.json();
             if (Array.isArray(destaques) && destaques.length > 0) {
@@ -159,7 +237,7 @@ async function buscarNoticiasParaHome() {
         console.warn('Falha ao carregar destaques, buscando todas as notícias.', erro);
     }
 
-    const respostaTodas = await fetch('/api/noticias');
+    const respostaTodas = await fetch(`/api/noticias?lang=${lang}`);
     if (!respostaTodas.ok) throw new Error('Erro ao buscar notícias');
     return respostaTodas.json();
 }
@@ -175,11 +253,13 @@ function limparTexto(texto) {
     return texto.replace(/<[^>]*>?/gm, '').trim();
 }
 
-function formatarData(dataISO) {
+function formatarData(dataISO, lang) {
     if (!dataISO) return '';
     const data = new Date(dataISO);
     if (Number.isNaN(data.getTime())) return '';
-    return data.toLocaleDateString('pt-BR');
+    return data.toLocaleDateString(lang === 'pt' ? 'pt-BR' : 'en-US', {
+        day: '2-digit', month: 'short', year: 'numeric'
+    });
 }
 
 function aplicarImagem(imgEl, url) {

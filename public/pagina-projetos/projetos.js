@@ -3,9 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
     configurarFiltros();
 });
 
+// Recarrega projetos quando o idioma mudar
+window.addEventListener('languageChange', () => {
+    carregarProjetos();
+});
+
 async function carregarProjetos() {
     try {
-        const resposta = await fetch('/api/projetos/publicos');
+        // Pega o idioma do localStorage para fazer a requisição correta
+        const lang = localStorage.getItem('selectedLanguage') || 'pt';
+        const resposta = await fetch(`/api/projetos/publicos?lang=${lang}`);
         const projetos = await resposta.json();
 
         // salva para filtros
@@ -21,8 +28,11 @@ async function carregarProjetos() {
 // ===============================================
 // RENDERIZA LISTA 
 // ===============================================
-
-
+// Função auxiliar para pegar texto baseado no idioma
+function getTexto(item, campo) {
+    // O backend agora envia o campo já traduzido. Apenas retornamos o valor.
+    return item[campo];
+}
 
 function renderizarProjetos(lista) {
 
@@ -32,35 +42,67 @@ function renderizarProjetos(lista) {
     });
 
     const container = document.getElementById('lista-projetos');
+    const containerHome = document.getElementById('projeto-destaque-home'); // Novo container na Home
     const mensagem = document.getElementById('mensagem');
 
-    if (!container) return;
+    // =========================================================
+    // RENDERIZAÇÃO NA PÁGINA DE PROJETOS (GALERIA)
+    // =========================================================
+    if (container) {
+        container.innerHTML = '';
 
-    container.innerHTML = '';
+        if (!lista || lista.length === 0) {
+            if (mensagem) mensagem.style.display = 'block';
+            return;
+        }
 
-    if (!lista || lista.length === 0) {
-        mensagem.style.display = 'block';
-        return;
+        if (mensagem) mensagem.style.display = 'none';
+
+        lista.forEach((proj) => {
+            const tituloExibicao = getTexto(proj, 'titulo');
+            const destaqueClasse = proj.destaque ? 'item-destaque' : '';
+
+            const a = document.createElement('a');
+            a.href = `../pagina-projetos/projeto-detalhe.html?id=${proj.id}`; // Ajuste de caminho relativo pode ser necessário dependendo de onde o script é chamado
+            // Se estiver na home, o caminho seria 'pagina-projetos/projeto-detalhe.html', mas aqui estamos assumindo estrutura padrão.
+            // Melhor usar caminho absoluto ou verificar location.pathname
+
+            // Correção para caminho relativo universal
+            const pathPrefix = window.location.pathname.includes('pagina-inicial') ? '../pagina-projetos/' : '';
+            a.href = `${pathPrefix}projeto-detalhe.html?id=${proj.id}`;
+
+            a.className = `item-galeria ${destaqueClasse} ${proj.fase || ''}`;
+
+            a.innerHTML = `
+                <img src="${proj.url_imagem}" alt="${tituloExibicao}">
+                <div class="overlay-texto">${tituloExibicao}</div>
+            `;
+
+            container.appendChild(a);
+        });
     }
 
-    mensagem.style.display = 'none';
+    // =========================================================
+    // RENDERIZAÇÃO NA HOME (APENAS DESTAQUE)
+    // =========================================================
+    if (containerHome) {
+        containerHome.innerHTML = '';
+        const destaque = lista.find(p => p.destaque);
 
-    lista.forEach((proj, index) => {
+        if (destaque) {
+            const tituloExibicao = getTexto(destaque, 'titulo');
+            const a = document.createElement('a');
+            // Na home, o link deve apontar para a pasta de projetos
+            a.href = `../pagina-projetos/projeto-detalhe.html?id=${destaque.id}`;
+            a.className = `item-galeria item-destaque`; // Mantém classes de estilo
 
-        // destaque = primeiro item
-        const destaqueClasse = proj.destaque ? 'item-destaque' : '';
-
-        const a = document.createElement('a');
-        a.href = `projeto-detalhe.html?id=${proj.id}`;
-        a.className = `item-galeria ${destaqueClasse} ${proj.fase || ''}`;
-
-        a.innerHTML = `
-            <img src="${proj.url_imagem}" alt="${proj.titulo}">
-            <div class="overlay-texto">${proj.titulo}</div>
-        `;
-
-        container.appendChild(a);
-    });
+            a.innerHTML = `
+                <img src="${destaque.url_imagem}" alt="${tituloExibicao}">
+                <div class="overlay-texto">${tituloExibicao}</div>
+            `;
+            containerHome.appendChild(a);
+        }
+    }
 }
 
 // ===============================================

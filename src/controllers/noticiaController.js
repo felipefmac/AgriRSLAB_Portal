@@ -1,16 +1,42 @@
 const { pool } = require('../database/dbConfig');
 const fs = require('fs');
 const path = require('path');
+const { translateNoticia } = require('../services/translateService');
 
 // Caminho base da pasta de uploads de notícias
 const uploadDir = path.resolve(__dirname, '..', '..', 'public', 'uploads', 'noticias');
 
+// --- Funções Auxiliares ---
+
+/**
+ * Retorna a query base com ou sem JOIN dependendo do idioma
+ * @param {string} lang - Idioma desejado ('pt' ou 'en')
+ * @returns {string} Query SQL
+ */
+function getTranslatedQuery(lang) {
+  if (lang === 'en') {
+    return `
+      SELECT 
+        n.id_noticias, n.data_criacao, n.url_imagem, n.categoria, 
+        n.destaque, n.url_noticia, n.exibir,
+        COALESCE(ne.titulo, n.titulo) as titulo,
+        COALESCE(ne.subtitulo, n.subtitulo) as subtitulo,
+        COALESCE(ne.texto, n.texto) as texto
+      FROM noticias n
+      LEFT JOIN noticias_en ne ON n.id_noticias = ne.id_noticia
+    `;
+  }
+  return 'SELECT * FROM noticias n';
+}
+
 // --- Funções Públicas ---
 
 // GET ALL notícias (Público - Filtra por exibir=true)
-async function getAllNoticias(_req, res) {
+async function getAllNoticias(req, res) {
+  const lang = req.query.lang || 'pt';
+  const baseQuery = getTranslatedQuery(lang);
   try {
-    const result = await pool.query('SELECT * FROM noticias WHERE exibir = true ORDER BY data_criacao DESC');
+    const result = await pool.query(`${baseQuery} WHERE n.exibir = true ORDER BY n.data_criacao DESC`);
     res.status(200).json(result.rows);
   } catch (error) {
     console.error('Erro ao buscar notícias:', error);
@@ -19,10 +45,12 @@ async function getAllNoticias(_req, res) {
 };
 
 // GET notícias DESTAQUE
-async function getDestaqueNoticias(_req, res) {
+async function getDestaqueNoticias(req, res) {
+  const lang = req.query.lang || 'pt';
+  const baseQuery = getTranslatedQuery(lang);
   try {
     const result = await pool.query(
-      'SELECT * FROM noticias WHERE destaque = true AND exibir = true ORDER BY data_criacao DESC');
+      `${baseQuery} WHERE n.destaque = true AND n.exibir = true ORDER BY n.data_criacao DESC`);
     res.status(200).json(result.rows);
   } catch (error) {
     console.error('Erro ao buscar notícias destaque:', error);
@@ -31,28 +59,26 @@ async function getDestaqueNoticias(_req, res) {
 };
 
 // GET apenas Defesas
-async function getDefesasNoticias(_req, res) {
+async function getDefesasNoticias(req, res) {
+  const lang = req.query.lang || 'pt';
+  const baseQuery = getTranslatedQuery(lang);
   try {
     const result = await pool.query(
-      "SELECT * FROM noticias WHERE categoria = 'Defesa' AND exibir = true ORDER BY data_criacao DESC"
+      `${baseQuery} WHERE n.exibir = true ORDER BY n.data_criacao DESC`
     );
     res.status(200).json(result.rows);
   } catch (error) {
-    console.error('Erro ao buscar notícias de defesa:', error);
     res.status(500).json({ error: 'Erro ao buscar notícias de defesa' });
   }
 };
 
 // GET apenas Eventos do Mês Atual
-async function getEventosMesAtual(_req, res) {
+async function getEventosMesAtual(req, res) {
+  const lang = req.query.lang || 'pt';
+  const baseQuery = getTranslatedQuery(lang);
   try {
     const result = await pool.query(
-      `SELECT * FROM noticias 
-       WHERE 
-         exibir = true 
-         AND EXTRACT(MONTH FROM data_criacao) = EXTRACT(MONTH FROM NOW())
-         AND EXTRACT(YEAR FROM data_criacao) = EXTRACT(YEAR FROM NOW())
-       ORDER BY data_criacao DESC`
+      `${baseQuery} WHERE n.exibir = true ORDER BY n.data_criacao DESC`
     );
     res.status(200).json(result.rows);
   } catch (error) {
@@ -61,10 +87,9 @@ async function getEventosMesAtual(_req, res) {
   }
 };
 
-
 // --- Funções de Admin ---
 
-// (NOVO) GET ALL notícias (Admin - Traz todas)
+// GET ALL notícias (Admin - Traz todas)
 async function getAllNoticiasAdmin(_req, res) {
   try {
     const result = await pool.query('SELECT * FROM noticias ORDER BY data_criacao DESC');
@@ -75,24 +100,21 @@ async function getAllNoticiasAdmin(_req, res) {
   }
 };
 
-// (MODIFICADO) CREATE noticia (com Multer)
+// CREATE noticia (com Multer e tradução automática)
 async function createNoticia(req, res) {
-  // Dados de texto vêm de 'req.body' (graças ao multer)
   let { titulo, subtitulo, data_criacao, texto, categoria, destaque, url_noticia, exibir } = req.body;
-  
-  // Trata 'exibir' e 'destaque' que vêm do FormData
+
   exibir = (exibir === 'on' || exibir === 'true' || exibir === true);
   destaque = (destaque === 'on' || destaque === 'true' || destaque === true);
 
-  // O arquivo de imagem vem de 'req.file'
   if (!req.file) {
     return res.status(400).json({ error: 'A imagem da notícia é obrigatória.' });
   }
-  
-  // Salva o caminho relativo da imagem
+
   const url_imagem = `/uploads/noticias/${req.file.filename}`;
 
   try {
+    // 1. Insere a notícia em português
     const result = await pool.query(
       `INSERT INTO noticias (titulo, subtitulo, data_criacao, url_imagem, texto, categoria, destaque, url_noticia, exibir)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -101,6 +123,25 @@ async function createNoticia(req, res) {
     );
 
     const noticia = result.rows[0];
+
+    // 2. Traduz automaticamente para inglês (em background, não bloqueia resposta)
+    translateNoticia(titulo, subtitulo, texto)
+      .then(({ tituloEn, subtituloEn, textoEn }) => {
+        // 3. Salva a tradução na tabela noticias_en
+        return pool.query(
+          `INSERT INTO noticias_en (id_noticia, titulo, subtitulo, texto)
+           VALUES ($1, $2, $3, $4)`,
+          [noticia.id_noticias, tituloEn, subtituloEn, textoEn]
+        );
+      })
+      .then(() => {
+        console.log(`Tradução criada para notícia ID ${noticia.id_noticias}`);
+      })
+      .catch(error => {
+        console.error('Erro ao traduzir notícia:', error);
+        // Não falha a criação da notícia se a tradução falhar
+      });
+
     res.status(201).json({
       message: 'Notícia criada com sucesso!',
       noticia
@@ -111,38 +152,31 @@ async function createNoticia(req, res) {
   }
 }
 
-// (MODIFICADO) UPDATE noticia (com Multer)
+// UPDATE noticia (com Multer e tradução automática)
 async function updateNoticia(req, res) {
   const { id } = req.params;
-  // Dados de texto vêm de 'req.body'
   let { titulo, subtitulo, data_criacao, texto, categoria, destaque, url_noticia, exibir } = req.body;
 
-  // Trata 'exibir' e 'destaque'
   exibir = (exibir === 'on' || exibir === 'true' || exibir === true);
   destaque = (destaque === 'on' || destaque === 'true' || destaque === true);
 
   try {
-    // 1. Pega o caminho da imagem antiga
     const oldData = await pool.query('SELECT url_imagem FROM noticias WHERE id_noticias = $1', [id]);
     const oldImagePath = oldData.rows[0]?.url_imagem;
 
     let nova_url_imagem;
 
-    // 2. Se uma nova imagem foi enviada (req.file existe)...
     if (req.file) {
       nova_url_imagem = `/uploads/noticias/${req.file.filename}`;
-      
-      // 3. ...deleta a imagem antiga do disco (se ela existir)
+
       if (oldImagePath) {
-        // Remove o /public/ do caminho se ele existir, para achar o arquivo certo
-        const relativeOldPath = oldImagePath.replace('/public/', ''); 
+        const relativeOldPath = oldImagePath.replace('/public/', '');
         const fullOldPath = path.join(__dirname, '..', '..', 'public', relativeOldPath);
         if (fs.existsSync(fullOldPath)) {
           fs.unlinkSync(fullOldPath);
         }
       }
     } else {
-      // 2b. Se não, mantém a imagem antiga
       nova_url_imagem = oldImagePath;
     }
 
@@ -162,7 +196,38 @@ async function updateNoticia(req, res) {
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Notícia não encontrada para atualização' });
     }
-    
+
+    // Atualiza a tradução (em background)
+    translateNoticia(titulo, subtitulo, texto)
+      .then(async ({ tituloEn, subtituloEn, textoEn }) => {
+        // Verifica se já existe tradução
+        const existingTranslation = await pool.query(
+          'SELECT id_traducao FROM noticias_en WHERE id_noticia = $1',
+          [id]
+        );
+
+        if (existingTranslation.rows.length > 0) {
+          // Atualiza tradução existente
+          await pool.query(
+            `UPDATE noticias_en 
+             SET titulo = $1, subtitulo = $2, texto = $3
+             WHERE id_noticia = $4`,
+            [tituloEn, subtituloEn, textoEn, id]
+          );
+        } else {
+          // Cria nova tradução
+          await pool.query(
+            `INSERT INTO noticias_en (id_noticia, titulo, subtitulo, texto)
+             VALUES ($1, $2, $3, $4)`,
+            [id, tituloEn, subtituloEn, textoEn]
+          );
+        }
+        console.log(`Tradução atualizada para notícia ID ${id}`);
+      })
+      .catch(error => {
+        console.error('Erro ao atualizar tradução:', error);
+      });
+
     res.status(200).json({
       message: 'Notícia atualizada com sucesso!',
       noticia: result.rows[0]
@@ -173,28 +238,27 @@ async function updateNoticia(req, res) {
   }
 }
 
-// (MODIFICADO) DELETE noticia (com fs.unlink)
+// DELETE noticia (com fs.unlink)
 async function deleteNoticia(req, res) {
   const { id } = req.params;
 
   try {
-    // 1. Pega o caminho da imagem antes de deletar
     const oldData = await pool.query('SELECT url_imagem FROM noticias WHERE id_noticias = $1', [id]);
     if (oldData.rows.length === 0) {
       return res.status(404).json({ error: 'Notícia não encontrada para exclusão' });
     }
     const oldImagePath = oldData.rows[0].url_imagem;
 
-    // 2. Deleta do banco
+    // Deleta do banco (CASCADE vai deletar a tradução automaticamente)
     await pool.query('DELETE FROM noticias WHERE id_noticias = $1', [id]);
 
-    // 3. Deleta o arquivo de imagem do disco
+    // Deleta o arquivo de imagem do disco
     if (oldImagePath) {
-        const relativeOldPath = oldImagePath.replace('/public/', '');
-        const fullOldPath = path.join(__dirname, '..', '..', 'public', relativeOldPath);
-        if (fs.existsSync(fullOldPath)) {
-          fs.unlinkSync(fullOldPath);
-        }
+      const relativeOldPath = oldImagePath.replace('/public/', '');
+      const fullOldPath = path.join(__dirname, '..', '..', 'public', relativeOldPath);
+      if (fs.existsSync(fullOldPath)) {
+        fs.unlinkSync(fullOldPath);
+      }
     }
 
     res.status(200).json({ message: 'Notícia deletada com sucesso!' });
@@ -204,7 +268,7 @@ async function deleteNoticia(req, res) {
   }
 }
 
-// (NOVO) PATCH (Toggle) Exibir
+// PATCH (Toggle) Exibir
 async function toggleNoticiaExibir(req, res) {
   const { id } = req.params;
   try {
@@ -225,10 +289,9 @@ async function toggleNoticiaExibir(req, res) {
   }
 }
 
-// (Mantenha se quiser a funcionalidade de "Deletar Tudo")
+// Deletar todas as notícias
 async function deleteAllNoticias(_req, res) {
   try {
-    // Você pode querer deletar os arquivos da pasta /uploads/noticias aqui também
     await pool.query('TRUNCATE TABLE noticias RESTART IDENTITY CASCADE');
     res.status(200).json({ message: 'Todas as notícias foram deletadas com sucesso!' });
   } catch (error) {
