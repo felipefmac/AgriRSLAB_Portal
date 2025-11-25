@@ -41,7 +41,6 @@ Legenda IDs
 
 | ID      | Tarefa                     | Autor           | Data  | Pontuação | Disciplina | Requisitos Atendidos | Status |
 |---------|----------------------------|-----------------|-------|-----------|------------|---------------------|--------|
-| ES-016 | Subir projeto                    |   William e Felipe        |   --    |     20      |    ES        |     RNF05                 |  ⬜    |
 | SO-006 | Documentação                  |   Pedro         |   10/11   |    20       |    SO        |        --             |  ✅    |
 | DW-013 | Botão de pesquisa            |  Ariana           | 18/11  |     10      |     DW       |       RF01              |   ✅   |
 | MB-002 | Ligar filtros da página de artigos ao BD                    |  Felipe e William           | 06/11 |     10      |    MB        |       RF07              |  ✅    |
@@ -61,7 +60,7 @@ Legenda IDs
 | MB-009 | Dinamização da página de projetos              | Ariana            | 14/11 |    10      |    MB        |     RF05                |   ✅   |
 | MB-010 | Subir a dinamização da pág de membros e projetos              | Felipe            | 14/11 |    8      |    MB        |     RF05/RF03                |   ✅   |
 | MB-007 | Dinamização da página de notícias              | William           | 14/11 |    10      |    MB        |       RF06              |   ✅   |
-| SO-005 | Organização github              | Eloah           | 18/11 |    20      |    SO        |       --              |   ⬜   |
-| MB-011 | Adicionar botão de navegação na pág admin               | João Otávio            | 24/11 |    8      |    MB        |     RNF02                |   ⬜   |
-| MB-012 | Correção de erros na pág de notícias              | William           | 24/11 |    10      |    MB        |       RF06              |   ⬜   |
+| SO-005 | Organização github              | Eloah           | 18/11 |    20      |    SO        |       --              |   ✅   |
+| MB-011 | Adicionar botão de navegação na pág admin               | João Otávio            | 24/11 |    8      |    MB        |     RNF02                |   ✅   |
+| MB-012 | Correção de erros na pág de notícias              | William           | 24/11 |    10      |    MB        |       RF06              |   ✅   |
 
