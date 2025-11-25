@@ -67,7 +67,7 @@ A terceira sprint concentrou-se na criação do banco de dados e na implementaç
 [↑ Voltar ao topo](#topo)
 
 <a id="dor"></a>
-## Dor do Cliente
+# Dor do Cliente
 
 1. Necessidade de um site para divulgação do Laboratório de Sensoriamento Remoto Agrícola do INPE.  
 2. Cliente com pouca experiência em desenvolvimento de websites — portanto, é essencial que o gerenciamento de conteúdo seja simples e objetivo.  
@@ -76,7 +76,7 @@ A terceira sprint concentrou-se na criação do banco de dados e na implementaç
 [↑ Voltar ao topo](#topo)
 
 
-## Requisitos e User Stories
+# Requisitos e User Stories
 
 | Requisito | Sub-Requisito | User Story |
 |-----------|---------------|------------|
@@ -216,7 +216,7 @@ O *DoD* pode ser acessado [aqui](https://github.com/404NotFound-ABP/AgriRSLAB_Po
 [↑ Voltar ao topo](#topo)
 
 <a id="equipe"></a>
-## Nossa Equipe
+# Nossa Equipe
 
 A equipe **404 Not Found** é constituída de alunos do primeiro semestre do curso de Desenvolvimento de Software Multiplataforma.
 
