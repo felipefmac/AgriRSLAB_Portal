@@ -42,7 +42,7 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 |------: |---------------|:------:|:------------------------------------------:|:-----:|:-----:|
 | 1      | 📅 08/10/2025 | ✅     | [Ver Backlog](docs/sprint1.md#backlog)     | [Ver vídeo](https://youtu.be/8NwBtAC9zXE)     | ✅     |
 | 2      | 📅 04/11/2025 | ✅     | [Ver Backlog](docs/sprint2.md#backlog)     | [Ver vídeo](https://youtu.be/8m5mneY6ezg)     | ✅     |
-| 3      | 📅 24/11/2025 | 🚧      | [Ver Backlog](https://github.com/404NotFound-ABP/AgriRSLAB_Portal/blob/b101f8361ab7a1a88254475e287edebc253a0282/docs/sprint3.md) | —     | —     |
+| 3      | 📅 24/11/2025 | 🚧      | [Ver Backlog](docs/sprint3.md#backlog) | —     | —     |
 
 
 </div>
