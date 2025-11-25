@@ -194,13 +194,18 @@ async function listarVagasPublicas(req, res) {
 
 
 // [R]EAD – Buscar vaga por ID (GET)
+// [R]EAD – Buscar vaga por ID (GET)
 async function buscarVagaPorId(req, res) {
     const { id } = req.params;
 
     const query = `
-        SELECT *
-        FROM vagas
-        WHERE vaga_id = $1;
+        SELECT 
+            v.*,
+            ve.titulo as titulo_en,
+            ve.descricao as descricao_en
+        FROM vagas v
+        LEFT JOIN vagas_en ve ON v.vaga_id = ve.vaga_id
+        WHERE v.vaga_id = $1;
     `;
 
     try {
@@ -212,20 +217,34 @@ async function buscarVagaPorId(req, res) {
 
         const vaga = resultado.rows[0];
 
+        // Busca requisitos (PT e EN)
         const reqs = await pool.query(
-            `SELECT descricao FROM requisitos_vaga WHERE vaga_id = $1`,
+            `SELECT 
+                r.descricao, 
+                re.descricao as descricao_en 
+             FROM requisitos_vaga r
+             LEFT JOIN requisitos_vaga_en re ON r.req_id = re.req_id
+             WHERE r.vaga_id = $1`,
             [id]
         );
 
+        // Busca benefícios (PT e EN)
         const bens = await pool.query(
-            `SELECT descricao FROM beneficios_vaga WHERE vaga_id = $1`,
+            `SELECT 
+                b.descricao, 
+                be.descricao as descricao_en 
+             FROM beneficios_vaga b
+             LEFT JOIN beneficios_vaga_en be ON b.benef_id = be.benef_id
+             WHERE b.vaga_id = $1`,
             [id]
         );
 
         const vagaCompleta = {
             ...vaga,
             requisitos: reqs.rows.map(r => r.descricao),
-            beneficios: bens.rows.map(b => b.descricao)
+            requisitos_en: reqs.rows.map(r => r.descricao_en || r.descricao), // Fallback para PT se não tiver EN
+            beneficios: bens.rows.map(b => b.descricao),
+            beneficios_en: bens.rows.map(b => b.descricao_en || b.descricao) // Fallback para PT se não tiver EN
         };
 
         res.status(200).json(vagaCompleta);

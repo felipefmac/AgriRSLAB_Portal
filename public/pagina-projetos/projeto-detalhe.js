@@ -4,13 +4,27 @@ document.addEventListener('DOMContentLoaded', carregarProjeto);
  * Retorna o texto no idioma correto (PT ou EN).
  */
 function getTexto(item, campo) {
-    const lang = localStorage.getItem('site_lang') || 'pt';
+    const lang = localStorage.getItem('selectedLanguage') || 'pt';
 
     // Se for inglês E existir tradução, retorna inglês. Senão, retorna PT.
     if (lang === 'en' && item[campo + '_en']) {
         return item[campo + '_en'];
     }
     return item[campo] || item[campo + '_pt']; // Fallback para campo base ou campo _pt
+}
+
+/**
+ * Retorna mensagens traduzidas conforme o idioma selecionado.
+ */
+function getMensagem(chave) {
+    const lang = localStorage.getItem('selectedLanguage') || 'pt';
+    const mensagens = {
+        'autores_nao_informados': {
+            'pt': 'Autores não informados',
+            'en': 'Authors not informed'
+        }
+    };
+    return mensagens[chave] ? mensagens[chave][lang] : '';
 }
 
 async function carregarProjeto() {
@@ -43,7 +57,7 @@ async function carregarProjeto() {
 
         // Autores (pulando linha por quebra de vírgula)
         document.getElementById('autores').innerHTML =
-            projeto.autores ? projeto.autores.replace(/,/g, '<br>') : 'Autores não informados';
+            projeto.autores ? projeto.autores.replace(/,/g, '<br>') : getMensagem('autores_nao_informados');
 
         // Conteúdo
         document.getElementById('conteudo').innerHTML = getTexto(projeto, 'conteudo');

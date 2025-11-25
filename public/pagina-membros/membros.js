@@ -10,9 +10,8 @@ const dicionario = {
     'doutorando': 'Doutorando(a)',
     'mestrando': 'Mestrando(a)',
     'bolsista': 'Bolsista',
-    'ver': 'Ver',
-    'curriculo': 'CURRÍCULO',
-    'lattes': 'LATTES'
+    'ver': 'VER',
+    'lattes': 'CURRÍCULO'
   },
   'en': {
     'coordenador': 'Researcher/ Coordinator',
@@ -20,9 +19,8 @@ const dicionario = {
     'doutorando': 'PhD Student',
     'mestrando': 'Master\'s Student',
     'bolsista': 'Fellow',
-    'ver': 'View',
-    'curriculo': 'CURRICULUM',
-    'lattes': 'LATTES'
+    'ver': 'VIEW',
+    'lattes': 'CURRICULUM'
   }
 };
 
@@ -108,7 +106,6 @@ async function carregarMembrosPublicos(secoes) {
           ${membro.link
           ? `<a href="${membro.link}" target="_blank" class="lattes-link" title="Currículo / Perfil">
                    <span class="lattes-ver">${traducoes.ver}</span>
-                   <span class="lattes-curriculo">${traducoes.curriculo}</span>
                    <span class="lattes-lattes">${traducoes.lattes}</span>
                  </a>`
           : ''

@@ -46,45 +46,45 @@ function getCategoriaNome(id_categoria) {
 
 // Carrega todos os membros e desenha no container
 async function carregarMembros() {
-  const container = document.getElementById('container-membros');
-  if (!container) return;
+    const container = document.getElementById('container-membros');
+    if (!container) return;
 
-  container.innerHTML = '<h2>Carregando Membros...</h2>';
+    container.innerHTML = '<h2>Carregando Membros...</h2>';
 
-  try {
-    const resp = await fetch(API_BASE_URL);
-    if (!resp.ok) {
-      console.error('Erro ao buscar membros:', resp.status);
-      container.innerHTML = '<p>Erro ao carregar membros.</p>';
-      return;
-    }
+    try {
+        const resp = await fetch(API_BASE_URL);
+        if (!resp.ok) {
+            console.error('Erro ao buscar membros:', resp.status);
+            container.innerHTML = '<p>Erro ao carregar membros.</p>';
+            return;
+        }
 
-    let membros = await resp.json();
+        let membros = await resp.json();
 
-    // 1) Ordena por id_categoria (1 coordenação, 5 bolsistas)
-    // 2) Dentro de cada categoria, ordena por nome em ordem alfabética
-    membros.sort((a, b) => {
-      const ga = Number(a.id_categoria);
-      const gb = Number(b.id_categoria);
+        // 1) Ordena por id_categoria (1 coordenação, 5 bolsistas)
+        // 2) Dentro de cada categoria, ordena por nome em ordem alfabética
+        membros.sort((a, b) => {
+            const ga = Number(a.id_categoria);
+            const gb = Number(b.id_categoria);
 
-      if (ga !== gb) {
-        return ga - gb;
-      }
+            if (ga !== gb) {
+                return ga - gb;
+            }
 
-      return String(a.nome).localeCompare(String(b.nome), 'pt-BR', {
-        sensitivity: 'base'
-      });
-    });
+            return String(a.nome).localeCompare(String(b.nome), 'pt-BR', {
+                sensitivity: 'base'
+            });
+        });
 
-    if (!membros || membros.length === 0) {
-      container.innerHTML = '<p>Nenhum membro cadastrado ainda.</p>';
-      return;
-    }
+        if (!membros || membros.length === 0) {
+            container.innerHTML = '<p>Nenhum membro cadastrado ainda.</p>';
+            return;
+        }
 
-    const tabela = document.createElement('table');
-    tabela.classList.add('tabela-admin-membros');
+        const tabela = document.createElement('table');
+        tabela.classList.add('tabela-admin-membros');
 
-    tabela.innerHTML = `
+        tabela.innerHTML = `
       <thead>
         <tr>
           <th class="col-membro">Membro</th>
@@ -96,19 +96,19 @@ async function carregarMembros() {
       <tbody></tbody>
     `;
 
-    const tbody = tabela.querySelector('tbody');
+        const tbody = tabela.querySelector('tbody');
 
-membros.forEach((membro) => {
-  const cargo = getCategoriaNome(membro.id_categoria);
+        membros.forEach((membro) => {
+            const cargo = getCategoriaNome(membro.id_categoria);
 
-  const tr = document.createElement('tr');
+            const tr = document.createElement('tr');
 
-  // se o membro não está marcado para exibir, aplica a classe de "apagado"
-  if (!membro.exibir) {
-    tr.classList.add('membro-oculto');
-  }
+            // se o membro não está marcado para exibir, aplica a classe de "apagado"
+            if (!membro.exibir) {
+                tr.classList.add('membro-oculto');
+            }
 
-  tr.innerHTML = `
+            tr.innerHTML = `
     <td>
       <div class="celula-membro">
         <img src="${membro.foto}" alt="Foto de ${membro.nome}" class="thumb-tabela">
@@ -131,22 +131,22 @@ membros.forEach((membro) => {
     </td>
   `;
 
-  const btnEditar = tr.querySelector('.btn-editar');
-  const btnDeletar = tr.querySelector('.btn-deletar');
+            const btnEditar = tr.querySelector('.btn-editar');
+            const btnDeletar = tr.querySelector('.btn-deletar');
 
-  btnEditar.addEventListener('click', () => abrirModalEdicao(membro));
-  btnDeletar.addEventListener('click', () => abrirModalDelecao(membro));
+            btnEditar.addEventListener('click', () => abrirModalEdicao(membro));
+            btnDeletar.addEventListener('click', () => abrirModalDelecao(membro));
 
-  tbody.appendChild(tr);
-});
+            tbody.appendChild(tr);
+        });
 
 
-    container.innerHTML = '';
-    container.appendChild(tabela);
-  } catch (erro) {
-    console.error('Erro ao carregar membros:', erro);
-    container.innerHTML = '<p>Erro ao carregar membros.</p>';
-  }
+        container.innerHTML = '';
+        container.appendChild(tabela);
+    } catch (erro) {
+        console.error('Erro ao carregar membros:', erro);
+        container.innerHTML = '<p>Erro ao carregar membros.</p>';
+    }
 }
 
 
@@ -295,6 +295,26 @@ function configurarSubmitCadastro() {
 
         const formData = new FormData(formCadastro);
 
+        // FIX: checkbox não envia valor quando desmarcado
+        // Precisamos garantir que 'exibir' sempre tenha um valor
+        const exibirCheckbox = formCadastro.querySelector('#exibir');
+        if (exibirCheckbox) {
+            // Remove o valor automático do checkbox (se existir)
+            formData.delete('exibir');
+            // Adiciona explicitamente como 'true' ou 'false'
+            formData.append('exibir', exibirCheckbox.checked ? 'true' : 'false');
+        }
+
+        // DEBUG: Mostrar o que está sendo enviado
+        console.log('=== DADOS SENDO ENVIADOS ===');
+        for (let [key, value] of formData.entries()) {
+            if (value instanceof File) {
+                console.log(`${key}: [Arquivo: ${value.name}, Tamanho: ${value.size} bytes]`);
+            } else {
+                console.log(`${key}: ${value}`);
+            }
+        }
+
         try {
             const resp = await fetch(API_BASE_URL, {
                 method: 'POST',
@@ -302,8 +322,11 @@ function configurarSubmitCadastro() {
             });
 
             if (!resp.ok) {
+                // Tentar pegar a mensagem de erro do servidor
+                const errorData = await resp.json().catch(() => ({}));
                 console.error('Erro ao cadastrar membro:', resp.status);
-                showToast('Erro ao cadastrar membro', 'error');
+                console.error('Mensagem do servidor:', errorData.mensagem || 'Sem mensagem');
+                showToast(errorData.mensagem || 'Erro ao cadastrar membro', 'error');
                 return;
             }
 
@@ -341,6 +364,16 @@ function configurarSubmitAtualizacao() {
         if (!id) return;
 
         const formData = new FormData(formAtualizacao);
+
+        // FIX: checkbox não envia valor quando desmarcado
+        // Precisamos garantir que 'exibir' sempre tenha um valor
+        const exibirCheckbox = formAtualizacao.querySelector('#edit-exibir');
+        if (exibirCheckbox) {
+            // Remove o valor automático do checkbox (se existir)
+            formData.delete('exibir');
+            // Adiciona explicitamente como 'true' ou 'false'
+            formData.append('exibir', exibirCheckbox.checked ? 'true' : 'false');
+        }
 
         try {
             const resp = await fetch(`${API_BASE_URL}/${id}`, {

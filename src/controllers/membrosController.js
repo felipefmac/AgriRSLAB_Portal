@@ -16,10 +16,17 @@ if (!fs.existsSync(uploadDir)) {
 // --- C.R.U.D. Membros ---
 // [C]RIAR Membro (POST)
 async function criarMembro(req, res) {
+    console.log('=== DEBUG CRIAR MEMBRO ===');
+    console.log('Body:', req.body);
+    console.log('Files:', req.files);
+
     const { nome, descricao, link, id_categoria, exibir } = req.body;
-    const foto = req.file ? `/upload/membros/${req.file.filename}` : null;
+    const foto = req.files?.foto?.[0] ? `/upload/membros/${req.files.foto[0].filename}` : null;
+
+    console.log('Extraído - nome:', nome, '| descricao:', descricao, '| foto:', foto, '| categoria:', id_categoria, '| exibir:', exibir);
 
     if (!nome || !descricao || !foto) {
+        console.log('ERRO: Campos faltando!');
         return res.status(400).json({ mensagem: 'Preencha todos os campos obrigatórios.' });
     }
 
@@ -83,8 +90,8 @@ async function atualizarMembro(req, res) {
         let novaFoto = fotoAtual;
 
         // Se enviou nova foto
-        if (req.file) {
-            novaFoto = `/upload/membros/${req.file.filename}`;
+        if (req.files?.foto?.[0]) {
+            novaFoto = `/upload/membros/${req.files.foto[0].filename}`;
 
             // Remove foto antiga se existir
             if (fotoAtual) {
