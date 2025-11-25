@@ -125,13 +125,13 @@ O *DoD* pode ser acessado [aqui](https://github.com/404NotFound-ABP/AgriRSLAB_Po
 
 | ID      | Seção / Atividade | Pontuação | Disciplina | Sprint |
 |---------|-------------------|-----------|------------|--------|
-| DD-001  | Definir cores, tipografia, espaçamento e estilos de botões | 8  | DD | 1 |
-| DD-002  | Criar header e footer padrão (figma) | 5  | DD | 1 |
-| DD-003  | Criar guia de estilo | 8  | DD | 1 |
-| DD-004  | Criar layout no Figma (Home) | 13 | DD | 1 |
-| DW-001  | Criar arquivo HTML (Home) | 5  | DW | 1 |
-| DW-002  | Aplicar design CSS (Home) | 8  | DW | 1 |
-| DW-003  | Inserir cards de destaques (notícias, projetos, publicações) back-end | 20 | DW | 2 |
+| DD-001  | Definir identidade visual do site | 10  | DD | 1 |
+| DD-002  | Criar protótipo da página home | 8  | DD | 1 |
+| DD-003  | Criar protótipo mobile (home) | 4	  | DD | 1 |
+| DD-004  | Criar cards em destaque na home (notícias, projetos, publicações) | 9 | DD | 1 |
+| DD-005  | Criar protótipo da página "Sobre" – objetivo e foco do laboratório | 4  | DD | 1 |
+| DD-006  | Criar protótipo mobile (sobre) | 2  | DD | 1 |
+| DD-007  | Criar protótipo da página de membros (nome, foto, função, descrição) | 6	 | DD | 2 |
 | DW-004  | Inserir links para redes sociais e contato | 5  | DW | 1 |
 | DD-005  | Criar layout no Figma (Sobre) | 8  | DD | 1 |
 | DW-005  | Criar arquivo HTML (Sobre) | 5  | DW | 1 |
