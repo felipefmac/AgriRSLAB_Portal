@@ -104,7 +104,7 @@ A apresentação da *Sprint 2* em vídeo pode ser acessada [aqui](https://youtu.
 
 
 
-## Definition of Done (DoD)
+## Definition of Done (DoD) ✅
 
 O Definition of Done (DoD) é fundamental para garantir a qualidade e a consistência do trabalho entregue em um projeto. Ele define, de forma clara e objetiva, os critérios que uma tarefa, user story ou funcionalidade deve atender para ser considerada realmente concluída. Com o DoD, a equipe evita ambiguidades, reduz retrabalho e assegura que todas as entregas sigam o mesmo padrão de excelência. Além disso, ele facilita a comunicação entre os membros do time e aumenta a transparência do processo de desenvolvimento, contribuindo para um fluxo de trabalho mais eficiente e previsível. Confira abaixo o *DoD* do projeto:
 
@@ -113,7 +113,7 @@ O *DoD* pode ser acessado [aqui](https://github.com/404NotFound-ABP/AgriRSLAB_Po
 
 
 
-## Objetivo das Sprints
+## Objetivo das Sprints 📌 
 
 # *Sprint 1 – Planejamento e Prototipagem:* 
 O foco desta sprint foi a criação do protótipo inicial do site e a definição da identidade visual do projeto. Foram estabelecidos os elementos de design, paleta de cores, tipografia e estrutura de navegação, garantindo uma base sólida para o desenvolvimento. Esta etapa também permitiu alinhar expectativas da equipe, definir requisitos visuais e validar conceitos antes da implementação.
@@ -128,7 +128,7 @@ A terceira sprint concentrou-se na criação do banco de dados e na implementaç
 
 
 
-# 📌 Backlog Geral do Projeto
+#  Backlog Geral do Projeto 📌
 
 | ID      | Seção / Atividade | Pontuação | Disciplina | Sprint |
 |---------|-------------------|-----------|------------|--------|
