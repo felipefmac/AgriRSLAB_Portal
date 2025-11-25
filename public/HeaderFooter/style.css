@@ -674,4 +674,13 @@ MENU HAMBURGUER
     margin-top: 20px;
   }
 
+    .language-selector {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 20px !important; 
+    z-index: 3001; 
+}
+
 }
