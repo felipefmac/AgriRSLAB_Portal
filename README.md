@@ -52,6 +52,19 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 - 🚧 **Em Progresso**
 - `—` **Não iniciado**
 
+# Objetivo das Sprints 📌 
+
+# *Sprint 1 – Planejamento e Prototipagem:* 
+O foco desta sprint foi a criação do protótipo inicial do site e a definição da identidade visual do projeto. Foram estabelecidos os elementos de design, paleta de cores, tipografia e estrutura de navegação, garantindo uma base sólida para o desenvolvimento. Esta etapa também permitiu alinhar expectativas da equipe, definir requisitos visuais e validar conceitos antes da implementação.
+
+# *Sprint 2 – Implementação Inicial e Testes:*
+Durante a segunda sprint, iniciou-se a codificação do site, transformando o protótipo em páginas funcionais. Paralelamente, foram realizados os primeiros testes no banco de dados, avaliando a integração inicial entre frontend e backend. Esta sprint teve como objetivo consolidar a estrutura do site, detectar problemas precocemente e preparar o ambiente para o desenvolvimento de funcionalidades mais complexas.
+
+# *Sprint 3 – Banco de Dados, Dinamização e Ajustes de Design:*
+A terceira sprint concentrou-se na criação do banco de dados e na implementação da dinamização das páginas, conectando efetivamente frontend e backend. Adicionalmente, foram realizados ajustes no design, aprimorando a experiência do usuário e garantindo consistência visual em todas as páginas. Essa etapa final permitiu integrar funcionalidades essenciais, corrigir inconsistências e aproximar o projeto da versão final planejada.
+
+
+
 A apresentação da *Sprint 1* em vídeo pode ser acessada [aqui](https://youtu.be/8NwBtAC9zXE).
 
 A apresentação da *Sprint 2* em vídeo pode ser acessada [aqui](https://youtu.be/8m5mneY6ezg).
@@ -110,21 +123,6 @@ O Definition of Done (DoD) é fundamental para garantir a qualidade e a consist�
 
 
 O *DoD* pode ser acessado [aqui](https://github.com/404NotFound-ABP/AgriRSLAB_Portal/blob/e8aae51d47e695c02c723c4ff65f78f73a937011/docs/DoD.md)
-
-
-
-# Objetivo das Sprints 📌 
-
-# *Sprint 1 – Planejamento e Prototipagem:* 
-O foco desta sprint foi a criação do protótipo inicial do site e a definição da identidade visual do projeto. Foram estabelecidos os elementos de design, paleta de cores, tipografia e estrutura de navegação, garantindo uma base sólida para o desenvolvimento. Esta etapa também permitiu alinhar expectativas da equipe, definir requisitos visuais e validar conceitos antes da implementação.
-
-# *Sprint 2 – Implementação Inicial e Testes:*
-Durante a segunda sprint, iniciou-se a codificação do site, transformando o protótipo em páginas funcionais. Paralelamente, foram realizados os primeiros testes no banco de dados, avaliando a integração inicial entre frontend e backend. Esta sprint teve como objetivo consolidar a estrutura do site, detectar problemas precocemente e preparar o ambiente para o desenvolvimento de funcionalidades mais complexas.
-
-# *Sprint 3 – Banco de Dados, Dinamização e Ajustes de Design:*
-A terceira sprint concentrou-se na criação do banco de dados e na implementação da dinamização das páginas, conectando efetivamente frontend e backend. Adicionalmente, foram realizados ajustes no design, aprimorando a experiência do usuário e garantindo consistência visual em todas as páginas. Essa etapa final permitiu integrar funcionalidades essenciais, corrigir inconsistências e aproximar o projeto da versão final planejada.
-
-
 
 
 
