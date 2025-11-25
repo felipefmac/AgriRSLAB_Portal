@@ -32,7 +32,7 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
 [↑ Voltar ao topo](#topo)
 
 <a id="sprint"></a>
-# Entregas de Sprints
+# Entregas de Sprints 🎯
 
 Todas as entregas serão realizadas conforme os prazos acordados com o cliente. Para cada ciclo de desenvolvimento, será gerado um relatório completo por sprint e uma planilha de tarefas, na aba **Tasks**, que detalha cada atividade executada, o responsável, a data de conclusão e uma descrição do trabalho realizado. A relação detalhada das sprints e tarefas é apresentada abaixo.
 
@@ -67,7 +67,7 @@ A terceira sprint concentrou-se na criação do banco de dados e na implementaç
 [↑ Voltar ao topo](#topo)
 
 <a id="dor"></a>
-# Dor do Cliente
+# Dor do Cliente 😢
 
 1. Necessidade de um site para divulgação do Laboratório de Sensoriamento Remoto Agrícola do INPE.  
 2. Cliente com pouca experiência em desenvolvimento de websites — portanto, é essencial que o gerenciamento de conteúdo seja simples e objetivo.  
@@ -76,7 +76,7 @@ A terceira sprint concentrou-se na criação do banco de dados e na implementaç
 [↑ Voltar ao topo](#topo)
 
 
-# Requisitos e User Stories
+# Requisitos e User Stories 📋
 
 | Requisito | Sub-Requisito | User Story |
 |-----------|---------------|------------|
@@ -194,7 +194,7 @@ O *DoD* pode ser acessado [aqui](https://github.com/404NotFound-ABP/AgriRSLAB_Po
 | ES-015 | *Product Owner:* Refinar e priorizar backlog, alinhar requisitos com stakeholders, validar entregas nas reviews e garantir clareza nos critérios de aceitação. | 20 | ES | 1, 2, 3 |
 
 <a id="tecnologias"></a>
-# Tecnologias
+# Tecnologias 💻
 
 <p align="center">
 
@@ -216,7 +216,7 @@ O *DoD* pode ser acessado [aqui](https://github.com/404NotFound-ABP/AgriRSLAB_Po
 [↑ Voltar ao topo](#topo)
 
 <a id="equipe"></a>
-# Nossa Equipe
+# Nossa Equipe 👩‍💻
 
 A equipe **404 Not Found** é constituída de alunos do primeiro semestre do curso de Desenvolvimento de Software Multiplataforma.
 
