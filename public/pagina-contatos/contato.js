@@ -53,17 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const dados = await resposta.json().catch(() => ({}));
 
       if (resposta.ok) {
-        alert(dados.mensagem || "Mensagem enviada com sucesso!");
+        customAlert(dados.mensagem || "Mensagem enviada com sucesso!");
         form.reset();
       } else {
-        alert(
+       customAlert(
           dados.mensagem ||
             "Ocorreu um erro ao enviar sua mensagem. Tente novamente mais tarde."
         );
       }
     } catch (erro) {
       console.error("Erro ao enviar formulário de contato:", erro);
-      alert(
+      customAlert(
         "Não foi possível enviar sua mensagem no momento. Verifique sua conexão e tente novamente."
       );
     }finally {

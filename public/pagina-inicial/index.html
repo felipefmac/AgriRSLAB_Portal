@@ -19,8 +19,7 @@
 
     <section class="anuncio">
         <div class="anuncio_img">
-            <img src="../assets/Imagens do laboratorio/Imagem_AgrisRs.svg" alt="Imagem do AgriRS"
-                class="imagem_anuncio">
+            <img src="../assets/Imagens do laboratorio/Imagem_AgrisRs.svg" alt="Imagem do AgriRS" class="imagem_anuncio">
 
             <div class="anuncio_container">
                 <div class="anuncio_texto">
@@ -91,17 +90,17 @@
         </h2>
         <div class="linha-divisoria"></div>
 
-        <a href="../pagina-projetos/proj1.html" class="projeto-link">
-            <img src="../assets/2.1 Projetos/Figura_P2_MG.JPG" alt="Imagem do projeto" class="imagem_projeto">
+        <a id="projeto-destaque" href="../pagina-projetos/projetos.html" class="projeto-link">
+            <img id="projeto-destaque-imagem"  alt="Imagem do projeto" class="imagem_projeto">
             <div class="projeto-destaque-container">
-                <h2 class="projeto-destaque-titulo">Sensoriamento de Resíduos Culturais no Solo</h2>
-                <p class="projeto-destaque-p">Estimativa do percentual de cobertura do solo por resíduos culturais
-                    através de sensoriamento remoto orbital.</p>
+                <h2 id="projeto-destaque-titulo" class="projeto-destaque-titulo">Carregando projeto em destaque...</h2>
+                <p id="projeto-destaque-descricao" class="projeto-destaque-p"></p>
 
             </div>
         </a>
+        <p id="projeto-mensagem" class="estado-informativo"></p>
 
-        <a href="../pagina-projetos/projetos.html" class="acesso-projetos-bt">Ver todos os projetos</a>
+        <a href="../pagina-projetos/projetos.html" class="acesso-projetos-bt" id="link-projetos">Ver todos os projetos</a>
     </section>
 
 
@@ -110,78 +109,52 @@
             Últimas Notícias </h2>
         <div class="linha-divisoria"></div>
 
-        <div class="noticia-layout">
+        <div class="noticia-layout" id="noticias-home">
 
-            <!-- Notícia principal -->
-            <div class="noticia-principal-card">
+            <!-- Notícia principal dinâmica -->
+            <article class="noticia-principal-card" id="noticia-principal">
                 <div class="noticia-principal-img">
-                    <img src="../../imagens/4. Eventos/Nt_AgriRS.png" alt="Imagem da notícia principal"
+                    <img id="noticia-principal-imagem" src="" alt="Imagem da notícia principal"
                         class="noticia-principal-imagem">
                 </div>
 
                 <div class="noticia-principal-content">
-                    <h3 class="noticia-principal-titulo">
-                        AgriRS Lab lança plataforma de monitoramento de culturas
+                    <h3 class="noticia-principal-titulo" id="noticia-principal-titulo">
+                        Carregando notícias...
                     </h3>
-                    <p class="noticia-principal-subtitulo">
-                        Pesquisadores do INPE e parceiros do AgriRS Lab anunciaram um protótipo de satélite capaz de
-                        monitorar o desenvolvimento das raízes das culturas em tempo quase real. A combinação de
-                        sensores de radar e modelos de inteligência artificial permite estimar perdas e ganhos de
-                        produtividade com antecedência de até 30 dias.</p>
+                    <p class="noticia-principal-subtitulo" id="noticia-principal-subtitulo"></p>
                     <div class="noticia-principal-footer">
-                        <span class="dateEvent"><time datetime="2025-10-22">22/10/25</time></span>
-                        <a href="../../Paginas/pagina-noticias/noticias2.html" class="continuar-lendo">Leia mais</a>
+                        <span class="dateEvent"><time id="noticia-principal-data"></time></span>
+                        <a href="../pagina-noticias/noticias.html" id="noticia-principal-link" class="continuar-lendo">Leia mais</a>
                     </div>
                 </div>
+            </article>
+
+            <!-- Notícias secundárias dinâmicas -->
+            <div class="noticias-secundarias" id="noticias-secundarias">
+                <p class="estado-informativo">Carregando notícias...</p>
             </div>
+        </div>
 
-            <!-- Notícias secundárias -->
-            <div class="noticias-secundarias">
-
-                <div class="card-noticia">
-                    <img src="../../imagens/4. Eventos/Evt_Simpósio-geoprocessamento.png"
-                        alt="Simpósio de Geoprocessamento">
-                    <div class="texto">
-                        <h3>Simpósio de Geoprocessamento destaca avanços na Modelagem de Sistemas Hídricos</h3>
-                        <p>Evento reúne pesquisadores e estudantes para discutir o uso de tecnologias espaciais no
-                            monitoramento e gestão inteligente dos recursos hídricos.</p>
-
-                        <div class="noticia-principal-footer">
-                            <span class="dateEvent"><time datetime="2025-02-22">22/02/25</time></span>
-                            <a href="../../Paginas/pagina-noticias/noticias2.html" class="continuar-lendo">Leia mais</a>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="card-noticia">
-                    <img src="../../imagens/4. Eventos/Evt_SEMAT.jpg" alt="Semana de materiais agricolas">
-                    <div class="texto">
-                        <h3>Último dia de inscrição para a I SEMAT — Semana de Materiais Agrícolas</h3>
-                        <p>Evento reúne especialistas e estudantes para debater inovação, sustentabilidade e
-                            novos materiais aplicados ao setor agrícola.</p>
-
-                        <div class="noticia-principal-footer">
-                            <span class="dateEvent"><time datetime="2025-02-22">22/02/25</time></span>
-                            <a href="../pagina-noticias/noticias1.html" class="continuar-lendo">Leia mais</a>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="ver-todas">
-                    <a href="../pagina-noticias/noticias.html">Ver todas as notícias</a>
-                </div>
-
-            </div>
+        <div class="ver-todas">
+            <a href="../pagina-noticias/noticias.html">Ver todas as notícias</a>
+        </div>
+        <p id="noticias-mensagem" class="estado-informativo"></p>
     </section>
 
 
     <footer>
     </footer>
+<<<<<<< HEAD
+    <script src="home.js"></script>
+=======
+>>>>>>> 6df3454a050d31f970cccc2bd1bc604c16cd96ad
     <script src="../HeaderFooter/menu-header.js"></script>
 
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 6df3454a050d31f970cccc2bd1bc604c16cd96ad

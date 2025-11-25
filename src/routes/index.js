@@ -16,6 +16,6 @@ router.use('/membros', membros);
 router.use('/projetos', projetos);
 router.use('/email', email);
 router.use('/vagas', vagas);
-router.use('/busca', require('./buscaRoutes'));
+router.use('/busca', busca);
 
 module.exports = router;

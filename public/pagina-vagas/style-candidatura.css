@@ -208,21 +208,21 @@ main{
   padding: 15px;
   border-radius: 8px;
   font-weight: 600;
-  display: none; /* Inicia oculto */
+  display: none; 
   text-align: center;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .form-message.success {
   background-color: #e6f6e7;
-  color: var(--texto-sucesso);
-  border: 1px solid var(--texto-sucesso);
+  color: var(--verde-2);
+  border: 1px solid var(--verde-1);
 }
 
 .form-message.error {
-  background-color: #fce7e7;
-  color: var(--texto-erro);
-  border: 1px solid var(--texto-erro);
+  background-color: #eceaea;
+  color: red;
+  border: 1px solid var(--verde-1);
 }
 
 /* ====== Responsivo geral ====== */

@@ -146,15 +146,17 @@ async function updateNoticia(req, res) {
       nova_url_imagem = oldImagePath;
     }
 
+    const final_url_noticia = (url_noticia === '') ? null : url_noticia;
+
     // 4. Atualiza o banco
-    const result = await pool.query(
+  const result = await pool.query(
       `UPDATE noticias
        SET 
          titulo = $1, subtitulo = $2, data_criacao = $3, url_imagem = $4, 
          texto = $5, categoria = $6, destaque = $7, url_noticia = $8, exibir = $9
        WHERE id_noticias = $10
        RETURNING *`,
-      [titulo, subtitulo, data_criacao, nova_url_imagem, texto, categoria, destaque, url_noticia, exibir, id] 
+      [titulo, subtitulo, data_criacao, nova_url_imagem, texto, categoria, destaque, final_url_noticia, exibir, id] 
     );
 
     if (result.rows.length === 0) {
@@ -235,6 +237,38 @@ async function deleteAllNoticias(_req, res) {
   }
 }
 
+async function getNoticiaById(req, res) {
+  const { id } = req.params;
+  try {
+    const result = await pool.query('SELECT * FROM noticias WHERE id_noticias = $1', [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Notícia não encontrada' });
+    }
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error('Erro ao buscar notícia por ID:', error);
+    res.status(500).json({ error: 'Erro ao buscar notícia' });
+  }
+};
+
+async function getNoticiasSugeridas(req, res) {
+  const { idAtual } = req.query; 
+
+  try {
+    const result = await pool.query(
+      `SELECT * FROM noticias 
+       WHERE exibir = true AND id_noticias != $1
+       ORDER BY data_criacao DESC
+       LIMIT 3`,
+      [idAtual]
+    );
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error('Erro ao buscar notícias sugeridas:', error);
+    res.status(500).json({ error: 'Erro ao buscar notícias sugeridas' });
+  }
+};
+
 
 module.exports = {
   // Públicas
@@ -242,11 +276,14 @@ module.exports = {
   getDestaqueNoticias,
   getDefesasNoticias,
   getEventosMesAtual,
+  getNoticiasSugeridas,
   // Admin
   getAllNoticiasAdmin,
   createNoticia,
   updateNoticia,
   deleteNoticia,
   deleteAllNoticias,
-  toggleNoticiaExibir
+  toggleNoticiaExibir,
+
+  getNoticiaById
 };
