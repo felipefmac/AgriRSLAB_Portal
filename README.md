@@ -131,19 +131,18 @@ O *DoD* pode ser acessado [aqui](https://github.com/404NotFound-ABP/AgriRSLAB_Po
 | DD-004  | Criar cards em destaque na home (notícias, projetos, publicações) | 9 | DD | 1 |
 | DD-005  | Criar protótipo da página "Sobre" – objetivo e foco do laboratório | 4  | DD | 1 |
 | DD-006  | Criar protótipo mobile (sobre) | 2  | DD | 1 |
-| DD-007  | Criar protótipo da página de membros (nome, foto, função, descrição) | 6	 | DD | 2 |
-| DW-004  | Inserir links para redes sociais e contato | 5  | DW | 1 |
-| DD-005  | Criar layout no Figma (Sobre) | 8  | DD | 1 |
-| DW-005  | Criar arquivo HTML (Sobre) | 5  | DW | 1 |
-| DW-006  | Aplicar design CSS (Sobre) | 8  | DW | 1 |
-| DW-007  | Inserir textos e imagens do laboratório | 8  | DW | 1 |
-| DD-006  | Criar layout no Figma (Membros) | 8  | DD | 1 |
-| DW-008  | Criar arquivo HTML (Membros) | 5  | DW | 1 |
-| DW-009  | Aplicar design CSS (Membros) | 8  | DW | 1 |
-| DW-010  | Inserir imagens e textos | 8  | DW | 1 |
-| ES-001  | Implementar CRUD de membros (back-end) | 13 | ES | 2 |
-| ES-002  | Categorizar membros por tipo | 13 | ES | 2 |
-| ES-003  | Ordenar membros por ordem alfabética | 5  | ES | 2 |
+| DD-007  | Criar protótipo da página de membros (nome, foto, função, descrição) | 6	 | DD | 1 |
+| DD-008  | Criar protótipo mobile (membros) | 3  | DD | 1 |
+| DD-009  | Criar protótipo da página de vagas | 3  | DD | 1 |
+| DD-010  | Criar protótipo mobile (vagas) | 1  | DD | 1 |
+| DD-011  | Criar protótipo da página de projetos | 1  | DD | 1 |
+| DD-012  | Criar protótipo mobile (projetos) | 1  | DD | 1 |
+| DD-013  | Criar protótipo da página de notícias | 7  | DD | 1 |
+| DD-014  | Criar protótipo mobile (notícias) | 3  | DD | 1 |
+| DD-015  | Criar protótipo da página de publicações | 4  | DD | 1 |
+| DD-016  | Criar protótipo mobile (publicações) | 2 | DD | 1 |
+| DD-017  | Criar protótipo da página de contato | 4 | DD | 1 |
+| DD-018  | Criar protótipo mobile (contato)| 2  | DD | 1 |
 | DD-007  | Criar layout no Figma (Vagas) | 20 | DD | 1 |
 | DW-011  | Criar arquivo HTML (Vagas) | 5  | DW | 1 |
 | DW-012  | Aplicar design CSS (Vagas) | 8  | DW | 1 |
