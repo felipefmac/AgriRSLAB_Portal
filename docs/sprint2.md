@@ -124,12 +124,12 @@ Legenda IDs
 | DW-007 |      Criação da estrutura da página de contatos em HTML           |  João Otávio            | 13/10 |     5      |      DW      |          RF03           |  ✅     |
 | DW-007.1 |     Criação da estrutura do formulário de contato HTML           | João Otávio            | 13/10 |     10      |      DW      |          RF08           |  ✅     |
 | DW-007.2 |      Criação da estrutura do card de localização em  HTML            | João Otávio            | 13/10 |     5      |      DW      |          RF08           |  ✅     |
-| DW-007.4 |      Criação de um arquivo CSS para a estlização           | João Otávio            | 13/10 |     8      |      DW      |          RF08           |  ✅     |
-| DW-007.5 |    Estilização da página           | João Otávio            | 17/10 |     8      |      DW      |          RF08           |  ✅     |
-| DW-007.6 |      Adicionar cores padrões          | João Otávio            | 17/10 |     2      |      DW      |          RF08           | ✅      |
-| DW-007.7 |      Adicionar fontes padrão         | João Otávio            | 17/10 |     2      |      DW      |          RF08           |  ✅     |
-| DW-007.8 |      Estilização do formulário          | João Otávio            | 17/10 |     10      |      DW      |          RF08           |  ✅     |
-| DW-007.9 |       Estilização do card de localização          | João Otávio            | 17/10 |     5      |      DW      |          RF08           |  ✅     |
+| DW-007.3 |      Criação de um arquivo CSS para a estlização           | João Otávio            | 13/10 |     8      |      DW      |          RF08           |  ✅     |
+| DW-007.4 |    Estilização da página           | João Otávio            | 17/10 |     8      |      DW      |          RF08           |  ✅     |
+| DW-007.5 |      Adicionar cores padrões          | João Otávio            | 17/10 |     2      |      DW      |          RF08           | ✅      |
+| DW-007.6 |      Adicionar fontes padrão         | João Otávio            | 17/10 |     2      |      DW      |          RF08           |  ✅     |
+| DW-007.7 |      Estilização do formulário          | João Otávio            | 17/10 |     10      |      DW      |          RF08           |  ✅     |
+| DW-007.8 |       Estilização do card de localização          | João Otávio            | 17/10 |     5      |      DW      |          RF08           |  ✅     |
 | SO-005 |       Configuração do GitHub          | João Otávio            | 21/10 |     10      |      SO     |        --            |  ✅     |
 | DW-008 |       Criação da estrutura da página sobre em HTML          | João Augusto            | 13/10 |     5      |      DW      |          RF02           |  ✅    |
 | DW-008.1 |      Adicionar imagem e logo de colaboradores           | João Augusto            | 13/10 |     2      |      DW      |          RF02           |  ✅    |
