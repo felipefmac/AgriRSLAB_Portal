@@ -153,7 +153,7 @@ O *DoD* pode ser acessado [aqui](https://github.com/404NotFound-ABP/AgriRSLAB_Po
 | DW-001.6 | Estilização dos cards | 5  | DW | 2 |
 | DW-001.7 | Adicionar as cores e fontes padrões aos cards | 2 | DW | 2 |
 | DW-001.8 | Adicionar imagens dos artigos  | 2  | DW | 2 |
-| SO-005 | Configuração GitHub   | 15 | SO | 2 |
+| SO-001 | Configuração GitHub   | 15 | SO | 2 |
 | DW-002 | Criaçaõ da estrutura da página inicial em HTML | 5  | DW | 2 |
 | DW-002.1 | Criação da estrutura dos cards da section "Atuação" em HTML | 8  | DW | 2 |
 | DW-002.2 | Criação da estrutura do cards da section "Projetos" em HTML  | 8 | DW | 2 |
@@ -216,18 +216,49 @@ O *DoD* pode ser acessado [aqui](https://github.com/404NotFound-ABP/AgriRSLAB_Po
 | DW-007.7 | Estilização do formulário | 10 | DW | 2
 | DW-007.8 | Estilização do card de localização |  5 | DW | 2
 | DW-008 | Criação da estrutura da página sobre em HTML | 5 | DW | 2
-| DW-008.1 |  Adicionar imagem e logo de colaboradores |  2 | DW | 2
-
-
-
-
+| DW-008.1 | Adicionar imagem e logo de colaboradores |  2 | DW | 2
+| DW-008.2 | Criação de um arquivo CSS para a estlização | 8 | DW | 2
+| DW-008.3 | Estilização da página  | 8 | DW | 2
+| DW-008.4 | Adicionar cores padrões  | 2 | DW | 2
+| DW-008.5 | Adicionar fontes padrão  | 2 | DW | 2
+| DW-009 | Criar a estrutura em HTML para o Header  | 10 | DW | 2
+| DW-009.1 | Estilizar o Header em CSS  | 10 | DW | 2
+| DW-010 | Criar a estrutura em HTML para o Footer  | 10 | DW | 2
+| DW-010.1 | Estilizar o footer em CSS   | 10 | DW | 2
+| DW-011 | Criar a estrutura da página administrativa em HTML  | 5 | DW | 2
+| DW-11.1 | Estilizar a página administrativa em CSS | 10 | DW | 2
+| DW-012 | Criação da estrutura HTML menu hamburguer. | 10 | DW | 2
+| DW-12.1 | Estilização do menu hamburguer em CSS. | 8 | DW | 2
+| AL-001 | Ligação com o BD | 20 | AL | 2
+| MB-001 | Testes no BD | 20 | MB | 2
+| SO-002 | Documentação | 20 | SO | 3
+| DW-013 | Botão de pesquisa do site | 10 | DW | 3
+| AL/MB-002 | Ligar filtros da página de artigos ao BD | 10 | AL/MB | 3
+| AL/MB-002.1 | Ligar filtros da página de vagas ao BD | 10 | AL/MB | 3
+| AL/MB-003 | Dinamizar página de vagas | 8 | AL/MB | 3
+| DW-014 | Formulário de candidatura via email | 10 | DW | 3
+| DW-014.1 | Formulário do fale conosco | 10 | DW | 3
+| AL/MB-004 | Dinamizar página inicial | 8 | AL/MB | 3
+| AL/MB-005 | Puxar o header e o footer da página admin | 5 | AL/MB | 3
+| SO-003 | Organizar pastas do GitHub | 20 | SO | 3
+| DW-015 | Design da página de login administrativo | 5 | DW | 3 
+| DW-016 | Login funcional e seguro da página admin   | 10 | DW | 3
+| DW-017 | Seletor de idioma (inglês/português) | 10 | DW | 3
+| DW-018 | Tradução em libras  | 5 | DW | 3
+| AL/MB-006 | Dinamizar página de membros | 10 | AL/MB | 3
+| AL/MB-007 | Dinamização da página de notícias | 10 | AL/MB | 3
+| AL/MB-008 | Subir login da pág admin | 8 | AL/MB | 3 
+| AL/MB-009 | Dinamização da página de projetos | 10 | AL/MB | 3 
+| AL/MB-010 | Subir a dinamização da pág de membros e projetos   | 8 | AL/MB | 3
+| AL/MB-011 | Adicionar botão de navegação na pág admin  | 8 | AL/MB | 3
+| AL/MB-012 | Correção de erros na pág de notícias | 10 | AL/MB | 3
 
 #  Backlog de Gestão do Projeto 📌
 
 | ID      | Seção / Atividade | Pontuação | Disciplina | Sprint |
 |---------|-------------------|-----------|------------|--------|
-| ES-014 | *Scrum Master:* Facilitar cerimônias ágeis, acompanhar impedimentos, garantir comunicação eficaz e apoiar a equipe na aplicação do DoD. | 20 | ES | 1, 2, 3 |
-| ES-015 | *Product Owner:* Refinar e priorizar backlog, alinhar requisitos com stakeholders, validar entregas nas reviews e garantir clareza nos critérios de aceitação. | 20 | ES | 1, 2, 3 |
+| ES-001 | *Scrum Master:* Facilitar cerimônias ágeis, acompanhar impedimentos, garantir comunicação eficaz e apoiar a equipe na aplicação do DoD. | 20 | ES | 1, 2, 3 |
+| ES-002 | *Product Owner:* Refinar e priorizar backlog, alinhar requisitos com stakeholders, validar entregas nas reviews e garantir clareza nos critérios de aceitação. | 20 | ES | 1, 2, 3 |
 
 <a id="tecnologias"></a>
 # Tecnologias 💻
