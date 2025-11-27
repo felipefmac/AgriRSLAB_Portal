@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     carregarNoticiasHome();
 });
 
+// Escuta mudanças de idioma e atualiza o conteúdo da página
+window.addEventListener('languageChange', () => {
+    traduzirHome();
+    carregarNoticiasHome(); // Recarrega as notícias no novo idioma
+});
+
 const dicionarioHome = {
     pt: {
         carregando: 'Carregando notícias...',
