@@ -34,18 +34,18 @@
         <div class="elementos-contato">
             <div class="form-contato">
                 <form class="envio-de-email-contato">
-                    <h3 class="h3-faleconosco">Fale Conosco</h3>
+                    <h3 class="h3-faleconosco" data-i18n-key="contactFormTitle">Fale Conosco</h3>
                     <div>
-                        <p><input type="text" class="caixas-contato" name="nome" id="nome" placeholder="Nome"></p>
-                        <p><input type="text" class="caixas-contato" name="email" id="email" placeholder="E-mail"></p>
-                        <p><input type="text" class="caixas-contato" name="assunto" id="assunto" placeholder="Assunto">
+                        <p><input type="text" class="caixas-contato" name="nome" id="nome" data-i18n-placeholder="formNamePlaceholder" placeholder="Nome"></p>
+                        <p><input type="text" class="caixas-contato" name="email" id="email" data-i18n-placeholder="formEmailPlaceholder" placeholder="E-mail"></p>
+                        <p><input type="text" class="caixas-contato" name="assunto" id="assunto" data-i18n-placeholder="formSubjectPlaceholder" placeholder="Assunto">
                         </p>
                         <p><textarea class="caixas-contato" name="comentario" id="comentario" maxlength="500" rows="15"
-                                placeholder="Escreva seu comentário, sugestão ou deixe uma mensagem para nossos integrantes."></textarea>
+                                data-i18n-placeholder="formMessagePlaceholder" placeholder="Escreva seu comentário, sugestão ou deixe uma mensagem para nossos integrantes."></textarea>
                         </p>
                         <button class="btn-faleconosco btn--primary-faleconosco btn--block-faleconosco"
                             id="btn-contato-submit" type="submit">
-                            <span>Enviar</span>
+                            <span data-i18n-key="formSendButton">Enviar</span>
                             <div class="spinner-faleconosco"></div>
                         </button>
                     </div>
@@ -55,7 +55,7 @@
 
             <div class="mapa-contato">
                 <div>
-                    <h3 class="h3-contato">
+                    <h3 class="h3-contato" data-i18n-key="locationTitle">
                         Localização
                     </h3>
                     <p>
@@ -73,7 +73,7 @@
                     </p>
                     <p>
                     <div>
-                        <h3 class="h3-contato">
+                        <h3 class="h3-contato" data-i18n-key="socialMediaTitle">
                             Redes Sociais
                         </h3>
                         <!-- inserindo svgs diretamente com código para que eu possa mudar a cor deles -->
@@ -141,6 +141,7 @@
     </footer>
     <script src="contato.js"></script>
     <script src="../HeaderFooter/menu-header.js"></script>
+    <script src="./i18n.js"></script>
     <script src="../traducao-titulo-guia.js"></script>
 </body>
 
