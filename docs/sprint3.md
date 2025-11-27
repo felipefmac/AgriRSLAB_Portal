@@ -41,15 +41,15 @@ Legenda IDs
 
 | ID      | Tarefa                     | Autor           | Data  | Pontuação | Disciplina | Requisitos Atendidos | Status |
 |---------|----------------------------|-----------------|-------|-----------|------------|---------------------|--------|
-| SO-006 | Documentação                  |   Pedro         |   10/11   |    20       |    SO        |        --             |  ✅    |
-| DW-013 | Botão de pesquisa            |  Ariana           | 18/11  |     10      |     DW       |       RF01              |   ✅   |
+| SO-002 | Documentação                  |   Pedro         |   10/11   |    20       |    SO        |        --             |  ✅    |
+| DW-013 | Botão de pesquisa do site           |  Ariana           | 18/11  |     10      |     DW       |       RF01              |   ✅   |
 | AL/MB-002 | Ligar filtros da página de artigos ao BD                    |  Felipe e William           | 06/11 |     10      |    MB        |       RF07              |  ✅    |
 | AL/MB-002.1 | Ligar filtros da página de vagas ao BD             | Felipe e William   | 12/11 |    10       |     MB       |       RF04              |   ✅   |
 | AL/MB-003 | Dinamizar página de vagas                 |   Ariana e William          | 18/11 |     8     |     MB       |       RF04              |   ✅   |
 | DW-014 | Formulário de candidatura via email                 |   Luiza          | 06/11 |    10      |    DW        |     RF04                |  ✅    |
 | DW-014.1 | Formulário do fale conosco                 |  Luiza           | 14/11 |   10       |    DW        |      RF08               |   ✅   |
 | AL/MB-004 | Dinamizar página inicial                 |  Luiza           | 24/11 |    8      |     MB       |      RF01               |   ✅   |
-| SO-005 | Organizar pastas do GitHub                 |  William           | 18/11 |    20      |    SO        |        --             |  ✅    |
+| SO-003 | Organizar pastas do GitHub                 |  William           | 18/11 |    20      |    SO        |        --             |  ✅    |
 | AL/MB-005 | Puxar o header e o footer da página admin                 | João Otávio            | 18/11 |    5      |    MB        |      RNF02               |  ✅    |
 | DW-015 | Design da página de login administrativo                 |  João Otávio           | 06/11 |     5     |    DW        |     RNF02                |  ✅    |
 | DW-016 | Login funcional e seguro da página admin                 | João Otávio            | 12/11 |    10      |    DW        |     RNF02                |  ✅    |
@@ -60,7 +60,7 @@ Legenda IDs
 | AL/MB-009 | Dinamização da página de projetos              | Ariana            | 14/11 |    10      |    MB        |     RF05                |   ✅   |
 | AL/MB-010 | Subir a dinamização da pág de membros e projetos              | Felipe            | 14/11 |    8      |    MB        |     RF05/RF03                |   ✅   |
 | AL/MB-007 | Dinamização da página de notícias              | William           | 14/11 |    10      |    MB        |       RF06              |   ✅   |
-| SO-005 | Organização github              | Eloah           | 18/11 |    20      |    SO        |       --              |   ✅   |
+| SO-001 | Organização github              | Eloah           | 18/11 |    20      |    SO        |       --              |   ✅   |
 | AL/MB-011 | Adicionar botão de navegação na pág admin               | João Otávio            | 24/11 |    8      |    MB        |     RNF02                |   ✅   |
 | AL/MB-012 | Correção de erros na pág de notícias              | William           | 24/11 |    10      |    MB        |       RF06              |   ✅   |
 
