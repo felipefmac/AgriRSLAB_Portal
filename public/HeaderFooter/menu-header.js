@@ -1,64 +1,70 @@
+// Dicionário de traduções APENAS para o Header e Footer
+const headerFooterTranslations = {
+  "en": {
+    "navHome": "Home",
+    "navArticles": "Articles and Publications",
+    "navNews": "News",
+    "navMembers": "Members",
+    "navProjects": "Projects",
+    "navAbout": "About",
+    "navJobs": "Jobs",
+    "navContact": "Contact Us",
+    "searchPlaceholder": "Search...",
+    "footerAdminAccess": "Administrative area access:",
+    "footerAccessButton": "Access",
+    "footerOurEmail": "Our E-mail:",
+    "footerSocialMedia": "Our social media:",
+    "footerOurLocation": "Our location:",
+    "footerCopyright": "Copyright © AgriRS "
+  },
+  "pt": {
+    "navHome": "Início",
+    "navArticles": "Artigos e Publicações",
+    "navNews": "Notícias",
+    "navMembers": "Membros",
+    "navProjects": "Projetos",
+    "navAbout": "Sobre",
+    "navJobs": "Vagas",
+    "navContact": "Fale Conosco",
+    "searchPlaceholder": "Pesquisar...",
+    "footerAdminAccess": "Acesso à área administrativa:",
+    "footerAccessButton": "Acesso",
+    "footerOurEmail": "Nosso E-mail:",
+    "footerSocialMedia": "Nossas redes sociais:",
+    "footerOurLocation": "Nossa localização:",
+    "footerCopyright": "Copyright © AgriRS "
+  }
+};
+
+// Função que aplica as traduções
+function applyHeaderFooterTranslations(lang) {
+  const header = document.querySelector('header');
+  const footer = document.querySelector('footer');
+
+  const elementsToTranslate = [];
+  if (header) elementsToTranslate.push(...header.querySelectorAll('[data-i18n-key], [data-i18n-placeholder]'));
+  if (footer) elementsToTranslate.push(...footer.querySelectorAll('[data-i18n-key], [data-i18n-placeholder]'));
+
+  elementsToTranslate.forEach(element => {
+    const key = element.getAttribute('data-i18n-key');
+    const placeholderKey = element.getAttribute('data-i18n-placeholder');
+
+    if (key && headerFooterTranslations[lang] && headerFooterTranslations[lang][key]) {
+      // Se for um input de busca, não use innerHTML, pois ele não tem conteúdo.
+      if (element.id !== 'search') {
+        element.innerHTML = headerFooterTranslations[lang][key];
+      }
+    }
+    if (placeholderKey && headerFooterTranslations[lang] && headerFooterTranslations[lang][placeholderKey]) {
+      element.setAttribute('placeholder', headerFooterTranslations[lang][placeholderKey]);
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-    // Função para carregar conteúdo de um arquivo em um elemento
-    const loadContent = async (url, elementSelector) => {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`Erro ao carregar ${url}: ${response.statusText}`);
-            }
-            const text = await response.text();
-            const element = document.querySelector(elementSelector);
-            if (element) {
-                element.innerHTML = text;
-            }
-            return text;
-        } catch (error) {
-            console.error(error);
-        }
-    };
+  // Inicializa o VLibras imediatamente para garantir que apareça em todas as páginas.
+  inicializarVLibras();
 
-    // Carrega o header e depois executa os scripts necessários
-    loadContent('../HeaderFooter/header.html', 'header').then(() => {
-        // Define o idioma padrão ou recupera do localStorage
-        if (!localStorage.getItem('selectedLanguage')) {
-            localStorage.setItem('selectedLanguage', 'pt');
-        }
-
-        // Torna a função de mudança de idioma global
-        window.mudarIdioma = function(lang) {
-            localStorage.setItem('selectedLanguage', lang);
-            // Dispara evento customizado para notificar outras partes da página
-            window.dispatchEvent(new Event('languageChange'));
-            window.location.reload(); // Recarrega a página para aplicar a tradução
-        }
-
-        // Adiciona os eventos de clique aos botões de idioma
-        const btnPt = document.querySelector('button[onclick*="pt"]');
-        const btnEn = document.querySelector('button[onclick*="en"]');
-        if(btnPt) btnPt.setAttribute('onclick', "mudarIdioma('pt')");
-        if(btnEn) btnEn.setAttribute('onclick', "mudarIdioma('en')");
-
-        // Após o header ser carregado, a função de tradução (que está no header.html) já existe.
-        // Podemos chamá-la.
-        if (typeof traduzirPagina === 'function') {
-            traduzirPagina();
-        }
-
-        // Ativa o menu hambúrguer
-        const hamburguer = document.getElementById('hamburguer');
-        const nav = document.getElementById('navHeader');
-        if (hamburguer && nav) {
-            hamburguer.addEventListener('click', () => {
-                nav.classList.toggle('active');
-            });
-        }
-    });
-
-    // Carrega o footer
-    loadContent('../HeaderFooter/footer.html', 'footer');
-});
-
-document.addEventListener("DOMContentLoaded", () => {
   // === CARREGAR HEADER ===
   fetch("../HeaderFooter/header.html")
     .then(response => {
@@ -66,28 +72,40 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.text();
     })
     .then(data => {
-      document.querySelector("header").innerHTML = data;
+      const headerElement = document.querySelector("header");
+      if (headerElement) {
+        headerElement.innerHTML = data;
+        // Após carregar o header, inicializa suas funcionalidades
+        inicializarMenuHamburguer();
+        inicializarBuscaGlobal();
+        inicializarControleIdioma(); // Nova função para o seletor de idioma
 
-      // Só executa o controle do menu depois do header existir
-      inicializarMenuHamburguer();
-      inicializarBuscaGlobal();
-
+        // Aplica a tradução inicial assim que o header é carregado
+        applyHeaderFooterTranslations(localStorage.getItem('selectedLanguage') || 'pt');
+      }
     })
     .catch(error => console.error("Erro ao carregar header:", error));
 
+
   // === CARREGAR FOOTER ===
- fetch("../HeaderFooter/footer.html")
+  fetch("../HeaderFooter/footer.html")
     .then(response => {
       if (!response.ok) throw new Error("Erro ao carregar o footer");
       return response.text();
     })
     .then(data => {
-      document.querySelector("footer").innerHTML = data;
+      const footerElement = document.querySelector("footer");
+      if (footerElement) {
+        footerElement.innerHTML = data;
 
-      // === INSERIR ANO AUTOMÁTICO ===
-      const anoElemento = document.getElementById("ano");
-      if (anoElemento) {
-        anoElemento.textContent = new Date().getFullYear();
+        // === INSERIR ANO AUTOMÁTICO ===
+        const anoElemento = document.getElementById("ano");
+        if (anoElemento) {
+          anoElemento.textContent = new Date().getFullYear();
+        }
+
+        // Aplica a tradução inicial assim que o footer é carregado
+        applyHeaderFooterTranslations(localStorage.getItem('selectedLanguage') || 'pt');
       }
     })
     .catch(error => console.error("Erro ao carregar footer:", error));
@@ -96,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // === FUNÇÃO PARA CONTROLAR O MENU ===
 function inicializarMenuHamburguer() {
   const hamburguer = document.getElementById("hamburguer");
-  const menu = document.querySelector(".ulNav");
+  const menu = document.getElementById("navHeader"); // Usar o container da nav
 
   if (!hamburguer || !menu) {
     console.warn("Elementos do menu não encontrados no header.");
@@ -104,7 +122,7 @@ function inicializarMenuHamburguer() {
   }
 
   hamburguer.addEventListener("click", (e) => {
-    e.stopPropagation();
+    e.stopPropagation(); // Impede que o clique feche o menu imediatamente
     menu.classList.toggle("active");
   });
 
@@ -142,4 +160,50 @@ function inicializarBuscaGlobal() {
       window.location.href = `/pagina-busca/buscar.html?q=${encodeURIComponent(termo)}`;
     }
   }
+}
+
+// === FUNÇÃO PARA CONTROLAR O IDIOMA ===
+function inicializarControleIdioma() {
+  // Define o idioma padrão se não existir
+  if (!localStorage.getItem('selectedLanguage')) {
+    localStorage.setItem('selectedLanguage', 'pt');
+  }
+
+  // Torna a função de mudança de idioma global para os botões `onclick`
+  window.mudarIdioma = function (lang) {
+    localStorage.setItem('selectedLanguage', lang);
+    applyHeaderFooterTranslations(lang); // Reaplica a tradução imediatamente
+    // Dispara um evento para que o i18n.js e outros scripts possam "ouvir" a mudança
+    window.dispatchEvent(new Event('languageChange')); // Notifica todos os listeners
+  }
+}
+
+/**
+ * Adiciona o widget do VLibras à página.
+ * Garante que o script seja adicionado apenas uma vez.
+ */
+function inicializarVLibras() {
+  // Se o widget já existe, não faz nada.
+  if (document.querySelector('[vw]')) return;
+
+  // 1. Cria os elementos HTML do widget
+  const vwContainer = document.createElement('div');
+  vwContainer.setAttribute('vw', '');
+  vwContainer.classList.add('enabled');
+  vwContainer.innerHTML = `
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    `;
+  document.body.appendChild(vwContainer);
+
+  // 2. Cria e anexa o script principal do VLibras de forma segura
+  const pluginScript = document.createElement('script');
+  pluginScript.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
+  pluginScript.async = true;
+  pluginScript.onload = () => {
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  };
+  document.body.appendChild(pluginScript);
 }

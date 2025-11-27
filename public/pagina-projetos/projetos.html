@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projetos</title>
+    <title data-i18n-key="navProjetos"></title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,35 +17,39 @@
 
 <body>
 
-<header></header>
+    <header></header>
 
-<h3 id="titulo-projetos">
-    Conectando Inovação e Sustentabilidade: Conheça os Projetos do AgriRSLab
-</h3>
+    <h3 id="titulo-projetos" data-i18n-key="projectsSubtitle">
+        Conectando Inovação e Sustentabilidade: Conheça os Projetos do AgriRSLab
+    </h3>
 
-<section class="filtros-section">
-    <div class="filtros">
-        <button class="botao-filtro ativo" data-filtro="todos">Todos</button>
-        <button class="botao-filtro" data-filtro="em-andamento">Em andamento</button>
-        <button class="botao-filtro" data-filtro="finalizado">Finalizados</button>
-    </div>
-</section>
+    <section class="filtros-section">
+        <div class="filtros">
+            <button class="botao-filtro ativo" data-filtro="todos" data-i18n-key="filterAll">Todos</button>
+            <button class="botao-filtro" data-filtro="em-andamento" data-i18n-key="filterInProgress">Em
+                andamento</button>
+            <button class="botao-filtro" data-filtro="finalizado" data-i18n-key="filterCompleted">Finalizados</button>
+        </div>
+    </section>
 
-<!-- ★★★ CONTAINER DO DESTAQUE + CARD LATERAL ★★★ -->
-<section class="projetos-galeria" id="lista-projetos"></section>
+    <!-- ★★★ CONTAINER DO DESTAQUE + CARD LATERAL ★★★ -->
+    <section class="projetos-galeria" id="lista-projetos"></section>
 
-<div id="mensagem">Nenhum projeto encontrado para este filtro.</div>
+    <div id="mensagem" data-i18n-key="noProjectsFound">Nenhum projeto encontrado para este filtro.</div>
 
 
-<!-- LISTA NORMAL DE PROJETOS -->
-<section class="projetos-galeria"></section>
+    <!-- LISTA NORMAL DE PROJETOS -->
+    <section class="projetos-galeria"></section>
 
-<div id="mensagem">Nenhum projeto encontrado para este filtro.</div>
+    <div id="mensagem" data-i18n-key="noProjectsFound">Nenhum projeto encontrado para este filtro.</div>
 
-<footer></footer>
+    <footer></footer>
 
-<script src="projetos.js"></script>
-<script src="../HeaderFooter/menu-header.js"></script>
+    <script src="../HeaderFooter/menu-header.js"></script>
+    <script src="./i18n.js"></script>
+    <script src="projetos.js"></script>
+    <script src="../traducao-titulo-guia.js"></script>
 
 </body>
+
 </html>

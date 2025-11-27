@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sobre - AGRIRS LAB</title>
+  <title data-i18n-key="navSobre"></title>
 
   <!-- Header/footer -->
   <link rel="stylesheet" href="../HeaderFooter/style.css">
@@ -13,9 +14,10 @@
   <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <script src="script.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
   <!-- HEADER  -->
   <header></header>
@@ -26,10 +28,8 @@
       <div class="sobre-grid">
         <!-- imagem -->
         <div class="sobre-img">
-          <img src="../../imagens/5. Parceiros/membros.png" alt="Equipe AgrIRS Lab">
+          <img src="../assets/5. Parceiros/membros.png" alt="Equipe AgrIRS Lab">
         </div>
-        <button onclick="setLanguage('pt')">PT</button>
-        <button onclick="setLanguage('en')">EN</button>
 
         <!-- caixa de cima (verde clara) -->
         <div class="sobre-card-top">
@@ -44,17 +44,52 @@
     </section>
 
     <section class="sobre-partners">
-      <h2>AGÊNCIAS DE FOMENTO E COLABORADORES</h2>
+      <h2 data-i18n="hero.colaboradores">AGÊNCIAS DE FOMENTO E COLABORADORES</h2>
       <div class="sobre-partners-logos">
-        <img src="../../imagens/5. Parceiros/FAP.png" alt="Logo FAPESP">
-        <img src="../../imagens/5. Parceiros/capes.png" alt="Logo CAPES">
-        <img src="../../imagens/5. Parceiros/INPE.png" alt="Logo INPE">
+        <img src="../assets/5. Parceiros/FAP.png" alt="Logo FAPESP">
+        <img src="../assets/5. Parceiros/capes.png" alt="Logo CAPES">
+        <img src="../assets/5. Parceiros/INPE.png" alt="Logo INPE">
       </div>
     </section>
   </main>
 
   <!-- FOOTER PADRÃO -->
-      <footer></footer>
-        <script src="../HeaderFooter/menu-header.js"></script>
+  <footer></footer>
+  <script src="../HeaderFooter/menu-header.js"></script>
+  <script src="../traducao-titulo-guia.js"></script>
+  <script>
+    const translations = {
+      en: {
+        "hero.title": "The AgriRSLab, linked to the Postgraduate Program in Remote Sensing at the National Institute for Space Research (INPE), is dedicated to advancing scientific and technological knowledge in the application of remote sensing to agriculture and the environment.",
+        "hero.subtitle": "Our mission is to develop innovative solutions for monitoring agricultural crops, assessing environmental impacts, and managing natural resources, contributing to sustainable and efficient agriculture.",
+        "hero.colaboradores": "FUNDING AGENCIES AND COLLABORATORS"
+      },
+      pt: {
+        "hero.title": "O AgriRSLab, vinculado ao Programa de Pós-Graduação em Sensoriamento Remoto do Instituto Nacional de Pesquisas Espaciais (INPE), dedica-se ao avanço do conhecimento científico e tecnológico na aplicação de sensoriamento remoto para a agricultura e o meio ambiente.",
+        "hero.subtitle": "Nossa missão é desenvolver soluções inovadoras para o monitoramento de culturas agrícolas, avaliação de impactos ambientais e gestão de recursos naturais, contribuindo para uma agricultura sustentável e eficiente.",
+        "hero.colaboradores": "AGÊNCIAS DE FOMENTO E COLABORADORES"
+      }
+    };
+
+    function setLanguage(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          element.innerHTML = translations[lang][key];
+        }
+      });
+    }
+
+    function applyTranslation() {
+      const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt';
+      setLanguage(savedLanguage);
+    }
+
+    // Aplica a tradução ao carregar a página
+    document.addEventListener('DOMContentLoaded', applyTranslation);
+    // Ouve por mudanças de idioma vindas do header
+    window.addEventListener('languageChange', applyTranslation);
+  </script>
 </body>
+
 </html>

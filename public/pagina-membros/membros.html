@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Membros AgriRSLab</title>
+    <title data-i18n-key="navMembros"></title>
     <link rel="stylesheet" href="membros.css">
     <link rel="stylesheet" href="../HeaderFooter/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
@@ -18,63 +18,64 @@
 
     <div class="junte-time">
         <div class="container">
-            <h2 class="titulo-secao">Junte-se ao nosso time!</h2>
-            <h3>Conecte-se com pesquisadores, acompanhe projetos inovadores e tenha acesso a conteúdos e experiências
+            <h2 class="titulo-secao" data-i18n-key="joinTeamTitle">Junte-se ao nosso time!</h2>
+            <h3 data-i18n-key="joinTeamSubtitle">Conecte-se com pesquisadores, acompanhe projetos inovadores e tenha
+                acesso a conteúdos e experiências
                 exclusivas.</h3>
-            <a href="../pagina-vagas/index-vagas.html" class="btn"> Clique aqui e se torne um membro!</a>
+            <a href="../pagina-vagas/index-vagas.html" class="btn" data-i18n-key="joinTeamButton"> Clique aqui e se
+                torne um membro!</a>
         </div>
     </div>
 
     <main class="container">
 
-        <h2 id="titulo-membros">Conheça nossa Equipe</h2>
-        <h3 id="subtitulo-membros">Os membros do AGRiRS Lab trabalham juntos para avançar nas pesquisas ambientais e
+        <h2 id="titulo-membros" data-i18n-key="meetTeamTitle">Conheça nossa Equipe</h2>
+        <h3 id="subtitulo-membros" data-i18n-key="meetTeamDescription">Os membros do AGRiRS Lab trabalham juntos para
+            avançar nas pesquisas ambientais e
             atmosféricas.</h3>
 
         <!-- COORDENAÇÃO (grupo_id = 1) -->
         <section class="grupo-membros" data-grupo="coordenadores">
             <button class="toggle-btn">
-                <h2 class="titulo-secao">Coordenação</h2><span class="seta"></span>
+                <h2 class="titulo-secao" data-i18n-key="coordinationTitle">Coordenação</h2><span class="seta"></span>
             </button>
             <div class="grade-membros">
                 <!-- Cards de coordenadores serão inseridos via JS -->
             </div>
         </section>
 
-        <!-- PESQUISADORES (grupo_id = 2) -->
+        <!-- PESQUISADORES (grupo_id = 2) - Usando a mesma chave de Coordenação -->
         <section class="grupo-membros" data-grupo="pesquisadores">
             <button class="toggle-btn">
-                <h2 class="titulo-secao">Pesquisadores</h2><span class="seta"></span>
+                <h2 class="titulo-secao" data-i18n-key="researchersTitle">Pesquisadores</h2><span class="seta"></span>
             </button>
             <div class="grade-membros">
                 <!-- Cards de pesquisadores serão inseridos via JS -->
             </div>
         </section>
 
-        <!-- DOUTORANDOS (grupo_id = 3) -->
+        <!-- DOUTORANDOS, MESTRANDOS, BOLSISTAS (grupo_id = 3, 4, 5) -->
         <section class="grupo-membros" data-grupo="doutorandos">
             <button class="toggle-btn">
-                <h2 class="titulo-secao">Doutorandos</h2><span class="seta"></span>
+                <h2 class="titulo-secao" data-i18n-key="doctoral_studentsTitle">Doutorandos</h2><span class="seta"></span>
             </button>
             <div class="grade-membros">
                 <!-- Cards de doutorandos serão inseridos via JS -->
             </div>
         </section>
 
-        <!-- MESTRANDOS (grupo_id = 4) -->
         <section class="grupo-membros" data-grupo="mestrandos">
             <button class="toggle-btn">
-                <h2 class="titulo-secao">Mestrandos</h2><span class="seta"></span>
+                <h2 class="titulo-secao" data-i18n-key="masters_studentsTitle">Mestrandos</h2><span class="seta"></span>
             </button>
             <div class="grade-membros">
                 <!-- Cards de mestrandos serão inseridos via JS -->
             </div>
         </section>
 
-        <!-- BOLSISTAS (grupo_id = 5) -->
         <section class="grupo-membros" data-grupo="bolsistas">
             <button class="toggle-btn">
-                <h2 class="titulo-secao">Bolsistas</h2><span class="seta"></span>
+                <h2 class="titulo-secao" data-i18n-key="fellowsTitle">Bolsistas</h2><span class="seta"></span>
             </button>
             <div class="grade-membros">
                 <!-- Cards de bolsistas serão inseridos via JS -->
@@ -86,7 +87,11 @@
     <footer>
     </footer>
 
+    <!-- Scripts da página -->
     <script src="../HeaderFooter/menu-header.js"></script>
+    <script src="./i18n.js"></script>
+    <script src="./membros.js"></script>
+    <script src="../traducao-titulo-guia.js"></script>
 </body>
 
 </html>
