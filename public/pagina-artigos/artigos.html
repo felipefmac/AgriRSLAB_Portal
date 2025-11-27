@@ -1,53 +1,127 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n-key="pageTitle">Projetos</title>
-
+    <title data-i18n-key="navArtigos"></title>
+    <link rel="stylesheet" href="../HeaderFooter/style.css">
+    <link rel="stylesheet" href="artigos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../HeaderFooter/style.css">
+
 </head>
 
 <body>
-
     <header></header>
 
-    <h3 id="titulo-projetos" data-i18n-key="projectsSubtitle">
-        Conectando Inovação e Sustentabilidade: Conheça os Projetos do AgriRSLab
-    </h3>
-
-    <section class="filtros-section">
-        <div class="filtros">
-            <button class="botao-filtro ativo" data-filtro="todos" data-i18n-key="filterAll">Todos</button>
-            <button class="botao-filtro" data-filtro="em-andamento" data-i18n-key="filterInProgress">Em
-                andamento</button>
-            <button class="botao-filtro" data-filtro="finalizado" data-i18n-key="filterCompleted">Finalizados</button>
-        </div>
-    </section>
-
-    <!-- ★★★ CONTAINER DO DESTAQUE + CARD LATERAL ★★★ -->
-    <section class="projetos-galeria" id="lista-projetos"></section>
-
-    <div id="mensagem" data-i18n-key="noProjectsFound">Nenhum projeto encontrado para este filtro.</div>
+    <main>
+        <nav class="interactive-filters">
+            <div class="search-box">
+                <input id="searchArtigos" type="search" placeholder="Pesquisar artigos..."
+                    data-i18n-placeholder="searchPlaceholder">
+                <button id="btnBuscarArtigos" class="btnSearchArtigos">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="20px"
+                        fill="#5A5A5A">
+                        <path
+                            d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+                    </svg>
+                </button>
 
 
-    <!-- LISTA NORMAL DE PROJETOS -->
-    <section class="projetos-galeria"></section>
 
-    <div id="mensagem" data-i18n-key="noProjectsFound">Nenhum projeto encontrado para este filtro.</div>
+                <button id="btnLimparBusca" class="btnClearSearch" title="Limpar busca"
+                    data-i18n-title="clearSearchTitle">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" fill="#5A5A5A">
+                        <path
+                            d="M 19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 Z" />
+                    </svg>
+                </button>
+
+
+            </div>
+
+            <div class="filter-dropdown" data-filter-name="ano">
+                <button class="filter-toggle" aria-expanded="false" aria-controls="panel-ano">
+                    <span data-i18n-key="filterTitleYear">Título/Ano</span> <span class="arrow-icon">▼</span>
+                </button>
+                <div class="filter-panel" id="panel-ano">
+                    <input type="text" placeholder="Buscar por título ou ano..." class="filter-input-text"
+                        data-i18n-placeholder="filterTitleYearPlaceholder">
+                    <button class="btn-apply-filter" data-i18n-key="filterApply">Aplicar</button>
+                </div>
+            </div>
+
+            <div class="filter-dropdown" data-filter-name="tipo">
+                <button class="filter-toggle" aria-expanded="false" aria-controls="panel-tipo">
+                    <span data-i18n-key="filterPublicationType">Tipo de Publicação</span> <span
+                        class="arrow-icon">▼</span>
+                </button>
+                <div class="filter-panel" id="panel-tipo">
+                    <label><input type="checkbox" value="artigos"> <span
+                            data-i18n-key="typeArticles">Artigos</span></label>
+                    <label><input type="checkbox" value="ac"> <span data-i18n-key="typeConference">Artigos de
+                            Conferência (AC)</span></label>
+                    <label><input type="checkbox" value="livros"> <span data-i18n-key="typeBooks">Livros</span></label>
+                    <label><input type="checkbox" value="outros"> <span data-i18n-key="typeTechnical_notes">Outros</span></label>
+                    <button class="btn-apply-filter" data-i18n-key="filterApply">Aplicar</button>
+                </div>
+            </div>
+
+            <div class="filter-dropdown" data-filter-name="autor">
+                <button class="filter-toggle" aria-expanded="false" aria-controls="panel-autor">
+                    <span data-i18n-key="filterAuthor">Autor/Membro</span> <span class="arrow-icon">▼</span>
+                </button>
+                <div class="filter-panel" id="panel-autor">
+                    <input type="text" placeholder="Buscar por autor/membro..." class="filter-input-text"
+                        data-i18n-placeholder="filterAuthorPlaceholder">
+                    <button class="btn-apply-filter" data-i18n-key="filterApply">Aplicar</button>
+                </div>
+            </div>
+        </nav>
+
+        <section class="publications-main-content">
+
+            <section class="publications-section">
+                <h2 class="titulo-secao" data-i18n-key="typeArticles">Artigos</h2>
+                <div class="cards-grid">
+                    <!-- Os cards de artigos serão inseridos aqui dinamicamente -->
+                </div>
+            </section>
+
+            <section class="publications-section">
+                <h2 class="titulo-secao" data-i18n-key="typeConference">Artigos de Conferência (AC)</h2>
+                <div class="cards-grid">
+                    <!-- Os cards de artigos de conferência serão inseridos aqui dinamicamente -->
+                </div>
+            </section>
+
+            <section class="publications-section">
+                <h2 class="titulo-secao" data-i18n-key="typeBooks">Capítulos de livros (CL)</h2>
+                <div class="cards-grid">
+                    <!-- Os cards de capítulos de livros serão inseridos aqui dinamicamente -->
+                </div>
+            </section>
+
+            <section class="publications-section">
+                <h2 class="titulo-secao" data-i18n-key="typeTechnical_notes">Notas Técnicas (NT)</h2>
+                <div class="cards-grid">
+                    <!-- Os cards de notas técnicas serão inseridos aqui dinamicamente -->
+                </div>
+            </section>
+
+        </section>
+    </main>
 
     <footer></footer>
-
     <script src="../HeaderFooter/menu-header.js"></script>
     <script src="./i18n.js"></script>
-    <script src="projetos.js"></script>
+    <script src="./artigos.js"></script>
+    <script src="./script.js"></script>
+    <script src="../traducao-titulo-guia.js"></script>
 
 </body>
 
