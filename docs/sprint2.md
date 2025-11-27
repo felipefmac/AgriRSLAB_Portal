@@ -62,8 +62,8 @@ Legenda IDs
 | DW-001.6 | Estilização dos cards                    | Eloah            | 21/10  |    5       |    DW        |            RF07         |  ✅    |
 | DW-001.7 | Adicionar as cores e fontes padrões aos cards             | Eloah  |21/10  |    2       |      DW      |           RF07          |  ✅    |
 | DW-001.8 | Adicionar imagens dos artigos                 | Eloah            | 21/10  |    2       |     DW       |        RF07             |   ✅   |
-| SO-005 |         Configuração GitHub        | Eloah            | 15/10 |     15      |      DW      |       --              |  ✅    |
-| ES-015 |        Refinar e priorizar backlog, alinhar requisitos com stakeholders, validar entregas nas reviews e garantir clareza nos critérios de aceitação.        | Eloah            | 15/10 |     20      |      ES      |         --            |  ✅    |
+| SO-001 |         Configuração GitHub        | Eloah            | 15/10 |     15      |      DW      |       --              |  ✅    |
+| ES-002 |        Refinar e priorizar backlog, alinhar requisitos com stakeholders, validar entregas nas reviews e garantir clareza nos critérios de aceitação.        | Eloah            | 15/10 |     20      |      ES      |         --            |  ✅    |
 | DW-002 | Criaçaõ da estrutura da página inicial em HTML | Pedro           | 13/10 |    5       |     DW       |       RF01              | ✅     |
 | DW-002.1 | Criação da estrutura dos cards da section "Atuação" em HTML                    | Pedro            | 13/10 |    8       |     DW       |           RF01          | ✅     |
 | DW-002.2 | Criação da estrutura do cards da section "Projetos" em HTML       | Pedro            | 13/10 |     8      |      DW      |         RF01            | ✅     |
@@ -75,9 +75,9 @@ Legenda IDs
 | DW-002.8 | Estilização dos cards da section "Projetos" em CSS                  | Pedro            | 13/10 |     10      |      DW      |          RF01           | ✅     |
 | DW-002.9 | Estilização dos cards da section "Notícias" em CSS                  | Pedro            | 13/10 |     10      |      DW      |          RF01           | ✅     |
 | DW-02.10 |  Adicionar imagens                  | Pedro            | 15/10 |     2      |      DW      |          RF01           |  ✅    |
-| ES-014 |   Facilitar cerimônias ágeis, acompanhar impedimentos, garantir comunicação eficaz e apoiar a equipe na aplicação do DoD.                  | Pedro            | 17/10 |     20      |      ES      |      --               |  ✅    |
-| ES-014 |   Facilitar cerimônias ágeis, acompanhar impedimentos, garantir comunicação eficaz e apoiar a equipe na aplicação do DoD.                  | Pedro            | 21/10 |     20      |      ES      |      --               |  ✅    |
-| ES-014 |   Facilitar cerimônias ágeis, acompanhar impedimentos, garantir comunicação eficaz e apoiar a equipe na aplicação do DoD.                  | Pedro            | 23/10 |     20      |      ES      |      --               |  ✅    |
+| ES-001 |   Facilitar cerimônias ágeis, acompanhar impedimentos, garantir comunicação eficaz e apoiar a equipe na aplicação do DoD.                  | Pedro            | 17/10 |     20      |      ES      |      --               |  ✅    |
+| ES-001 |   Facilitar cerimônias ágeis, acompanhar impedimentos, garantir comunicação eficaz e apoiar a equipe na aplicação do DoD.                  | Pedro            | 21/10 |     20      |      ES      |      --               |  ✅    |
+| ES-001 |   Facilitar cerimônias ágeis, acompanhar impedimentos, garantir comunicação eficaz e apoiar a equipe na aplicação do DoD.                  | Pedro            | 23/10 |     20      |      ES      |      --               |  ✅    |
 | DW-003 |       Criação da estrutura da página de notícias em HTML          | Willian            | 13/10 |     8      |      DW       |          RF06           |   ✅   |
 | DW-003.1 |        Criação da estrutura dos cards das notícias em HTML          | Willian            | 13/10 |     10      |      DW      |          RF06           |   ✅   |
 | DW-003.2 |         Criação da estrutura da página de carrossel de notícias em HTML          | Willian            | 13/10 |     10      |      DW      |          RF06           |   ✅   |
@@ -158,6 +158,6 @@ Legenda IDs
 | DW-003 |        Refinamento página de notícias.         |  Ariana           | 31/10 |     6      |      DW      |    RF06                 |  ✅     |
 | DW-002 |        Refinamento página inicial         |  Pedro           | 31/10 |     6      |      DW      |    RF01                 |  ✅     |
 | SO-005 |        Configuração GitHub        | Eloah            | 31/10 |     15      |      DW      |       --              |  ✅    |
-| ES-015 |        Refinar e priorizar backlog, alinhar requisitos com stakeholders, validar entregas nas reviews e garantir clareza nos critérios de aceitação.        | Eloah            | 31/10 |     20      |      ES      |       --              |  ✅    |
+| ES-002 |        Refinar e priorizar backlog, alinhar requisitos com stakeholders, validar entregas nas reviews e garantir clareza nos critérios de aceitação.        | Eloah            | 31/10 |     20      |      ES      |       --              |  ✅    |
 | AL-001 |        Ligação com o BD        |   William          | 31/10 |     20      |      AL     |       --              |  ✅     |
 | AL-001 |        Ligação com o BD        |   Felipe          | 31/10 |     20      |      AL     |         --            |  ✅     |
