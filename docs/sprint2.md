@@ -140,7 +140,7 @@ Legenda IDs
 | DW-009 |        Criar a estrutura em HTML para o Header         | Willian            | 15/10 |     10      |      DW      |          RF01.1           |   ✅   |
 | DW-009.1 |       Estilizar o Header em CSS          | Willian            | 15/10 |     10      |      DW      |          RF01.1           |   ✅   |
 | DW-010 |        Criar a estrutura em HTML para o Footer         | Willian            | 15/10 |     10      |      DW      |          RF01.3           |   ✅   |
-| DW-00.1 |        Estilizar o footer em CSS         | Willian            | 15/10 |     10      |      DW      |          RF01.3           |   ✅   |
+| DW-010.1 |        Estilizar o footer em CSS         | Willian            | 15/10 |     10      |      DW      |          RF01.3           |   ✅   |
 | DW-011 |        Criar a estrutura da página administrativa em HTML          |   João Otávio            | 31/10 |     5      |      DW      |   RNF02                  |  ✅     |
 | DW-11.1 |       Estilizar a página administrativa em CSS          |    João Otávio         | 31/10 |     10      |      DW      |  RNF02                   |  ✅     |
 | DW-012 |        Criação da estrutura HTML menu hamburguer.       |   Ariana          | 31/10 |     10      |      DW      |      RF01.1             |  ✅     |
