@@ -4,14 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vagas</title>
+  <title data-i18n-key="jobsTitle">Vagas</title>
 
   <!-- Estilos -->
   <link rel="stylesheet" href="style-vagas.css?v=5">
   <link rel="stylesheet" href="../HeaderFooter/style.css">
-
-  <!-- Script dinâmico das vagas -->
-  <script src="javascript-vagas.js" defer></script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,14 +26,16 @@
   <!-- BANNER -->
   <section class="banner-vagas">
     <div class="container-vagas">
-      <p class="chamada-vagas">Chamadas de Mestrado e Doutorado variam conforme edital do PGSER</p>
-      <h2>Mestrado e Doutorado em Sensoriamento Remoto aplicado à Agricultura</h2>
-      <p>
+      <p class="chamada-vagas" data-i18n-key="mastersPhdCallNotice">Chamadas de Mestrado e Doutorado variam conforme
+        edital do PGSER</p>
+      <h2 data-i18n-key="mastersPhdTitle">Mestrado e Doutorado em Sensoriamento Remoto aplicado à Agricultura</h2>
+      <p data-i18n-key="mastersPhdDescription">
         O AgriRS Lab pertence à Divisão de Sensoriamento Remoto do INPE e desenvolve pesquisa e desenvolvimento em
         geoinformática e sensoriamento remoto para agricultura...
       </p>
 
-      <button class="btn-vagas btn-primary-vagas" onclick="scrollToSection()">Ver inscrições</button>
+      <button class="btn-vagas btn-primary-vagas" onclick="scrollToSection()" data-i18n-key="viewApplicationsButton">Ver
+        inscrições</button>
     </div>
   </section>
 
@@ -46,7 +45,7 @@
     <!-- OPORTUNIDADES DE TRABALHO -->
     <section class="oportunidades-vagas">
       <div class="container-vagas">
-        <h3 class="section-title-vagas">🌱 Oportunidades de Trabalho</h3>
+        <h3 class="section-title-vagas" data-i18n-key="workOpportunitiesTitle">🌱 Oportunidades de Trabalho</h3>
 
         <!-- AQUI VÃO OS CARDS DINÂMICOS -->
         <div class="cards-vagas" id="lista-vagas">
@@ -59,21 +58,21 @@
     <!-- INSCRIÇÕES -->
     <section class="inscricoes-vagas" id="verMestrado">
       <div class="container-vagas">
-        <h3 class="section-title-vagas">📄 Inscrições para Mestrado e Doutorado</h3>
+        <h3 class="section-title-vagas" data-i18n-key="applicationsTitle">📄 Inscrições para Mestrado e Doutorado</h3>
 
         <div class="card-vagas">
-          <p>
+          <p data-i18n-key="applicationsDescription">
             As inscrições são centralizadas pelo Programa de Pós Graduação em Sensoriamento Remoto do INPE.
             Acesse o link para editais e orientações.
           </p>
 
           <a class="btn-vagas btn-sm-vagas btn-primary-vagas"
-            href="https://www.gov.br/inpe/pt-br/area-conhecimento/posgraduacao" target="_blank">
+            href="https://www.gov.br/inpe/pt-br/area-conhecimento/posgraduacao" target="_blank"
+            data-i18n-key="applicationsButton">
             Abrir página de inscrições e editais do PGSER
           </a>
 
-          <p>
-            Contato da secretaria do programa:
+          <p><span data-i18n-key="applicationsContact">Contato da secretaria do programa:</span>
             <a href="mailto:posgraduacao@inpe.br">posgraduacao@inpe.br</a>
           </p>
         </div>
@@ -85,29 +84,31 @@
     <section class="linhas-vagas">
       <div class="container-vagas">
 
-        <h3 class="section-title-vagas">📊 Linhas de pesquisa e temas</h3>
+        <h3 class="section-title-vagas" data-i18n-key="researchTopicsTitle">📊 Linhas de pesquisa e temas</h3>
 
         <div class="cards-grid-vagas">
 
           <div class="card-vagas">
-            <h4>Agricultura de precisão</h4>
-            <p>Variabilidade espacial, sensores em campo e integração com dados de máquinas.</p>
+            <h4 data-i18n-key="topic1Title">Agricultura de precisão</h4>
+            <p data-i18n-key="topic1Desc">Variabilidade espacial, sensores em campo e integração com dados de máquinas.
+            </p>
           </div>
 
           <div class="card-vagas">
-            <h4>Imagens orbitais e aéreas</h4>
-            <p>Uso de satélites e VANTs para monitoramento de culturas e fenologia.</p>
+            <h4 data-i18n-key="topic2Title">Imagens orbitais e aéreas</h4>
+            <p data-i18n-key="topic2Desc">Uso de satélites e VANTs para monitoramento de culturas e fenologia.</p>
           </div>
 
           <div class="card-vagas">
-            <h4>Processamento e modelagem</h4>
-            <p>Processamento de imagens, séries temporais e aprendizado de máquina aplicado ao agro.</p>
+            <h4 data-i18n-key="topic3Title">Processamento e modelagem</h4>
+            <p data-i18n-key="topic3Desc">Processamento de imagens, séries temporais e aprendizado de máquina aplicado
+              ao agro.</p>
           </div>
 
         </div>
 
         <div class="card-full-vagas">
-          <p>
+          <p data-i18n-key="researchTopicsNote">
             As linhas específicas do PGSER incluem áreas como sensoriamento remoto aplicado à agricultura,
             processamento de imagens e geoprocessamento. Consulte a página do programa para a lista completa e
             atualizada.
@@ -121,21 +122,21 @@
     <section class="comoingressar-vagas">
       <div class="container-vagas">
 
-        <h3 class="section-title-vagas">📥 Como ingressar</h3>
+        <h3 class="section-title-vagas" data-i18n-key="howToApplyTitle">📥 Como ingressar</h3>
 
         <div class="cards-ingressar-vagas">
 
           <div class="card-vagas">
-            <h4>1. Leia o edital do PGSER</h4>
-            <p>
+            <h4 data-i18n-key="step1Title">1. Leia o edital do PGSER</h4>
+            <p data-i18n-key="step1Desc">
               Verifique requisitos, cronograma e documentos.
               O PGSER do INPE publica os editais no site oficial.
             </p>
           </div>
 
           <div class="card-vagas">
-            <h4>2. Prepare a inscrição</h4>
-            <ul>
+            <h4 data-i18n-key="step2Title">2. Prepare a inscrição</h4>
+            <ul data-i18n-key="step2List">
               <li>Histórico e diploma ou declaração de concluinte</li>
               <li>Currículo Lattes</li>
               <li>Carta de motivação</li>
@@ -145,9 +146,9 @@
           </div>
 
           <div class="card-vagas">
-            <h4>3. Submeta e acompanhe</h4>
-            <p>
-              Env ie pelo sistema indicado no edital e acompanhe entrevistas ou provas.
+            <h4 data-i18n-key="step3Title">3. Submeta e acompanhe</h4>
+            <p data-i18n-key="step3Desc">
+              Envie pelo sistema indicado no edital e acompanhe entrevistas ou provas.
               Resultados são divulgados no site do PGSER.
             </p>
           </div>
@@ -155,7 +156,8 @@
         </div>
 
         <div class="card-full-vagas" style="margin-top: 20px;">
-          <p>Mais detalhes sobre linhas, seleção e contatos estão na página do PGSER do INPE.</p>
+          <p data-i18n-key="howToApplyNote">Mais detalhes sobre linhas, seleção e contatos estão na página do PGSER do
+            INPE.</p>
         </div>
 
       </div>
@@ -167,6 +169,8 @@
   <footer></footer>
 
   <script src="../HeaderFooter/menu-header.js"></script>
+  <script src="./i18n.js"></script>
+  <script src="./javascript-vagas.js"></script>
 
 </body>
 

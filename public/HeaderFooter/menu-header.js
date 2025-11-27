@@ -29,7 +29,8 @@ const headerFooterTranslations = {
     "searchPlaceholder": "Pesquisar...",
     "footerAdminAccess": "Acesso à área administrativa:",
     "footerAccessButton": "Acesso",
-    "footerOurEmail": "Nosso E-mail:", "footerSocialMedia": "Nossas redes sociais:",
+    "footerOurEmail": "Nosso E-mail:",
+    "footerSocialMedia": "Nossas redes sociais:",
     "footerOurLocation": "Nossa localização:",
     "footerCopyright": "Copyright © AgriRS "
   }
@@ -171,9 +172,9 @@ function inicializarControleIdioma() {
   // Torna a função de mudança de idioma global para os botões `onclick`
   window.mudarIdioma = function (lang) {
     localStorage.setItem('selectedLanguage', lang);
-    // Dispara um evento para que o i18n.js e outros scripts possam "ouvir" a mudança
-    window.dispatchEvent(new Event('languageChange')); // Mantém para outros scripts
     applyHeaderFooterTranslations(lang); // Reaplica a tradução imediatamente
+    // Dispara um evento para que o i18n.js e outros scripts possam "ouvir" a mudança
+    window.dispatchEvent(new Event('languageChange')); // Notifica todos os listeners
   }
 }
 
