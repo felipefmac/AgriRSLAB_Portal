@@ -108,7 +108,7 @@
 /* ===================== FILTROS ===================== */
 .interactive-filters {
   display: flex;
-  justify-content: space-around;
+  justify-content: right;
   align-items: stretch;
   gap: 15px;
   flex-wrap: wrap;

@@ -1,20 +1,18 @@
+/**
+ * Exibe mensagem de sucesso ou erro no formulário
+ */
 function showMessage(msgContainer, message, type) {
     msgContainer.textContent = message;
     msgContainer.className = `form-message ${type}`;
     msgContainer.style.display = 'block';
-<<<<<<< HEAD
+    
     // Oculta a mensagem após 5 segundos
     setTimeout(() => { msgContainer.style.display = 'none'; }, 5000);
-=======
-
-    setTimeout(() => { msgContainer.style.display = 'none'; }, 5000); 
->>>>>>> afe38cc2d7592930888e7a98b1680037bdf07973
 }
 
 const customAlert = (msgContainer, message, isError = false) => {
     showMessage(msgContainer, message, isError ? 'error' : 'success');
 };
-
 
 /**
  * Retorna o texto no idioma correto (PT ou EN).
@@ -22,11 +20,11 @@ const customAlert = (msgContainer, message, isError = false) => {
 function getTexto(item, campo) {
     const lang = localStorage.getItem('selectedLanguage') || 'pt';
 
-    // Se for inglês E existir tradução, retorna inglês. Senão, retorna PT.
+    // Se for inglês E existir tradução, retorna inglês. Senão, retorna PT (ou base).
     if (lang === 'en' && item[campo + '_en']) {
         return item[campo + '_en'];
     }
-    return item[campo] || item[campo + '_pt']; // Fallback para campo base ou campo _pt
+    return item[campo] || item[campo + '_pt']; 
 }
 
 // =====================================================================
@@ -34,20 +32,19 @@ function getTexto(item, campo) {
 // =====================================================================
 async function carregarVaga() {
     const params = new URLSearchParams(window.location.search);
-    // Pega o ID da vaga a ser carregada
+    // Pega o ID da vaga a ser carregada (ex: vagas-candidatura.html?id=1)
     const id = params.get("id");
 
     if (!id) {
         console.error("ID da vaga não encontrado na URL.");
-        // Exibe uma mensagem de erro na área principal
-        document.querySelector(".vacancy-canditadura").innerHTML =
-            "<p>Erro: ID da vaga não fornecido na URL.</p>";
+        const container = document.querySelector(".vacancy-canditadura");
+        if(container) container.innerHTML = "<p>Erro: ID da vaga não fornecido na URL.</p>";
         return;
     }
 
     try {
         const resposta = await fetch(`/api/vagas/${id}`);
-        // Verifica se a resposta foi HTTP 404/500, etc.
+        
         if (!resposta.ok) {
             throw new Error(`Erro HTTP ${resposta.status}`);
         }
@@ -55,54 +52,39 @@ async function carregarVaga() {
         const vaga = await resposta.json();
 
         if (!vaga || vaga.mensagem === "Vaga não encontrada.") {
-            document.querySelector(".vacancy-canditadura").innerHTML =
-                "<p>Vaga não encontrada.</p>";
+            document.querySelector(".vacancy-canditadura").innerHTML = "<p>Vaga não encontrada.</p>";
             return;
         }
 
-<<<<<<< HEAD
-        // 🛑 PREENCHIMENTO DOS DADOS (Requisitos e Benefícios devem ser arrays de strings)
+        // --- PREENCHIMENTO DOS DADOS ---
+        
+        // 1. Título e Descrição (com suporte a idioma)
         document.getElementById("vaga-titulo").textContent = getTexto(vaga, 'titulo');
         document.getElementById("vaga-descricao").textContent = getTexto(vaga, 'descricao');
 
-        // Determina qual array de requisitos usar com base no idioma
+        // 2. Requisitos
         const lang = localStorage.getItem('selectedLanguage') || 'pt';
+        
+        // Decide qual array usar
         let requisitos = vaga.requisitos;
         if (lang === 'en' && vaga.requisitos_en && Array.isArray(vaga.requisitos_en)) {
             requisitos = vaga.requisitos_en;
         }
 
-        // Mapeia array de requisitos
-        if (Array.isArray(requisitos)) {
+        if (Array.isArray(requisitos) && requisitos.length > 0) {
             document.getElementById("vaga-requisitos").innerHTML =
                 requisitos.map(req => `<li>${req}</li>`).join("");
-=======
-        document.getElementById("vaga-titulo").textContent = vaga.titulo;
-        document.getElementById("vaga-descricao").textContent = vaga.descricao;
-
-        if (Array.isArray(vaga.requisitos)) {
-             document.getElementById("vaga-requisitos").innerHTML =
-                vaga.requisitos.map(req => `<li>${req}</li>`).join("");
-        } else {
-             document.getElementById("vaga-requisitos").innerHTML = "<li>Requisitos não listados.</li>";
-        }
-        
-        if (Array.isArray(vaga.beneficios)) {
-            document.getElementById("vaga-beneficios").innerHTML =
-                vaga.beneficios.map(b => `<li>${b}</li>`).join("");
->>>>>>> afe38cc2d7592930888e7a98b1680037bdf07973
         } else {
             document.getElementById("vaga-requisitos").innerHTML = "<li>Requisitos não listados.</li>";
         }
 
-        // Determina qual array de benefícios usar com base no idioma
+        // 3. Benefícios
         let beneficios = vaga.beneficios;
         if (lang === 'en' && vaga.beneficios_en && Array.isArray(vaga.beneficios_en)) {
             beneficios = vaga.beneficios_en;
         }
 
-        // Mapeia array de benefícios
-        if (Array.isArray(beneficios)) {
+        if (Array.isArray(beneficios) && beneficios.length > 0) {
             document.getElementById("vaga-beneficios").innerHTML =
                 beneficios.map(b => `<li>${b}</li>`).join("");
         } else {
@@ -111,36 +93,29 @@ async function carregarVaga() {
 
     } catch (erro) {
         console.error("Erro ao carregar vaga:", erro);
-        document.querySelector(".vacancy-canditadura").innerHTML =
-            "<p>Erro ao carregar detalhes da vaga. Verifique a conexão com o servidor.</p>";
+        const container = document.querySelector(".vacancy-canditadura");
+        if(container) container.innerHTML = "<p>Erro ao carregar detalhes da vaga. Verifique a conexão com o servidor.</p>";
     }
 }
 
 function inicializarFormulario() {
     const btnSubmit = document.getElementById("btn-candidatura-submit");
     const msgContainer = document.getElementById("candidatura-message");
-<<<<<<< HEAD
-
-    if (!form || !btnSubmit || !msgContainer) {
-        console.warn("Elementos do formulário (botão/msgContainer) não encontrados. O envio não será configurado.");
-        return;
-=======
     
     if (!btnSubmit || !msgContainer) {
-        console.warn("Elementos essenciais não encontrados.");
+        console.warn("Elementos essenciais do formulário não encontrados.");
         return; 
     }
 
     const form = btnSubmit.closest('form'); 
     
     if (!form) {
-        console.warn("O formulário pai do botão 'btn-candidatura-submit' não foi encontrado. Verifique se o botão está dentro da tag <form>.");
+        console.warn("Formulário não encontrado.");
         return; 
->>>>>>> afe38cc2d7592930888e7a98b1680037bdf07973
     }
 
     form.addEventListener("submit", async (event) => {
-        event.preventDefault(); //Impede a navegação padrão
+        event.preventDefault(); // Impede a navegação padrão
 
         const formData = new FormData(form);
 
@@ -158,10 +133,10 @@ function inicializarFormulario() {
         btnSubmit.classList.add('loading');
 
         try {
-            // Requisição de envio do formulário (adaptada para lidar com FormData)
+            // Requisição de envio
             const resposta = await fetch("/api/email/candidatura", {
                 method: "POST",
-                body: formData // Envia FormData diretamente, incluindo o arquivo CV
+                body: formData 
             });
 
             const dados = await resposta.json().catch(() => ({}));
@@ -169,17 +144,17 @@ function inicializarFormulario() {
             if (resposta.ok) {
                 customAlert(msgContainer, dados.mensagem || "Candidatura enviada com sucesso!", false);
                 form.reset();
-                // Resetar o nome do arquivo também
+                
+                // Resetar o texto do input file
                 const fileNameSpan = document.getElementById('file-name');
-                if (fileNameSpan) {
+                if (fileNameSpan && traducoes && traducoes['nenhum_arquivo']) {
                     const lang = localStorage.getItem('selectedLanguage') || 'pt';
                     fileNameSpan.textContent = traducoes['nenhum_arquivo'][lang];
                 }
             } else {
                 customAlert(
                     msgContainer,
-                    dados.mensagem ||
-                    "Ocorreu um erro ao enviar sua candidatura. Tente novamente mais tarde.",
+                    dados.mensagem || "Ocorreu um erro ao enviar sua candidatura.",
                     true
                 );
             }
@@ -187,7 +162,7 @@ function inicializarFormulario() {
             console.error("Erro ao enviar candidatura:", erro);
             customAlert(
                 msgContainer,
-                "Não foi possível enviar sua candidatura no momento. Verifique sua conexão e tente novamente.",
+                "Erro de conexão. Tente novamente.",
                 true
             );
         } finally {
@@ -197,97 +172,31 @@ function inicializarFormulario() {
 }
 
 // =====================================================================
-// TRADUÇÕES ESTÁTICAS
+// TRADUÇÕES ESTÁTICAS (Mantido igual ao original)
 // =====================================================================
 const traducoes = {
-    'oportunidades_trabalho': {
-        'pt': '💼 Oportunidades de Trabalho',
-        'en': '💼 Job Opportunities'
-    },
-    'detalhes_vaga': {
-        'pt': 'Detalhes da Vaga:',
-        'en': 'Job Details:'
-    },
-    'descricao_label': {
-        'pt': 'Descrição:',
-        'en': 'Description:'
-    },
-    'requisitos_label': {
-        'pt': 'Requisitos:',
-        'en': 'Requirements:'
-    },
-    'beneficios_label': {
-        'pt': 'Benefícios:',
-        'en': 'Benefits:'
-    },
-    'cultura_organizacional': {
-        'pt': '🏛️ Cultura Organizacional',
-        'en': '🏛️ Organizational Culture'
-    },
-    'cultura_intro': {
-        'pt': 'Na AGRIRS LAB · INPE, promovemos um ambiente de trabalho baseado em:',
-        'en': 'At AGRIRS LAB · INPE, we promote a work environment based on:'
-    },
-    'cultura_colaboracao': {
-        'pt': '<strong>Colaboração:</strong> Trabalhamos em equipe para alcançar objetivos científicos e tecnológicos.',
-        'en': '<strong>Collaboration:</strong> We work as a team to achieve scientific and technological goals.'
-    },
-    'cultura_inovacao': {
-        'pt': '<strong>Inovação:</strong> Estimulamos ideias novas e soluções criativas para desafios ambientais.',
-        'en': '<strong>Innovation:</strong> We stimulate new ideas and creative solutions for environmental challenges.'
-    },
-    'cultura_diversidade': {
-        'pt': '<strong>Diversidade:</strong> Valorizamos diferentes perspectivas e experiências.',
-        'en': '<strong>Diversity:</strong> We value different perspectives and experiences.'
-    },
-    'cultura_desenvolvimento': {
-        'pt': '<strong>Desenvolvimento:</strong> Incentivamos o crescimento profissional e pessoal dos nossos colaboradores.',
-        'en': '<strong>Development:</strong> We encourage the professional and personal growth of our collaborators.'
-    },
-    'envie_candidatura': {
-        'pt': '✉️ Envie sua Candidatura',
-        'en': '✉️ Send your Application'
-    },
-    'label_nome': {
-        'pt': 'Nome*',
-        'en': 'Name*'
-    },
-    'label_email': {
-        'pt': 'E-mail*',
-        'en': 'E-mail*'
-    },
-    'label_telefone': {
-        'pt': 'Telefone',
-        'en': 'Phone'
-    },
-    'label_lattes': {
-        'pt': 'Lattes, Currículo ou LinkedIn',
-        'en': 'Lattes, Resume or LinkedIn'
-    },
-    'label_cv': {
-        'pt': 'Anexar Currículo (PDF ou DOC)',
-        'en': 'Attach Resume (PDF or DOC)'
-    },
-    'label_resumo': {
-        'pt': 'Resumo de Experiência',
-        'en': 'Experience Summary'
-    },
-    'placeholder_resumo': {
-        'pt': 'Conte, em poucas linhas, suas experiências mais relevantes...',
-        'en': 'Tell us, in a few lines, your most relevant experiences...'
-    },
-    'btn_confirmar': {
-        'pt': 'Confirmar Candidatura',
-        'en': 'Confirm Application'
-    },
-    'btn_escolher_arquivo': {
-        'pt': 'Escolher arquivo',
-        'en': 'Choose file'
-    },
-    'nenhum_arquivo': {
-        'pt': 'Nenhum arquivo escolhido',
-        'en': 'No file chosen'
-    }
+    'oportunidades_trabalho': { 'pt': '💼 Oportunidades de Trabalho', 'en': '💼 Job Opportunities' },
+    'detalhes_vaga': { 'pt': 'Detalhes da Vaga:', 'en': 'Job Details:' },
+    'descricao_label': { 'pt': 'Descrição:', 'en': 'Description:' },
+    'requisitos_label': { 'pt': 'Requisitos:', 'en': 'Requirements:' },
+    'beneficios_label': { 'pt': 'Benefícios:', 'en': 'Benefits:' },
+    'cultura_organizacional': { 'pt': '🏛️ Cultura Organizacional', 'en': '🏛️ Organizational Culture' },
+    'cultura_intro': { 'pt': 'Na AGRIRS LAB · INPE, promovemos um ambiente de trabalho baseado em:', 'en': 'At AGRIRS LAB · INPE, we promote a work environment based on:' },
+    'cultura_colaboracao': { 'pt': '<strong>Colaboração:</strong> Trabalhamos em equipe para alcançar objetivos científicos e tecnológicos.', 'en': '<strong>Collaboration:</strong> We work as a team to achieve scientific and technological goals.' },
+    'cultura_inovacao': { 'pt': '<strong>Inovação:</strong> Estimulamos ideias novas e soluções criativas para desafios ambientais.', 'en': '<strong>Innovation:</strong> We stimulate new ideas and creative solutions for environmental challenges.' },
+    'cultura_diversidade': { 'pt': '<strong>Diversidade:</strong> Valorizamos diferentes perspectivas e experiências.', 'en': '<strong>Diversity:</strong> We value different perspectives and experiences.' },
+    'cultura_desenvolvimento': { 'pt': '<strong>Desenvolvimento:</strong> Incentivamos o crescimento profissional e pessoal dos nossos colaboradores.', 'en': '<strong>Development:</strong> We encourage the professional and personal growth of our collaborators.' },
+    'envie_candidatura': { 'pt': '✉️ Envie sua Candidatura', 'en': '✉️ Send your Application' },
+    'label_nome': { 'pt': 'Nome*', 'en': 'Name*' },
+    'label_email': { 'pt': 'E-mail*', 'en': 'E-mail*' },
+    'label_telefone': { 'pt': 'Telefone', 'en': 'Phone' },
+    'label_lattes': { 'pt': 'Lattes, Currículo ou LinkedIn', 'en': 'Lattes, Resume or LinkedIn' },
+    'label_cv': { 'pt': 'Anexar Currículo (PDF ou DOC)', 'en': 'Attach Resume (PDF or DOC)' },
+    'label_resumo': { 'pt': 'Resumo de Experiência', 'en': 'Experience Summary' },
+    'placeholder_resumo': { 'pt': 'Conte, em poucas linhas, suas experiências mais relevantes...', 'en': 'Tell us, in a few lines, your most relevant experiences...' },
+    'btn_confirmar': { 'pt': 'Confirmar Candidatura', 'en': 'Confirm Application' },
+    'btn_escolher_arquivo': { 'pt': 'Escolher arquivo', 'en': 'Choose file' },
+    'nenhum_arquivo': { 'pt': 'Nenhum arquivo escolhido', 'en': 'No file chosen' }
 };
 
 function traduzirPagina() {
@@ -300,7 +209,7 @@ function traduzirPagina() {
         if (chave === 'nenhum_arquivo') {
             const fileInput = document.getElementById('cv-upload');
             if (fileInput && fileInput.files.length > 0) {
-                return; // Não traduz se tiver arquivo
+                return; 
             }
         }
 
@@ -325,7 +234,6 @@ function inicializarFileInput() {
             if (this.files && this.files.length > 0) {
                 fileNameSpan.textContent = this.files[0].name;
             } else {
-                // Se desmarcar, volta para o texto padrão traduzido
                 const lang = localStorage.getItem('selectedLanguage') || 'pt';
                 fileNameSpan.textContent = traducoes['nenhum_arquivo'][lang];
             }
@@ -349,7 +257,8 @@ function inicializarPagina() {
     // Ouve mudanças de idioma
     window.addEventListener('languageChange', () => {
         traduzirPagina();
-        carregarVaga(); // Recarrega a vaga para atualizar os campos dinâmicos também
+        carregarVaga(); 
     });
 }
+
 document.addEventListener("DOMContentLoaded", inicializarPagina);
