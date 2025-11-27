@@ -107,7 +107,7 @@ Legenda IDs
 | DW-005.2 |       Criação da estrutura dos cards das vagas em HTML           | Luiza            | 13/10 |     5      |      DW      |          RF04           |  ✅    |
 | DW-005.3 |       Criação da estrutura do formulário de candidatura em HTML          | Luiza            | 13/10 |     10      |      DW      |          RF04           |   ✅   |
 | DW-005.4 |       Criação de um arquivo CSS para a página de vagas          | Luiza            | 13/10 |     8      |      DW      |          RF04           |   ✅   |
-| SO-005 |       Configuração GitHub          | Luiza            | 15/10 |     10      |      SO     |     --                |   ✅   |
+| SO-001 |       Configuração GitHub          | Luiza            | 15/10 |     10      |      SO     |     --                |   ✅   |
 | DW-005.5 |       Estilização da página         | Luiza            | 17/10 |     8      |      DW      |          RF04           |   ✅   |
 | DW-005.6 |       Criação de um arquivo CSS para a página de candidatura          | Luiza            | 21/10 |     8      |      DW      |          RF04           |  ✅    |
 | DW-005.7 |       Estilização da página         | Luiza            | 21/10 |     8      |      DW      |          RF04           |  ✅    |
@@ -130,7 +130,7 @@ Legenda IDs
 | DW-007.6 |      Adicionar fontes padrão         | João Otávio            | 17/10 |     2      |      DW      |          RF08           |  ✅     |
 | DW-007.7 |      Estilização do formulário          | João Otávio            | 17/10 |     10      |      DW      |          RF08           |  ✅     |
 | DW-007.8 |       Estilização do card de localização          | João Otávio            | 17/10 |     5      |      DW      |          RF08           |  ✅     |
-| SO-005 |       Configuração do GitHub          | João Otávio            | 21/10 |     10      |      SO     |        --            |  ✅     |
+| SO-001 |       Configuração do GitHub          | João Otávio            | 21/10 |     10      |      SO     |        --            |  ✅     |
 | DW-008 |       Criação da estrutura da página sobre em HTML          | João Augusto            | 13/10 |     5      |      DW      |          RF02           |  ✅    |
 | DW-008.1 |      Adicionar imagem e logo de colaboradores           | João Augusto            | 13/10 |     2      |      DW      |          RF02           |  ✅    |
 | DW-008.2 |      Criação de um arquivo CSS para a estlização           | João Augusto            | 13/10 |     8      |      DW      |          RF02           |  ✅    |
@@ -157,7 +157,7 @@ Legenda IDs
 | DW-008 |        Refinamento página sobre         |  Luiza           | 31/10 |     6      |      DW      |       RF02              |  ✅     |
 | DW-003 |        Refinamento página de notícias.         |  Ariana           | 31/10 |     6      |      DW      |    RF06                 |  ✅     |
 | DW-002 |        Refinamento página inicial         |  Pedro           | 31/10 |     6      |      DW      |    RF01                 |  ✅     |
-| SO-005 |        Configuração GitHub        | Eloah            | 31/10 |     15      |      DW      |       --              |  ✅    |
+| SO-001 |        Configuração GitHub        | Eloah            | 31/10 |     15      |      DW      |       --              |  ✅    |
 | ES-002 |        Refinar e priorizar backlog, alinhar requisitos com stakeholders, validar entregas nas reviews e garantir clareza nos critérios de aceitação.        | Eloah            | 31/10 |     20      |      ES      |       --              |  ✅    |
 | AL-001 |        Ligação com o BD        |   William          | 31/10 |     20      |      AL     |       --              |  ✅     |
 | AL-001 |        Ligação com o BD        |   Felipe          | 31/10 |     20      |      AL     |         --            |  ✅     |
