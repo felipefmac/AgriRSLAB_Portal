@@ -10,8 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
             "searchButton": "Search",
 
             // Member Categories
+            "coordinationTitle": "Coordinators",
             "researchersTitle": "Researchers",
-            "fellowsTitle": "Fellows & Students",
+            "doctoral_studentsTitle": "Doctoral Students",
+            "masters_studentsTitle": "Master's Students",
+            "fellowsTitle": "Fellows",
             "alumniTitle": "Alumni",
 
             // New sections
@@ -47,8 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
             "searchButton": "Buscar",
 
             // Categorias de Membros
+            "coordinationTitle": "Coordenadores",
             "researchersTitle": "Pesquisadores",
-            "fellowsTitle": "Bolsistas e Estudantes",
+            "doctoral_studentsTitle": "Doutorandos",
+            "masters_studentsTitle": "Mestrandos",
+            "fellowsTitle": "Bolsistas",
             "alumniTitle": "Ex-membros",
 
             // Novas seções
