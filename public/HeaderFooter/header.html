@@ -7,7 +7,8 @@
         <h1 class="h1HEADER">AgriRSLab</h1>
 
         <div class="searchBar">
-            <input id="search" class="inputSearch" type="search" placeholder="Pesquisar..." data-i18n-placeholder="searchPlaceholder">
+            <input id="search" class="inputSearch" type="search" placeholder="Pesquisar..."
+                data-i18n-placeholder="searchPlaceholder">
             <button id="searchBtn" class="searchBtn">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="20px"
                     fill="#5A5A5A">
@@ -49,8 +50,7 @@
                         data-i18n-key="navProjects">Projetos</a>
                 </li>
                 <li>
-                    <a class="decorationHeaderMenu" href="../pagina-sobre/sobre.html" 
-                        data-i18n-key="navAbout">Sobre</a>
+                    <a class="decorationHeaderMenu" href="../pagina-sobre/sobre.html" data-i18n-key="navAbout">Sobre</a>
                 </li>
                 <li>
                     <a class="decorationHeaderMenu" href="../pagina-vagas/index-vagas.html"
@@ -62,13 +62,19 @@
                 </li>
             </ul>
             <div class="language-selector" style="margin-left: 20px; display: flex; gap: 5px; align-items: center;">
-                <button onclick="mudarIdioma('pt')" style="cursor: pointer; border: none; background: none;">
+                <button onclick="mudarIdioma('pt')"
+                    style="cursor: pointer; border: 2px solid #c8e6c9; background: #e8f5e9; padding: 3px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.3s ease;">
                     <img src="https://flagcdn.com/w40/br.png" alt="Português" title="Português"
-                        style="width: 32px; height: 20px; object-fit: cover; border-radius: 2px;">
+                        style="width: 32px; height: 20px; object-fit: cover; border-radius: 2px; display: block;"
+                        onmouseover="this.parentElement.style.transform='scale(1.1)'; this.parentElement.style.boxShadow='0 4px 8px rgba(0,0,0,0.2)';"
+                        onmouseout="this.parentElement.style.transform='scale(1)'; this.parentElement.style.boxShadow='0 2px 4px rgba(0,0,0,0.1)';">
                 </button>
-                <button onclick="mudarIdioma('en')" style="cursor: pointer; border: none; background: none;">
+                <button onclick="mudarIdioma('en')"
+                    style="cursor: pointer; border: 2px solid #c8e6c9; background: #e8f5e9; padding: 3px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.3s ease;">
                     <img src="https://flagcdn.com/w40/us.png" alt="English" title="English"
-                        style="width: 32px; height: 20px; object-fit: cover; border-radius: 2px;">
+                        style="width: 32px; height: 20px; object-fit: cover; border-radius: 2px; display: block;"
+                        onmouseover="this.parentElement.style.transform='scale(1.1)'; this.parentElement.style.boxShadow='0 4px 8px rgba(0,0,0,0.2)';"
+                        onmouseout="this.parentElement.style.transform='scale(1)'; this.parentElement.style.boxShadow='0 2px 4px rgba(0,0,0,0.1)';">
                 </button>
             </div>
             <script>
