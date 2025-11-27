@@ -118,6 +118,8 @@ function esconderTitulosSemCard() {
 
 // ======================= CARREGAR ARTIGOS =======================
 
+// script.js
+
 async function carregarArtigosPublicos() {
 
     const containers = {
@@ -125,6 +127,14 @@ async function carregarArtigosPublicos() {
         'Artigos de Conferência (AC)': document.querySelector('.publications-section:nth-of-type(2) .cards-grid'),
         'Capítulos de livros (CL)': document.querySelector('.publications-section:nth-of-type(3) .cards-grid'),
         'Notas Técnicas (NT)': document.querySelector('.publications-section:nth-of-type(4) .cards-grid'),
+    };
+
+    // Mapeamento: Nome da Categoria na API -> Valor do checkbox no HTML (classe CSS)
+    const mapClasses = {
+        'Artigos': 'artigos',
+        'Artigos de Conferência (AC)': 'ac',
+        'Capítulos de livros (CL)': 'livros',
+        'Notas Técnicas (NT)': 'outros'
     };
 
     // mensagem de carregando
@@ -151,13 +161,21 @@ async function carregarArtigosPublicos() {
             );
 
             if (chaveContainer && containers[chaveContainer]) {
-                containers[chaveContainer].appendChild(criarArtigoCard(artigo));
+                const cardElement = criarArtigoCard(artigo);
+                
+                // --- AQUI ESTÁ A MUDANÇA ---
+                // Adiciona a classe específica para o filtro funcionar (ex: 'ac', 'livros')
+                if (mapClasses[chaveContainer]) {
+                    cardElement.classList.add(mapClasses[chaveContainer]);
+                }
+                // ---------------------------
+
+                containers[chaveContainer].appendChild(cardElement);
             } else {
                 console.warn(`Categoria sem container: "${nomeCategoria}"`);
             }
         });
 
-        // depois de preencher, esconde títulos das seções que ficaram vazias
         esconderTitulosSemCard();
 
     } catch (error) {
@@ -168,7 +186,6 @@ async function carregarArtigosPublicos() {
         }
     }
 
-    // ativa a busca depois que os cards existem
     ativarBuscaInterna();
 }
 
