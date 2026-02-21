@@ -13,8 +13,8 @@
 
 <p align="center">
   <a href="#sobre">Sobre o Projeto</a> |
-  <a href="#backlogs">Product Backlog</a> |
   <a href="#sprint">Entrega de Sprints</a> |
+  <a href="#backlogs">Product Backlog</a> |
   <a href="#tecnologias">Tecnologias</a> |
   <a href="#equipe">Nossa Equipe</a>
 </p>
@@ -78,7 +78,7 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
 <a id="dor"></a>
 
 <details>
-  <summary><b># Dor do Cliente 😢</b></summary>
+  <summary><b>Dor do Cliente 😢</b></summary>
   <br>
   
   1. Necessidade de um site para divulgação do Laboratório de Sensoriamento Remoto Agrícola do INPE.  
@@ -90,7 +90,7 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
 
 
 <details>
-  <summary><b># Requisitos e User Stories 📋</b></summary>
+  <summary><b>Requisitos e User Stories 📋</b></summary>
   <br>
 
   | Requisito | Sub-Requisito | User Story |
@@ -136,166 +136,173 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
 </details>
 
 
-#  Backlog Geral do Projeto 📌
+<details>
+  <summary><b>Backlog Geral do Projeto 📌</b></summary>
+  <br>
+  
+  | ID      | Seção / Atividade | Pontuação | Disciplina | Sprint |
+  |---------|-------------------|-----------|------------|--------|
+  | DD-001  | Definir identidade visual do site | 10  | DD | 1 |
+  | DD-002  | Criar protótipo da página home | 8  | DD | 1 |
+  | DD-003  | Criar protótipo mobile (home) | 4	  | DD | 1 |
+  | DD-004  | Criar cards em destaque na home (notícias, projetos, publicações) | 9 | DD | 1 |
+  | DD-005  | Criar protótipo da página "Sobre" – objetivo e foco do laboratório | 4  | DD | 1 |
+  | DD-006  | Criar protótipo mobile (sobre) | 2  | DD | 1 |
+  | DD-007  | Criar protótipo da página de membros (nome, foto, função, descrição) | 6	 | DD | 1 |
+  | DD-008  | Criar protótipo mobile (membros) | 3  | DD | 1 |
+  | DD-009  | Criar protótipo da página de vagas | 3  | DD | 1 |
+  | DD-010  | Criar protótipo mobile (vagas) | 1  | DD | 1 |
+  | DD-011  | Criar protótipo da página de projetos | 1  | DD | 1 |
+  | DD-012  | Criar protótipo mobile (projetos) | 1  | DD | 1 |
+  | DD-013  | Criar protótipo da página de notícias | 7  | DD | 1 |
+  | DD-014  | Criar protótipo mobile (notícias) | 3  | DD | 1 |
+  | DD-015  | Criar protótipo da página de publicações | 4  | DD | 1 |
+  | DD-016  | Criar protótipo mobile (publicações) | 2 | DD | 1 |
+  | DD-017  | Criar protótipo da página de contato | 4 | DD | 1 |
+  | DD-018  | Criar protótipo mobile (contato)| 2  | DD | 1 |
+  | DD-007  | Criar layout no Figma (Vagas) | 20 | DD | 1 |
+  | DW-001  | Criação da estrutura da página de publicações em HTML |  5  | DW | 2 |
+  | DW-001.1 | Criação da estrutura dos cards das publicações em HTML | 10  | DW | 2 |
+  | DW-001.2 | Criação da estrutura dos filtros de pesquisa em HTML   | 10 | DW | 2 |
+  | DW-001.3 | Criação de um arquivo CSS para a estiliação | 8  | DW | 2 |
+  | DW-001.4 | Adicionar cores padrões | 2 | DW | 2 |
+  | DW-001.5 | Adicionar fontes padrão | 2  | DW | 2 |
+  | DW-001.6 | Estilização dos cards | 5  | DW | 2 |
+  | DW-001.7 | Adicionar as cores e fontes padrões aos cards | 2 | DW | 2 |
+  | DW-001.8 | Adicionar imagens dos artigos  | 2  | DW | 2 |
+  | SO-001 | Configuração GitHub   | 15 | SO | 2 |
+  | DW-002 | Criaçaõ da estrutura da página inicial em HTML | 5  | DW | 2 |
+  | DW-002.1 | Criação da estrutura dos cards da section "Atuação" em HTML | 8  | DW | 2 |
+  | DW-002.2 | Criação da estrutura do cards da section "Projetos" em HTML  | 8 | DW | 2 |
+  | DW-002.3 | Criação da estrutura do cards da section "Notícias" em HTML  | 8  | DW | 2 |
+  | DW-002.4 | Criação de um arquivo CSS para a estiliação | 8  | DW | 2 |
+  | DW-002.5 | Adicionar cores padrões | 2  | DW | 2 |
+  | DW-002.6 | Adicionar fontes padrão | 2  | DW | 2 |
+  | DW-002.7 | Estilização dos cards da section "Atuação" em CSS | 10 | DW | 2 |
+  | DW-002.8 | Estilização dos cards da section "Projetos" em CSS | 10 | DW | 2 |
+  | DW-002.9 | Estilização dos cards da section "Notícias" em CSS | 10  | DW | 2 |
+  | DW-02.10 |  Adicionar imagens | 2  | DW | 2 |
+  | DW-003 | Criação da estrutura da página de notícias em HTML  | 8  | DW | 2 |
+  | DW-003.1 | Criação da estrutura dos cards das notícias em HTML  | 10 | DW | 2 |
+  | DW-003.2 | Criação da estrutura da página de carrossel de notícias em HTML | 10 | DW | 2 |
+  | DW-003.3 | Criação da estrutura dos cards da página de carrossel  de notícias em HTML | 10 | DW | 2 |
+  | DW-003.4 | Criação de um arquivo CSS para a estiliação | 8 | DW | 2 |
+  | DW-003.5 | Estilização da página  | 8 | DW | 2 |
+  | DW-003.6 | Adicionar cores padrões | 2 | DW | 2 |
+  | DW-003.7 | Adicionar fontes padrão | 2 | DW | 2 |
+  | DW-003.8 | Estilização dos cards da página de notícias  | 8 | DW | 2 |
+  | DW-003.9 | Estilização dos cards da página de carrossel de notícias | 8 | DW | 2 |
+  | DW-03.10 | Adicionar as cores e fontes padrões aos cards  | 2 | DW | 2 |
+  | DW-03.11 | Adicionar imagens das notícias | 2 | DW | 2 |
+  | DW-03.12 | Organizar notícias cronologicamente | 5 | DW | 2 |
+  | DW-004 | Criação da estrutura da página de projetos em HTML  | 8 | DW | 2 |
+  | DW-004.1 | Criação da estrutura da página de projetos abertos em HTML  | 5  | DW | 2 |
+  | DW-004.2 | Criação da estrutura dos cards dos projetos em HTML | 5 | DW | 2 |
+  | DW-004.3 | Criação de um arquivo CSS para a estiliação da página de cards de projetos  | 8 | DW | 2 |
+  | DW-004.4 | Criação de um arquivo CSS para a estiliação da página de projeto aberto  | 8 | DW | 2 
+  | DW-004.5 | Adicionar cores padrões  | 2 | DW | 2 
+  | DW-004.6 | Adicionar fontes padrão  | 2 | DW | 2  
+  | DW-004.7 | Estilização dos cards da página de projetos  | 8 | DW | 2 
+  | DW-004.8 | Adicionar as cores e fontes padrões aos cards e na descrição do projeto | 2 | DW | 2 
+  | DW-004.9 | Adicionar imagens dos projetos  | 2 | DW | 2 
+  | DW-005 | Criação da estrutura da página de vagas em HTML |  8 | DW | 2 
+  | DW-005.1 | Criação da estrutura da página de candidatura em HTML  | 5 | DW | 2 
+  | DW-005.2 | Criação da estrutura dos cards das vagas em HTML  | 5 | DW | 2 
+  | DW-005.3 | Criação da estrutura do formulário de candidatura em HTML  | 10 | DW | 2 
+  | DW-005.4 | Criação de um arquivo CSS para a página de vagas  | 8 | DW | 2 
+  | DW-005.5 | Estilização da página  | 8 | DW | 2 
+  | DW-005.6 | Criação de um arquivo CSS para a página de candidatura  | 8 | DW | 2 
+  | DW-005.7 | Estilização da página   | 8 | DW | 2 
+  | DW-005.8 | Adicionar cores padrões  | 2 | DW | 2 
+  | DW-005.9 | Adicionar fontes padrão   | 2 | DW | 2
+  | DW-05.1.0 | Estilização dos cards da página de vagas   | 8 | DW | 2 
+  | DW-05.1.1 | Estilização do formulário de candidatura  | 8 | DW | 2
+  | DW-006 | Criação da estrutura da página de membros em HTML  | 5 | DW | 2 
+  | DW-006.1 | Criação da estrutura dos cards de membros em HTML | 10 | DW | 2 
+  | DW-006.2 | Criação de um arquivo CSS para a estlização  | 8 | DW | 2 
+  | DW-006.3 | Adicionar cores padrões | 2 | DW | 2 
+  | DW-006.4 | Adicionar fontes padrão |  2 | DW | 2
+  | DW-006.5 | Estilização dos cards de membros  | 20 | DW | 2 
+  | DW-007 | Criação da estrutura da página de contatos em HTML | 5 | DW | 2 
+  | DW-007.1 | Criação da estrutura do formulário de contato HTML  | 10 | DW | 2 
+  | DW-007.2 | Criação da estrutura do card de localização em  HTML   | 5 | DW | 2 
+  | DW-007.3 | Criação de um arquivo CSS para a estlização | 8 | DW | 2 
+  | DW-007.4 | Estilização da página | 8 | DW | 2
+  | DW-007.5 | Adicionar cores padrões | 2 | DW | 2
+  | DW-007.6 | Adicionar fontes padrão | 2 | DW | 2
+  | DW-007.7 | Estilização do formulário | 10 | DW | 2
+  | DW-007.8 | Estilização do card de localização |  5 | DW | 2
+  | DW-008 | Criação da estrutura da página sobre em HTML | 5 | DW | 2
+  | DW-008.1 | Adicionar imagem e logo de colaboradores |  2 | DW | 2
+  | DW-008.2 | Criação de um arquivo CSS para a estlização | 8 | DW | 2
+  | DW-008.3 | Estilização da página  | 8 | DW | 2
+  | DW-008.4 | Adicionar cores padrões  | 2 | DW | 2
+  | DW-008.5 | Adicionar fontes padrão  | 2 | DW | 2
+  | DW-009 | Criar a estrutura em HTML para o Header  | 10 | DW | 2
+  | DW-009.1 | Estilizar o Header em CSS  | 10 | DW | 2
+  | DW-010 | Criar a estrutura em HTML para o Footer  | 10 | DW | 2
+  | DW-010.1 | Estilizar o footer em CSS   | 10 | DW | 2
+  | DW-011 | Criar a estrutura da página administrativa em HTML  | 5 | DW | 2
+  | DW-11.1 | Estilizar a página administrativa em CSS | 10 | DW | 2
+  | DW-012 | Criação da estrutura HTML menu hamburguer. | 10 | DW | 2
+  | DW-12.1 | Estilização do menu hamburguer em CSS. | 8 | DW | 2
+  | AL-001 | Ligação com o BD | 20 | AL | 2
+  | MB-001 | Testes no BD | 20 | MB | 2
+  | SO-002 | Documentação | 20 | SO | 3
+  | DW-013 | Botão de pesquisa do site | 10 | DW | 3
+  | AL/MB-002 | Ligar filtros da página de artigos ao BD | 10 | AL/MB | 3
+  | AL/MB-002.1 | Ligar filtros da página de vagas ao BD | 10 | AL/MB | 3
+  | AL/MB-003 | Dinamizar página de vagas | 8 | AL/MB | 3
+  | DW-014 | Formulário de candidatura via email | 10 | DW | 3
+  | DW-014.1 | Formulário do fale conosco | 10 | DW | 3
+  | AL/MB-004 | Dinamizar página inicial | 8 | AL/MB | 3
+  | AL/MB-005 | Puxar o header e o footer da página admin | 5 | AL/MB | 3
+  | SO-003 | Organizar pastas do GitHub | 20 | SO | 3
+  | DW-015 | Design da página de login administrativo | 5 | DW | 3 
+  | DW-016 | Login funcional e seguro da página admin   | 10 | DW | 3
+  | DW-017 | Seletor de idioma (inglês/português) | 10 | DW | 3
+  | DW-018 | Tradução em libras  | 5 | DW | 3
+  | AL/MB-006 | Dinamizar página de membros | 10 | AL/MB | 3
+  | AL/MB-007 | Dinamização da página de notícias | 10 | AL/MB | 3
+  | AL/MB-008 | Subir login da pág admin | 8 | AL/MB | 3 
+  | AL/MB-009 | Dinamização da página de projetos | 10 | AL/MB | 3 
+  | AL/MB-010 | Subir a dinamização da pág de membros e projetos   | 8 | AL/MB | 3
+  | AL/MB-011 | Adicionar botão de navegação na pág admin  | 8 | AL/MB | 3
+  | AL/MB-012 | Correção de erros na pág de notícias | 10 | AL/MB | 3
+</details>
 
-| ID      | Seção / Atividade | Pontuação | Disciplina | Sprint |
-|---------|-------------------|-----------|------------|--------|
-| DD-001  | Definir identidade visual do site | 10  | DD | 1 |
-| DD-002  | Criar protótipo da página home | 8  | DD | 1 |
-| DD-003  | Criar protótipo mobile (home) | 4	  | DD | 1 |
-| DD-004  | Criar cards em destaque na home (notícias, projetos, publicações) | 9 | DD | 1 |
-| DD-005  | Criar protótipo da página "Sobre" – objetivo e foco do laboratório | 4  | DD | 1 |
-| DD-006  | Criar protótipo mobile (sobre) | 2  | DD | 1 |
-| DD-007  | Criar protótipo da página de membros (nome, foto, função, descrição) | 6	 | DD | 1 |
-| DD-008  | Criar protótipo mobile (membros) | 3  | DD | 1 |
-| DD-009  | Criar protótipo da página de vagas | 3  | DD | 1 |
-| DD-010  | Criar protótipo mobile (vagas) | 1  | DD | 1 |
-| DD-011  | Criar protótipo da página de projetos | 1  | DD | 1 |
-| DD-012  | Criar protótipo mobile (projetos) | 1  | DD | 1 |
-| DD-013  | Criar protótipo da página de notícias | 7  | DD | 1 |
-| DD-014  | Criar protótipo mobile (notícias) | 3  | DD | 1 |
-| DD-015  | Criar protótipo da página de publicações | 4  | DD | 1 |
-| DD-016  | Criar protótipo mobile (publicações) | 2 | DD | 1 |
-| DD-017  | Criar protótipo da página de contato | 4 | DD | 1 |
-| DD-018  | Criar protótipo mobile (contato)| 2  | DD | 1 |
-| DD-007  | Criar layout no Figma (Vagas) | 20 | DD | 1 |
-| DW-001  | Criação da estrutura da página de publicações em HTML |  5  | DW | 2 |
-| DW-001.1 | Criação da estrutura dos cards das publicações em HTML | 10  | DW | 2 |
-| DW-001.2 | Criação da estrutura dos filtros de pesquisa em HTML   | 10 | DW | 2 |
-| DW-001.3 | Criação de um arquivo CSS para a estiliação | 8  | DW | 2 |
-| DW-001.4 | Adicionar cores padrões | 2 | DW | 2 |
-| DW-001.5 | Adicionar fontes padrão | 2  | DW | 2 |
-| DW-001.6 | Estilização dos cards | 5  | DW | 2 |
-| DW-001.7 | Adicionar as cores e fontes padrões aos cards | 2 | DW | 2 |
-| DW-001.8 | Adicionar imagens dos artigos  | 2  | DW | 2 |
-| SO-001 | Configuração GitHub   | 15 | SO | 2 |
-| DW-002 | Criaçaõ da estrutura da página inicial em HTML | 5  | DW | 2 |
-| DW-002.1 | Criação da estrutura dos cards da section "Atuação" em HTML | 8  | DW | 2 |
-| DW-002.2 | Criação da estrutura do cards da section "Projetos" em HTML  | 8 | DW | 2 |
-| DW-002.3 | Criação da estrutura do cards da section "Notícias" em HTML  | 8  | DW | 2 |
-| DW-002.4 | Criação de um arquivo CSS para a estiliação | 8  | DW | 2 |
-| DW-002.5 | Adicionar cores padrões | 2  | DW | 2 |
-| DW-002.6 | Adicionar fontes padrão | 2  | DW | 2 |
-| DW-002.7 | Estilização dos cards da section "Atuação" em CSS | 10 | DW | 2 |
-| DW-002.8 | Estilização dos cards da section "Projetos" em CSS | 10 | DW | 2 |
-| DW-002.9 | Estilização dos cards da section "Notícias" em CSS | 10  | DW | 2 |
-| DW-02.10 |  Adicionar imagens | 2  | DW | 2 |
-| DW-003 | Criação da estrutura da página de notícias em HTML  | 8  | DW | 2 |
-| DW-003.1 | Criação da estrutura dos cards das notícias em HTML  | 10 | DW | 2 |
-| DW-003.2 | Criação da estrutura da página de carrossel de notícias em HTML | 10 | DW | 2 |
-| DW-003.3 | Criação da estrutura dos cards da página de carrossel  de notícias em HTML | 10 | DW | 2 |
-| DW-003.4 | Criação de um arquivo CSS para a estiliação | 8 | DW | 2 |
-| DW-003.5 | Estilização da página  | 8 | DW | 2 |
-| DW-003.6 | Adicionar cores padrões | 2 | DW | 2 |
-| DW-003.7 | Adicionar fontes padrão | 2 | DW | 2 |
-| DW-003.8 | Estilização dos cards da página de notícias  | 8 | DW | 2 |
-| DW-003.9 | Estilização dos cards da página de carrossel de notícias | 8 | DW | 2 |
-| DW-03.10 | Adicionar as cores e fontes padrões aos cards  | 2 | DW | 2 |
-| DW-03.11 | Adicionar imagens das notícias | 2 | DW | 2 |
-| DW-03.12 | Organizar notícias cronologicamente | 5 | DW | 2 |
-| DW-004 | Criação da estrutura da página de projetos em HTML  | 8 | DW | 2 |
-| DW-004.1 | Criação da estrutura da página de projetos abertos em HTML  | 5  | DW | 2 |
-| DW-004.2 | Criação da estrutura dos cards dos projetos em HTML | 5 | DW | 2 |
-| DW-004.3 | Criação de um arquivo CSS para a estiliação da página de cards de projetos  | 8 | DW | 2 |
-| DW-004.4 | Criação de um arquivo CSS para a estiliação da página de projeto aberto  | 8 | DW | 2 
-| DW-004.5 | Adicionar cores padrões  | 2 | DW | 2 
-| DW-004.6 | Adicionar fontes padrão  | 2 | DW | 2  
-| DW-004.7 | Estilização dos cards da página de projetos  | 8 | DW | 2 
-| DW-004.8 | Adicionar as cores e fontes padrões aos cards e na descrição do projeto | 2 | DW | 2 
-| DW-004.9 | Adicionar imagens dos projetos  | 2 | DW | 2 
-| DW-005 | Criação da estrutura da página de vagas em HTML |  8 | DW | 2 
-| DW-005.1 | Criação da estrutura da página de candidatura em HTML  | 5 | DW | 2 
-| DW-005.2 | Criação da estrutura dos cards das vagas em HTML  | 5 | DW | 2 
-| DW-005.3 | Criação da estrutura do formulário de candidatura em HTML  | 10 | DW | 2 
-| DW-005.4 | Criação de um arquivo CSS para a página de vagas  | 8 | DW | 2 
-| DW-005.5 | Estilização da página  | 8 | DW | 2 
-| DW-005.6 | Criação de um arquivo CSS para a página de candidatura  | 8 | DW | 2 
-| DW-005.7 | Estilização da página   | 8 | DW | 2 
-| DW-005.8 | Adicionar cores padrões  | 2 | DW | 2 
-| DW-005.9 | Adicionar fontes padrão   | 2 | DW | 2
-| DW-05.1.0 | Estilização dos cards da página de vagas   | 8 | DW | 2 
-| DW-05.1.1 | Estilização do formulário de candidatura  | 8 | DW | 2
-| DW-006 | Criação da estrutura da página de membros em HTML  | 5 | DW | 2 
-| DW-006.1 | Criação da estrutura dos cards de membros em HTML | 10 | DW | 2 
-| DW-006.2 | Criação de um arquivo CSS para a estlização  | 8 | DW | 2 
-| DW-006.3 | Adicionar cores padrões | 2 | DW | 2 
-| DW-006.4 | Adicionar fontes padrão |  2 | DW | 2
-| DW-006.5 | Estilização dos cards de membros  | 20 | DW | 2 
-| DW-007 | Criação da estrutura da página de contatos em HTML | 5 | DW | 2 
-| DW-007.1 | Criação da estrutura do formulário de contato HTML  | 10 | DW | 2 
-| DW-007.2 | Criação da estrutura do card de localização em  HTML   | 5 | DW | 2 
-| DW-007.3 | Criação de um arquivo CSS para a estlização | 8 | DW | 2 
-| DW-007.4 | Estilização da página | 8 | DW | 2
-| DW-007.5 | Adicionar cores padrões | 2 | DW | 2
-| DW-007.6 | Adicionar fontes padrão | 2 | DW | 2
-| DW-007.7 | Estilização do formulário | 10 | DW | 2
-| DW-007.8 | Estilização do card de localização |  5 | DW | 2
-| DW-008 | Criação da estrutura da página sobre em HTML | 5 | DW | 2
-| DW-008.1 | Adicionar imagem e logo de colaboradores |  2 | DW | 2
-| DW-008.2 | Criação de um arquivo CSS para a estlização | 8 | DW | 2
-| DW-008.3 | Estilização da página  | 8 | DW | 2
-| DW-008.4 | Adicionar cores padrões  | 2 | DW | 2
-| DW-008.5 | Adicionar fontes padrão  | 2 | DW | 2
-| DW-009 | Criar a estrutura em HTML para o Header  | 10 | DW | 2
-| DW-009.1 | Estilizar o Header em CSS  | 10 | DW | 2
-| DW-010 | Criar a estrutura em HTML para o Footer  | 10 | DW | 2
-| DW-010.1 | Estilizar o footer em CSS   | 10 | DW | 2
-| DW-011 | Criar a estrutura da página administrativa em HTML  | 5 | DW | 2
-| DW-11.1 | Estilizar a página administrativa em CSS | 10 | DW | 2
-| DW-012 | Criação da estrutura HTML menu hamburguer. | 10 | DW | 2
-| DW-12.1 | Estilização do menu hamburguer em CSS. | 8 | DW | 2
-| AL-001 | Ligação com o BD | 20 | AL | 2
-| MB-001 | Testes no BD | 20 | MB | 2
-| SO-002 | Documentação | 20 | SO | 3
-| DW-013 | Botão de pesquisa do site | 10 | DW | 3
-| AL/MB-002 | Ligar filtros da página de artigos ao BD | 10 | AL/MB | 3
-| AL/MB-002.1 | Ligar filtros da página de vagas ao BD | 10 | AL/MB | 3
-| AL/MB-003 | Dinamizar página de vagas | 8 | AL/MB | 3
-| DW-014 | Formulário de candidatura via email | 10 | DW | 3
-| DW-014.1 | Formulário do fale conosco | 10 | DW | 3
-| AL/MB-004 | Dinamizar página inicial | 8 | AL/MB | 3
-| AL/MB-005 | Puxar o header e o footer da página admin | 5 | AL/MB | 3
-| SO-003 | Organizar pastas do GitHub | 20 | SO | 3
-| DW-015 | Design da página de login administrativo | 5 | DW | 3 
-| DW-016 | Login funcional e seguro da página admin   | 10 | DW | 3
-| DW-017 | Seletor de idioma (inglês/português) | 10 | DW | 3
-| DW-018 | Tradução em libras  | 5 | DW | 3
-| AL/MB-006 | Dinamizar página de membros | 10 | AL/MB | 3
-| AL/MB-007 | Dinamização da página de notícias | 10 | AL/MB | 3
-| AL/MB-008 | Subir login da pág admin | 8 | AL/MB | 3 
-| AL/MB-009 | Dinamização da página de projetos | 10 | AL/MB | 3 
-| AL/MB-010 | Subir a dinamização da pág de membros e projetos   | 8 | AL/MB | 3
-| AL/MB-011 | Adicionar botão de navegação na pág admin  | 8 | AL/MB | 3
-| AL/MB-012 | Correção de erros na pág de notícias | 10 | AL/MB | 3
 
-#  Backlog de Gestão do Projeto 📌
+<details>
+  <summary><b>Backlog de Gestão do Projeto 📌</b></summary>
+  <br>
+  
+  | ID      | Seção / Atividade | Pontuação | Disciplina | Sprint |
+  |---------|-------------------|-----------|------------|--------|
+  | ES-001 | *Scrum Master:* Facilitar cerimônias ágeis, acompanhar impedimentos, garantir comunicação eficaz e apoiar a equipe na aplicação do DoD. | 20 | ES | 1, 2, 3 |
+  | ES-002 | *Product Owner:* Refinar e priorizar backlog, alinhar requisitos com stakeholders, validar entregas nas reviews e garantir clareza nos critérios de aceitação. | 20 | ES | 1, 2, 3 |
+</details>
 
-| ID      | Seção / Atividade | Pontuação | Disciplina | Sprint |
-|---------|-------------------|-----------|------------|--------|
-| ES-001 | *Scrum Master:* Facilitar cerimônias ágeis, acompanhar impedimentos, garantir comunicação eficaz e apoiar a equipe na aplicação do DoD. | 20 | ES | 1, 2, 3 |
-| ES-002 | *Product Owner:* Refinar e priorizar backlog, alinhar requisitos com stakeholders, validar entregas nas reviews e garantir clareza nos critérios de aceitação. | 20 | ES | 1, 2, 3 |
 
 <a id="tecnologias"></a>
-# Tecnologias 💻
 
-<p align="center">
+<details>
+  <summary><b>Tecnologias 💻</b></summary>
+  <br>
+  <p align="center">
+    <a href="https://www.figma.com/" style="">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" width="30" height="30">
+    </a>
+    <a href="https://trello.com/" >
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg" alt="Trello" width="30" height="30">
+    </a>
+    <a href="https://code.visualstudio.com/" >
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" width="30" height="30">
+    </a>
+  </p>
+  
+  [↑ Voltar ao topo](#topo)
+</details>
 
- <a href="https://www.figma.com/" style="">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" width="30" height="30">
-</a>
-
-
-
-<a href="https://trello.com/" >
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg" alt="Trello" width="30" height="30">
-</a>
-
-
-<a href="https://code.visualstudio.com/" >
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" width="30" height="30">
-</a>
-
-[↑ Voltar ao topo](#topo)
 
 <a id="equipe"></a>
 # Nossa Equipe 👩‍💻
