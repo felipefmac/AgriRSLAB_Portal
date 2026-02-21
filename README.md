@@ -1,15 +1,11 @@
 # AgriRSLAB-Portal - ABP1
 
 <a id="topo"></a>
-
-
-
 <p align="center">
   <img src="https://github.com/404NotFound-ABP/AgriRSLAB_Portal/blob/76a8c62e6c347c423505e24162cd9b520b5d316c/imagens/1.1Imagens%20Git/logo_404notfound.png"
        alt="Logo 404NotFound"
        style="max-width: 260px; width: 60%; height: auto;">
 </p>
-
 
 <p align="center">
   <a href="#sobre">Sobre o Projeto</a> |
@@ -26,8 +22,6 @@ A criação de um website para o Laboratório de Sensoriamento Remoto Agrícola 
 
 O site do AgriRS está sendo desenvolvido pela **404NotFound** com o objetivo de centralizar informações essenciais do laboratório, ampliar sua visibilidade e facilitar o acesso do público às pesquisas, projetos e iniciativas. O portal reunirá perfis da equipe e áreas de atuação, publicações científicas, oportunidades (vagas, editais, estágios) e canais de contato.  
 Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas do laboratório e aproximar estudantes, parceiros e a sociedade do conhecimento produzido.
-
-
 
 [↑ Voltar ao topo](#topo)
 
@@ -54,6 +48,8 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
   - ✅ **Finalizada**
   - 🚧 **Em Progresso**
   - `—` **Não iniciado**
+
+  [↑ Voltar ao topo](#topo)
 </details>
 
 
@@ -133,6 +129,8 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
   
   
   O *DoD* pode ser acessado [aqui](https://github.com/404NotFound-ABP/AgriRSLAB_Portal/blob/e8aae51d47e695c02c723c4ff65f78f73a937011/docs/DoD.md)
+
+  [↑ Voltar ao topo](#topo)
 </details>
 
 
@@ -269,6 +267,8 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
   | AL/MB-010 | Subir a dinamização da pág de membros e projetos   | 8 | AL/MB | 3
   | AL/MB-011 | Adicionar botão de navegação na pág admin  | 8 | AL/MB | 3
   | AL/MB-012 | Correção de erros na pág de notícias | 10 | AL/MB | 3
+
+  [↑ Voltar ao topo](#topo)
 </details>
 
 
@@ -280,6 +280,9 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
   |---------|-------------------|-----------|------------|--------|
   | ES-001 | *Scrum Master:* Facilitar cerimônias ágeis, acompanhar impedimentos, garantir comunicação eficaz e apoiar a equipe na aplicação do DoD. | 20 | ES | 1, 2, 3 |
   | ES-002 | *Product Owner:* Refinar e priorizar backlog, alinhar requisitos com stakeholders, validar entregas nas reviews e garantir clareza nos critérios de aceitação. | 20 | ES | 1, 2, 3 |
+
+  [↑ Voltar ao topo](#topo)
+
 </details>
 
 
