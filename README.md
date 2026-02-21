@@ -32,25 +32,29 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
 [↑ Voltar ao topo](#topo)
 
 <a id="sprint"></a>
-# Entregas de Sprints 🎯
 
-Todas as entregas serão realizadas conforme os prazos acordados com o cliente. Para cada ciclo de desenvolvimento, será gerado um relatório completo por sprint e uma planilha de tarefas, na aba **Tasks**, que detalha cada atividade executada, o responsável, a data de conclusão e uma descrição do trabalho realizado. A relação detalhada das sprints e tarefas é apresentada abaixo.
+<details>
+  <summary><b>Entregas de Sprints 🎯</b></summary>
+  <br>
 
-<div align="center">
-
-| Sprint | Entrega       | Status |                 Relatório                  | Vídeo | Tasks |
-|------: |---------------|:------:|:------------------------------------------:|:-----:|:-----:|
-| 1      | 📅 08/10/2025 | ✅     | [Ver Backlog](docs/sprint1.md#backlog)     | [Ver vídeo](https://youtu.be/8NwBtAC9zXE)     | ✅     |
-| 2      | 📅 04/11/2025 | ✅     | [Ver Backlog](docs/sprint2.md#backlog)     | [Ver vídeo](https://youtu.be/8m5mneY6ezg)     | ✅     |
-| 3      | 📅 24/11/2025 | ✅     | [Ver Backlog](docs/sprint3.md#backlog)     | [Ver vídeo](https://youtu.be/AR4eFr8gDT8)     | ✅     |
-
-
-</div>
-
-**Legenda:**
-- ✅ **Finalizada**
-- 🚧 **Em Progresso**
-- `—` **Não iniciado**
+  Todas as entregas serão realizadas conforme os prazos acordados com o cliente. Para cada ciclo de desenvolvimento, será gerado um relatório completo por sprint e uma planilha de tarefas, na aba **Tasks**, que detalha cada atividade executada, o responsável, a data de conclusão e uma descrição do trabalho realizado. A relação detalhada das sprints e tarefas é apresentada abaixo.
+  
+  <div align="center">
+  
+  | Sprint | Entrega       | Status |                 Relatório                  | Vídeo | Tasks |
+  |------: |---------------|:------:|:------------------------------------------:|:-----:|:-----:|
+  | 1      | 📅 08/10/2025 | ✅     | [Ver Backlog](docs/sprint1.md#backlog)     | [Ver vídeo](https://youtu.be/8NwBtAC9zXE)     | ✅     |
+  | 2      | 📅 04/11/2025 | ✅     | [Ver Backlog](docs/sprint2.md#backlog)     | [Ver vídeo](https://youtu.be/8m5mneY6ezg)     | ✅     |
+  | 3      | 📅 24/11/2025 | ✅     | [Ver Backlog](docs/sprint3.md#backlog)     | [Ver vídeo](https://youtu.be/AR4eFr8gDT8)     | ✅     |
+  
+  
+  </div>
+  
+  **Legenda:**
+  - ✅ **Finalizada**
+  - 🚧 **Em Progresso**
+  - `—` **Não iniciado**
+</details>
 
 # Objetivo das Sprints 📌 
 
