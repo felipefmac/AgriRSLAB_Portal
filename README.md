@@ -29,7 +29,7 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
 <a id="sprint"></a>
 
 <details>
-  <summary><h2>Entregas de Sprints 🎯</h2></summary>
+  <summary><h1>Entregas de Sprints 🎯</h1></summary>
   <br>
 
   Todas as entregas serão realizadas conforme os prazos acordados com o cliente. Para cada ciclo de desenvolvimento, será gerado um relatório completo por sprint e uma planilha de tarefas, na aba **Tasks**, que detalha cada atividade executada, o responsável, a data de conclusão e uma descrição do trabalho realizado. A relação detalhada das sprints e tarefas é apresentada abaixo.
@@ -55,7 +55,7 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
 
 
 <details>
-  <summary><h2>Objetivo das Sprints 📌 </h2></summary>
+  <summary><h1>Objetivo das Sprints 📌 </h1></summary>
   <br>
 
   # *Sprint 1 – Planejamento e Prototipagem:* 
@@ -75,7 +75,7 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
 <a id="dor"></a>
 
 <details>
-  <summary><h2>Dor do Cliente 😢</h2></summary>
+  <summary><h1>Dor do Cliente 😢</h1></summary>
   <br>
   
   1. Necessidade de um site para divulgação do Laboratório de Sensoriamento Remoto Agrícola do INPE.  
@@ -87,7 +87,7 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
 
 
 <details>
-  <summary><h2>Requisitos e User Stories 📋</h2></summary>
+  <summary><h1>Requisitos e User Stories 📋</h1></summary>
   <br>
 
   | Requisito | Sub-Requisito | User Story |
@@ -138,7 +138,7 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
 <a id="backlogs"></a>
 
 <details>
-  <summary><h2>Backlog Geral do Projeto 📌</h2></summary>
+  <summary><h1>Backlog Geral do Projeto 📌</h1></summary>
   <br>
   
   | ID      | Seção / Atividade | Pontuação | Disciplina | Sprint |
@@ -276,7 +276,7 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
 
 
 <details>
-  <summary><h2>Backlog de Gestão do Projeto 📌</h2></summary>
+  <summary><h1>Backlog de Gestão do Projeto 📌</h1></summary>
   <br>
   
   | ID      | Seção / Atividade | Pontuação | Disciplina | Sprint |
@@ -292,7 +292,7 @@ Nossa meta é manter a comunidade atualizada sobre as atividades e descobertas d
 <a id="tecnologias"></a>
 
 <details>
-  <summary><h2>Tecnologias 💻</h2></summary>
+  <summary><h1>Tecnologias 💻</h1></summary>
   <br>
   <p align="center">
     <a href="https://www.figma.com/" style="">
